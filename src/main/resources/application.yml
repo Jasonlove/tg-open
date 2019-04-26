@@ -24,3 +24,10 @@ spring:
         removeAbandoned: true
         removeAbandonedTimeout: 180
         logAbandoned: true
+    thymeleaf:
+      mode: HTML5
+      encoding: UTF-8
+      suffix: .html
+      cache: false 
+      
+      

@@ -3,23 +3,28 @@ package com.jinkuangkj.open.controller;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
-import com.jinkuangkj.open.mapper.ActUserDao;
-import com.jinkuangkj.open.model.ActUser;
 import com.jinkuangkj.open.model.Activity;
 import com.jinkuangkj.open.service.ActivityService;
 
-@RestController
-@RequestMapping("test")
-public class TestController {
+@Controller
+@RequestMapping("admin")
+public class AdminController {
 	
 	
 	@Autowired
 	ActivityService activityService;
+	
+	
+	@GetMapping("/index")
+	public String index() {
+		return "index";
+	}
+	
 	
 	@PostMapping("activity")
 	public void getTest() {
