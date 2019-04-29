@@ -1,5 +1,5 @@
 server:
-    port: 8081
+    port: 6080
     
 spring:
     datasource:
@@ -25,9 +25,6 @@ spring:
         removeAbandonedTimeout: 180
         logAbandoned: true
     thymeleaf:
-      mode: HTML5
-      encoding: UTF-8
-      suffix: .html
       cache: false 
       
       
