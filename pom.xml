@@ -46,6 +46,12 @@
 		</dependency>
 		
 		<dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
+		
+		<dependency>
 			<groupId>com.alibaba</groupId>
 			<artifactId>fastjson</artifactId>
 			<version>1.2.47</version>
@@ -89,9 +95,32 @@
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
 		</dependency>
+		
+		<dependency>
+		  <groupId>com.github.binarywang</groupId>
+		  <artifactId>weixin-java-pay</artifactId>
+		  <version>3.3.0</version>
+		</dependency>
+		
+		<dependency>
+		  <groupId>com.github.binarywang</groupId>
+		  <artifactId>weixin-java-mp</artifactId>
+		  <version>3.3.0</version>
+		</dependency>
+		
+		<dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
 
 
-	</dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-configuration-processor</artifactId>
+			<optional>true</optional>
+		</dependency>
+ 	</dependencies>
     
 
 	<build>
