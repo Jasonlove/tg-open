@@ -1,0 +1,292 @@
+body,html{
+	padding: 0;
+	margin: 0;
+	font-family: "微软雅黑";
+	font-size:42px;
+}
+h2,h3,p,ul,li,img{
+	padding: 0;
+	margin: 0;
+	border: 0;
+	list-style: none;
+}
+.pic img{
+	width:100%;
+}
+.record .tm{
+	text-align: center;
+	margin-top:20px;
+}
+.tm .tm_p{
+	font-size:42px;
+	text-indent:5px;
+
+}
+.tm_p em{
+	font-style: normal;
+	font-weight:normal;
+	color:red;
+}
+.tm .tm_end{
+	font-size:40px;
+	margin-top:10px;
+	color:red;
+}
+.tm_end em{
+	font-style:normal;
+	font-weight:normal;
+	text-indent: 5px;
+	display: inline-block;
+	font-size: 36px;
+	color:#000;
+}
+.record .attend_num{
+	margin-top:40px;
+}
+.attend_num p{
+	text-align: center;
+	font-size: 42px;
+}
+.attend_num strong{
+	font-weight: normal;
+
+}
+.attend_num li{
+	text-align: center;
+	width:12.5%;
+	float:left;
+	margin-left:30px;
+	margin-top:20px;
+}
+.attend_num img{
+	border-radius: 50%;
+	width:70%;
+}
+.attend_num em{
+	display: block;
+	font-style: normal;
+	font-size:32px;
+}
+.buy_record .buy_num{
+	text-align: center;
+}
+.buy_record strong{
+	font-weight: normal;
+}
+.record .buy_record{
+	margin-top:40px;
+}
+.buy_record li{
+	height: 160px;
+}
+.buy_record li p{
+	float:left;
+	font-size:32px;
+	margin-left:60px;
+}
+.buy_record li .buy_p2{
+	margin-left:80px;
+}
+.buy_record img{
+	width:132px;
+	height:132px;
+}
+.buy_record em{
+	font-style: normal;
+	display: inline-block;
+	margin-top:10px;
+}
+.buy_record ul{
+	margin-top:20px;
+	height: 460px;
+	overflow: hidden;
+	overflow-y: auto;
+}
+.record .product_mess{
+	text-align: center;
+	background-color: #d6eef2;
+	margin-top:80px;
+}
+.product_mess p{
+	background-color: #fff;
+	padding-bottom: 30px;
+}
+.product_mess img{
+	width: 100%;
+}
+.intro_mess img{
+	width:100%;
+}
+.record .intro_mess{
+	background-color: #d6eef2;
+}
+.record .acti_rule{
+	padding-top: 40px;
+	font-size:42px;
+}
+.acti_rule p{
+	text-align: center;
+	margin-bottom: 40px;
+}
+.acti_rule li{
+	margin-bottom: 20px;
+}
+.acti_rule em{
+	background-color: #e53333;
+	font-style: normal;
+	color:#fff;
+	display: inline-block;
+	padding:0 10px;
+}
+.record .ewm{
+	text-align: center;
+}
+.ewm img{
+	width:80%;
+}
+.record .teno_p{
+	text-align: center;
+	font-size: 42px;
+	background-color: #337fe5;
+	color:#fff;
+}
+.record .tg_p{
+	font-size: 44px;
+}
+.tg_p p{
+	text-align: center;
+}
+.record .tg_p{
+	margin-top:50px;
+}
+.tg_p table{
+	width: 100%;
+	text-align: center;
+	border-collapse: collapse;
+	margin-top:20px;
+}
+.tg_p em{
+	font-style: normal;
+}
+.tg_p tr{
+	border-bottom: 1px solid #ccc;
+}
+.tg_p th{
+	font-weight: normal;
+}
+.tg_p strong{
+	font-weight: normal;
+}
+.tg_p .noborder{
+	border-bottom: 0;
+}
+.tg_p .add_color{
+	color:#ff8d3b;
+}
+.tg_p td{
+	padding:20px;
+	font-size: 36px;
+}
+.tg_p div{
+	background-color: #a08b86;
+	border-radius: 50px;
+	text-align: center;
+	padding:20px 0;
+	margin:40px auto;
+	width:90%;
+	font-size: 32px;
+}
+.tg_p a{
+	display: block;
+	text-decoration:none;
+	color:#fff;
+}
+body,html{
+	position: relative;
+}
+#main{
+	padding-bottom:80px;
+}
+.con_bottom{
+	position: fixed;
+	left: 0;
+	bottom:0;
+	width: 100%;
+}
+.con_bottom button,.con_bottom a{
+	font-size: 42px;
+	border:none;
+	color: #fff;
+	padding:20px 0;
+	text-decoration: none;
+}
+.con_bottom .btn_left{
+	width:60%;
+	background-color: #ff6d41;
+	float: left;
+}
+.con_bottom .btn_right{
+	background-color: #32cd32;
+	width: 40%;
+	display: inline-block;
+	text-align: center;
+
+}
+/*限时抢购点击*/
+.yincang_div{
+	text-align: center;
+	width: 100%;
+	height: 100%;
+	display: none;
+	position: fixed;
+	left: 0;
+	top: 0;
+	/*background-color: rgb(0,0,0,0.5);*/
+	z-index: 1;
+}
+.yincang_div .back_div{
+	position: absolute;
+	left: 0;top: 0;
+	width: 100%;
+	background-color: rgb(0,0,0,0.5);
+	z-index: 2;
+	height: 100%;
+}
+.yincang_div .yin_content{
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	background-color: #fff;
+	padding-bottom: 50px;
+	z-index: 3;
+}
+.yincang_div h2{
+	font-size: 42px;
+	margin-bottom: 80px;
+}
+.yincang_div input{
+	padding: 40px 0;
+	border:0;
+	border-top:1px solid #000;
+	border-bottom:1px solid #000;
+	width:100%;
+	margin-bottom: 50px;
+	font-size: 40px;
+	padding-left:20px;
+	color: #000;
+}
+.yincang_div .mon_buy{
+	width: 90%;
+	color:#fff;
+	background-color: #ff6d41;
+	height: 80px;
+	border:0;
+	font-size: 40px;
+	border-radius: 10px;
+}
+}
+/*分享海报页面*/
+.share_con img{
+	width: 100%;
+}

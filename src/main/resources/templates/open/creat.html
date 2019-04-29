@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>报名中心</title>
+	<script src="https://cdn.bootcss.com/jquery/3.4.0/jquery.min.js"></script>
+</head>
+<style>
+	body,html{
+		text-align: center;
+	}
+	.act_name h2{
+		font-size: 60px;
+		margin-bottom: 80px;
+	}
+	.act_name input{
+		padding:40px 0;
+		border:1px solid #000;
+		width:80%;
+		border-radius: 10px;
+		margin-bottom: 30px;
+		font-size: 40px;
+		padding-left:80px;
+		/*font-size: 40px;*/
+	}
+	.act_name button{
+		width: 90%;
+		color:#fff;
+		background-color: red;
+		height: 80px;
+		border:0;
+		font-size: 40px;
+		margin-top:30px;
+		border-radius: 10px;
+	}
+	.act_name div{
+		position: relative;
+	}
+	.act_name em,.act_name strong{
+		background-color: rgba(0,0,0,0.5);
+		color:#fff;
+		border-radius: 10px;
+		padding: 20px 40px;
+		position: absolute;
+		display: block;
+		font-size: 42px;
+		margin: 0 auto;
+		left: 50%;
+		top:50%;
+		transform:translate(-50%,-40%);
+		font-style: normal;
+	}
+	.act_name em{
+		display: none;
+	}
+	.act_name strong{
+		display: none;
+	}
+</style>
+<body>
+	<div class="act_name">
+		<h2>商家报名中心</h2>
+		<p>	
+		<input type="text" name="" placeholder="请输入您的名字" class="inp_name">
+		</p>
+		<p>	
+		<input type="text" name="" placeholder="请输入您的电话" class="inp_num">
+		</p>
+		<div>
+			<button>立即报名</button>
+			<em>请输入姓名</em>
+			<!-- <strong>请输入正确手机号</strong> -->
+		</div>
+	</div>
+
+</body>
+</html>
+<script>
+	var val=$(".act_name .inp_name").val();
+	var num=$(".act_name .inp_num").val();
+	$(".act_name button").click(function(){
+		if(val==""){
+			console.log(5555);
+			$(".act_name em").css("display","block");
+			var t=setTimeout(function(){
+				$(".act_name em").hide()
+			}, 2000)
+		}else if(num==""){
+			console.log(6666)
+			$(".act_name em").css("display","block");
+			$(".act_name em").html("请输入正确手机号")
+		}
+
+		// if(num==""){
+		// 	$(".act_name em").css("display","block");
+		// 	$(".act_name em").html("请输入正确手机号")
+		// }
+	})
+</script>

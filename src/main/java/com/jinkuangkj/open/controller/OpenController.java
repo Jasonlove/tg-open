@@ -19,7 +19,7 @@ import me.chanjar.weixin.mp.bean.result.WxMpOAuth2AccessToken;
 
 @Slf4j
 @Controller
-@RequestMapping("/wechat")
+@RequestMapping("/open")
 public class OpenController {
 	
 	
@@ -28,7 +28,7 @@ public class OpenController {
  
     @GetMapping("/authorize")
     public String authorize(@RequestParam("returnUrl") String returnUrl){
-        String url = "http://xinghui.natapp1.cc/wechat/userInfo";
+        String url = "http://xinghui.natapp1.cc/open/userInfo";
         String redirectURL = wxMpService.oauth2buildAuthorizationUrl(url, WxConsts.OAuth2Scope.SNSAPI_USERINFO, URLEncoder.encode(returnUrl));
         log.info("【微信网页授权】获取code,redirectURL={}", redirectURL);
         return "redirect:" + redirectURL;
@@ -49,6 +49,12 @@ public class OpenController {
         String openId = wxMpOAuth2AccessToken.getOpenId();
         log.info("【微信网页授权】openId={}", openId);
         return "redirect:" + returnUrl + "?openid=" + openId;
+    }
+    
+    @GetMapping("/act")
+    public String getAct() {
+    	
+    	return "open/index";
     }
 
 }
