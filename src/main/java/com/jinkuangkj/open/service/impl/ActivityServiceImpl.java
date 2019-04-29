@@ -19,11 +19,15 @@ public class ActivityServiceImpl implements ActivityService {
 	public void saveActivity(Activity activity) {
 		activityDao.insertSelective(activity);
 	}
-
+	
 	@Override
 	public List<Activity> getList() {
 		return activityDao.getList();
 	}
-	
+
+	@Override
+	public Activity get(Integer actId) {
+		return activityDao.selectById(actId);
+	}
 	
 }

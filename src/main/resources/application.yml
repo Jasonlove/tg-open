@@ -29,4 +29,5 @@ spring:
 
 wechat:  mpAppId: wxa2c54680eabde041
   mpAppSecret: 1f3ddde1803db2e188092ab0a928b86a
+  mpBaseUrl: http://xinghui.natapp1.cc
   

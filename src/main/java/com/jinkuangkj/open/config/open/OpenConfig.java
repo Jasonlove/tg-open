@@ -11,6 +11,8 @@ public class OpenConfig {
     private String mpAppId;
  
     private String mpAppSecret;
+    
+    private String mpBaseUrl;
 
 	public String getMpAppId() {
 		return mpAppId;
@@ -26,6 +28,14 @@ public class OpenConfig {
 
 	public void setMpAppSecret(String mpAppSecret) {
 		this.mpAppSecret = mpAppSecret;
+	}
+
+	public String getMpBaseUrl() {
+		return mpBaseUrl;
+	}
+
+	public void setMpBaseUrl(String mpBaseUrl) {
+		this.mpBaseUrl = mpBaseUrl;
 	}
     
     
