@@ -23,6 +23,13 @@
         from t_activity
         where id = #{id,jdbcType=INTEGER}
     </select>
+    
+    <select id="getList"  resultMap="BaseResultMap">
+        select 
+        <include refid="Base_Column_List" />
+        from t_activity
+    </select>
+    
     <delete id="deleteById" parameterType="java.lang.Integer">
         delete from t_activity
         where id = #{id,jdbcType=INTEGER}

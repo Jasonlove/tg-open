@@ -6,6 +6,8 @@
  */
 package com.jinkuangkj.open.mapper;
 
+import java.util.List;
+
 import com.jinkuangkj.open.model.Activity;
 
 public interface ActivityDao {
@@ -20,4 +22,6 @@ public interface ActivityDao {
     int updateSelective(Activity record);
 
     int updateById(Activity record);
+    
+    List<Activity> getList();
 }

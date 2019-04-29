@@ -1,5 +1,7 @@
 package com.jinkuangkj.open.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +18,11 @@ public class ActivityServiceImpl implements ActivityService {
 	@Override
 	public void saveActivity(Activity activity) {
 		activityDao.insertSelective(activity);
+	}
+
+	@Override
+	public List<Activity> getList() {
+		return activityDao.getList();
 	}
 	
 	
