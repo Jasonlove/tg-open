@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -97,12 +98,19 @@ public class OpenController {
     	//获取人员参数列表
     	List<ActUser> list = actUserService.getList(Integer.valueOf(actId));
     	
-    	//model.addAttribute("user", register);
+    	model.addAttribute("user", register);
     	model.addAttribute("act", activity);
     	model.addAttribute("userList", list);
     	
     	
     	return "open/index";
+    }
+    
+    @PostMapping("/order")
+    public String order(@RequestParam Integer userId,@RequestParam Integer actId,
+    		@RequestParam String name,@RequestParam String iphone) {
+    	
+    	return "";
     }
 
 }
