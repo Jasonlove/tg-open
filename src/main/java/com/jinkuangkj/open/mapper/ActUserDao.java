@@ -6,6 +6,8 @@
  */
 package com.jinkuangkj.open.mapper;
 
+import java.util.List;
+
 import com.jinkuangkj.open.model.ActUser;
 
 public interface ActUserDao {
@@ -22,4 +24,6 @@ public interface ActUserDao {
     int updateById(ActUser record);
     
     ActUser selectByOpenId(String openId);
+    
+    List<ActUser> getListByActId(Integer actId);
 }

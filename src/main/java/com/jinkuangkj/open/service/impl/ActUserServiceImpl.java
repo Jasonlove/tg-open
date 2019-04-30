@@ -1,11 +1,15 @@
 package com.jinkuangkj.open.service.impl;
 
+import java.util.List;
+
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.jinkuangkj.open.mapper.ActUserDao;
+import com.jinkuangkj.open.mapper.ActivityDao;
 import com.jinkuangkj.open.model.ActUser;
+import com.jinkuangkj.open.model.Activity;
 import com.jinkuangkj.open.service.ActUserService;
 
 import me.chanjar.weixin.common.error.WxErrorException;
@@ -22,6 +26,9 @@ public class ActUserServiceImpl implements ActUserService {
 	
 	@Autowired
     private WxMpService wxMpService;
+	
+	@Autowired
+	private ActivityDao activityDao;
 	
 	@Override
 	public ActUser register(Integer actId, String openId,String shareId) {
@@ -45,10 +52,21 @@ public class ActUserServiceImpl implements ActUserService {
 			}
 			actUserDao.insertSelective(actUser);
 			
+			//活动参与人数加1
+			Activity activity = activityDao.selectById(Integer.valueOf(actId));
+			activity.setJoinCount(activity.getJoinCount() + 1);
+			activityDao.updateSelective(activity);
+			
+			
 		} catch (WxErrorException e) {
 			e.printStackTrace();
 		}
 		return actUser;
+	}
+
+	@Override
+	public List<ActUser> getList(Integer actId) {
+		return actUserDao.getListByActId(actId);
 	}
 
 	

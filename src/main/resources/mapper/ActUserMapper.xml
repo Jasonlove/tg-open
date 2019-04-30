@@ -124,4 +124,11 @@
         where openid = #{openid,jdbcType=VARCHAR}
     </select>
     
+    <select id="getListByActId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select 
+        <include refid="Base_Column_List" />
+        from t_user
+        where act_id = #{actId,jdbcType=INTEGER} order by id desc limit 0,12
+    </select>
+    
 </mapper>

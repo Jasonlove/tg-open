@@ -1,6 +1,7 @@
 package com.jinkuangkj.open.controller;
 
 import java.net.URLEncoder;
+import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -90,7 +91,16 @@ public class OpenController {
     	//用户注册
     	ActUser register = actUserService.register(Integer.valueOf(actId), openId, shareId);
     	log.info("用户信息:{}",register);
-    	model.addAttribute("user", register);
+    	
+    	//活动信息
+    	Activity activity = activityService.get(Integer.valueOf(actId));
+    	//获取人员参数列表
+    	List<ActUser> list = actUserService.getList(Integer.valueOf(actId));
+    	
+    	//model.addAttribute("user", register);
+    	model.addAttribute("act", activity);
+    	model.addAttribute("userList", list);
+    	
     	
     	return "open/index";
     }
