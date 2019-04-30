@@ -193,13 +193,13 @@ public class OpenController extends AbstractController{
      * @param tradeNo
      * @param request
      * @param response
+     * @throws WxPayException 
      */
     @RequestMapping("/notifying/{tradeNo}")
-    public String notifying(@PathVariable("tradeNo") String tradeNo, HttpServletRequest request, HttpServletResponse response) {
+    public String notifying(@PathVariable("tradeNo") String tradeNo, HttpServletRequest request, HttpServletResponse response) throws WxPayException {
     	log.info("回调流水:{}",tradeNo);
     	String xmlData = super.getRequestBody(request);
-    	
-    	
+    	actOrderService.doNotify(tradeNo, xmlData);
     	response.setHeader(HTTP_CONTENT_TYPE, HTTP_CHARSET_UTF8);
     	return returnSuccess();
     }
