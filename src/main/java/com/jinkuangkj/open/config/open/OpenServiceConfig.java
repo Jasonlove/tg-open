@@ -29,5 +29,6 @@ public class OpenServiceConfig {
         wxMpConfigStorage.setSecret(openConfig.getMpAppSecret());
         return wxMpConfigStorage;
     }
+    
 }
 

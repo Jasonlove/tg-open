@@ -31,42 +31,43 @@ public class ActUserServiceImpl implements ActUserService {
 	private ActivityDao activityDao;
 	
 	@Override
-	public ActUser register(Integer actId, String openId,String shareId) {
+	public ActUser register(WxMpUser info,Integer actId,String shareId) {
 		
 		//进入活动页面
 		
-		ActUser actUser = actUserDao.selectByOpenId(openId);
+		ActUser actUser = actUserDao.selectByOpenId(info.getOpenId());
 		if(null != actUser) {
 			return actUser;
 		}
-    	try {
-    		WxMpUserService service = new WxMpUserServiceImpl(wxMpService);
-			WxMpUser info = service.userInfo(openId);
-			actUser = new ActUser();
-			actUser.setActId(Integer.valueOf(actId));
-			actUser.setHeadimgurl(info.getHeadImgUrl());
-			actUser.setOpenid(info.getOpenId());
-			actUser.setNickname(info.getNickname());
-			if(StringUtils.isNotBlank(shareId)) {
-				actUser.setShareUserId(Integer.valueOf(shareId));
-			}
-			actUserDao.insertSelective(actUser);
-			
-			//活动参与人数加1
-			Activity activity = activityDao.selectById(Integer.valueOf(actId));
-			activity.setJoinCount(activity.getJoinCount() + 1);
-			activityDao.updateSelective(activity);
-			
-			
-		} catch (WxErrorException e) {
-			e.printStackTrace();
+    
+		actUser = new ActUser();
+		actUser.setActId(Integer.valueOf(actId));
+		actUser.setHeadimgurl(info.getHeadImgUrl());
+		actUser.setOpenid(info.getOpenId());
+		actUser.setNickname(info.getNickname());
+		if(StringUtils.isNotBlank(shareId)) {
+			actUser.setShareUserId(Integer.valueOf(shareId));
 		}
+		actUserDao.insertSelective(actUser);
+		
+		//活动参与人数加1
+		Activity activity = activityDao.selectById(Integer.valueOf(actId));
+		Integer count = activity.getJoinCount() + 1;
+		activity.setJoinCount(count);
+		activityDao.updateSelective(activity);
+			
+
 		return actUser;
 	}
 
 	@Override
 	public List<ActUser> getList(Integer actId) {
 		return actUserDao.getListByActId(actId);
+	}
+	
+	
+	public ActUser getUserById(Integer id) {
+		return actUserDao.selectById(id);
 	}
 
 	

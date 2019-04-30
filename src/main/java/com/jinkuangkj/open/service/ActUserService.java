@@ -4,10 +4,13 @@ import java.util.List;
 
 import com.jinkuangkj.open.model.ActUser;
 
+import me.chanjar.weixin.mp.bean.result.WxMpUser;
+
 public interface ActUserService {
 	
-	ActUser register(Integer actId, String openId,String shareId);
+	ActUser register(WxMpUser info,Integer actId,String shareId);
 	
+	ActUser getUserById(Integer id);
 	
 	List<ActUser> getList(Integer actId);
 

@@ -4,6 +4,7 @@
 	<title>支付</title>
 	<script src="https://cdn.bootcss.com/jquery/3.4.0/jquery.min.js"></script>
 	<script type="text/javascript" src="/open/js/myjs.js"></script>
+	<script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
 	<link rel="stylesheet" type="text/css" href="/open/css/style.css"></link>
 </head>
 <style>
@@ -38,8 +39,47 @@
 		</div>
 		<div class="pay_way">
 			<p>选择支付方式</p>
-			<button>微信支付</button>
+			<button id="pay">微信支付</button>
 		</div>
+		<input id="appId" type="hidden" th:value="${websocketUrl}" />
+		<input id="timeStamp" type="hidden" th:value="${websocketUrl}" />
+		<input id="nonceStr" type="hidden" th:value="${websocketUrl}" />
+		<input id="package" type="hidden" th:value="${websocketUrl}" />
+		<input id="paySign" type="hidden" th:value="${websocketUrl}" />
+		
 	</div>
 </body>
+
+<script type="text/javascript">
+
+$("#pay").click(function(){
+	
+		
+	  	
+	   WeixinJSBridge.invoke(
+	       'getBrandWCPayRequest', {
+	           "appId":"wxcf53702f0700cb52",     //公众号名称，由商户传入     
+	           "timeStamp":timestamp,         //时间戳，自1970年以来的秒数     
+	           "nonceStr":noncestr, //随机串     
+	           "package":packageValue,     
+	           "signType":"MD5",         //微信签名方式：     
+	           "paySign":sign //微信签名 
+	       },
+	       function(res){     
+	           if(res.err_msg == "get_brand_wcpay_request:ok" ) {
+	        	   
+	        	   
+	        	   
+	           }     // 使用以上方式判断前端返回,微信团队郑重提示：res.err_msg将在用户支付成功后返回    ok，但并不保证它绝对可靠。 
+	       }
+	   ); 
+		
+ });
+
+
+
+
+
+</script>
+
 </html>

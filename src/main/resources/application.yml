@@ -27,7 +27,7 @@ spring:
     thymeleaf:
       cache: false
 
-wechat:  mpAppId: wxa2c54680eabde041
-  mpAppSecret: 1f3ddde1803db2e188092ab0a928b86a
+wechat:  mpAppId: wx1b3ed6da07dbdc5b
+  mpAppSecret: fae00b40f6bce1059d531010bba60fe3
   mpBaseUrl: http://xinghui.natapp1.cc
   

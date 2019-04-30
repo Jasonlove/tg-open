@@ -21,6 +21,7 @@ import com.jinkuangkj.open.model.Activity;
 import com.jinkuangkj.open.service.ActOrderService;
 import com.jinkuangkj.open.service.ActUserService;
 import com.jinkuangkj.open.service.ActivityService;
+import com.jinkuangkj.open.util.URLUtil;
 
 import lombok.extern.slf4j.Slf4j;
 import me.chanjar.weixin.common.api.WxConsts;
@@ -73,16 +74,24 @@ public class OpenController {
         log.info("【微信网页授权】code={}", code);
         log.info("【微信网页授权】state={}", returnUrl);
         WxMpOAuth2AccessToken wxMpOAuth2AccessToken;
+        
+        ActUser user = null;
+        
         try {
             wxMpOAuth2AccessToken = wxMpService.oauth2getAccessToken(code);
+            WxMpUser info = wxMpService.oauth2getUserInfo(wxMpOAuth2AccessToken, null);
+            //用户注册
+            String actId = URLUtil.getParamByUrl(returnUrl, "actId");
+            String shareId = URLUtil.getParamByUrl(returnUrl, "shareId");
+            log.info("【微信网页获取参数】actId={},shareId={}", actId,shareId);
+            user = actUserService.register(info,Integer.valueOf(actId),shareId);
         } catch (WxErrorException e) {
             log.error("【微信网页授权】{}", e);
             throw new Exception(e.getError().getErrorMsg());
         }
-        String openId = wxMpOAuth2AccessToken.getOpenId();
         
         //注册用户信息
-        String url = returnUrl +"&openId=" + openId;
+        String url = returnUrl +"&userId=" + user.getId();
         log.info("【微信网页授权】redirect url={}", url);
     
         return "redirect:"+ url;
@@ -90,18 +99,16 @@ public class OpenController {
     
     
     @GetMapping("/act")
-    public String getAct(@RequestParam String openId, @RequestParam String actId, 
+    public String getAct(@RequestParam Integer userId, @RequestParam String actId, 
     		@RequestParam(required=false) String shareId,Model model) {
-    	//用户注册
-    	ActUser register = actUserService.register(Integer.valueOf(actId), openId, shareId);
-    	log.info("用户信息:{}",register);
     	
+    	ActUser user = actUserService.getUserById(userId);
     	//活动信息
     	Activity activity = activityService.get(Integer.valueOf(actId));
     	//获取人员参数列表
     	List<ActUser> list = actUserService.getList(Integer.valueOf(actId));
     	
-    	model.addAttribute("user", register);
+    	model.addAttribute("user", user);
     	model.addAttribute("act", activity);
     	model.addAttribute("userList", list);
     	
