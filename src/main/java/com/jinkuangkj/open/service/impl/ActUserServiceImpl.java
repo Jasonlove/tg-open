@@ -1,6 +1,8 @@
 package com.jinkuangkj.open.service.impl;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.jinkuangkj.open.mapper.ActUserDao;
 import com.jinkuangkj.open.model.ActUser;
@@ -12,6 +14,7 @@ import me.chanjar.weixin.mp.api.WxMpUserService;
 import me.chanjar.weixin.mp.api.impl.WxMpUserServiceImpl;
 import me.chanjar.weixin.mp.bean.result.WxMpUser;
 
+@Service
 public class ActUserServiceImpl implements ActUserService {
 
 	@Autowired
@@ -37,8 +40,10 @@ public class ActUserServiceImpl implements ActUserService {
 			actUser.setHeadimgurl(info.getHeadImgUrl());
 			actUser.setOpenid(info.getOpenId());
 			actUser.setNickname(info.getNickname());
-			actUser.setShareUserId(Integer.valueOf(shareId));
-			actUserDao.insert(actUser);
+			if(StringUtils.isNotBlank(shareId)) {
+				actUser.setShareUserId(Integer.valueOf(shareId));
+			}
+			actUserDao.insertSelective(actUser);
 			
 		} catch (WxErrorException e) {
 			e.printStackTrace();

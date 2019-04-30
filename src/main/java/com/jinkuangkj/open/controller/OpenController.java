@@ -5,6 +5,7 @@ import java.net.URLEncoder;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -14,6 +15,7 @@ import com.jinkuangkj.open.config.open.OpenConfig;
 import com.jinkuangkj.open.mapper.ActUserDao;
 import com.jinkuangkj.open.model.ActUser;
 import com.jinkuangkj.open.model.Activity;
+import com.jinkuangkj.open.service.ActUserService;
 import com.jinkuangkj.open.service.ActivityService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -40,6 +42,8 @@ public class OpenController {
 	private OpenConfig openConfig;
 	@Autowired
 	private ActivityService activityService;
+	@Autowired
+	private ActUserService actUserService;
 	
  
     @GetMapping("/authorize")
@@ -82,10 +86,11 @@ public class OpenController {
     
     @GetMapping("/act")
     public String getAct(@RequestParam String openId, @RequestParam String actId, 
-    		@RequestParam(required=false) String shareId) {
-    	
-    	
-    	
+    		@RequestParam(required=false) String shareId,Model model) {
+    	//用户注册
+    	ActUser register = actUserService.register(Integer.valueOf(actId), openId, shareId);
+    	log.info("用户信息:{}",register);
+    	model.addAttribute("user", register);
     	
     	return "open/index";
     }
