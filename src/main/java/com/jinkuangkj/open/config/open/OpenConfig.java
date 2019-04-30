@@ -8,11 +8,16 @@ import org.springframework.stereotype.Component;
 @ConfigurationProperties(prefix="wechat")
 public class OpenConfig {
  
+	//应用appid
     private String mpAppId;
- 
+    //密钥
     private String mpAppSecret;
     
     private String mpBaseUrl;
+    //商户号
+    private String mpMchId;
+    //key
+    private String mpMchKey;
 
 	public String getMpAppId() {
 		return mpAppId;
@@ -37,8 +42,22 @@ public class OpenConfig {
 	public void setMpBaseUrl(String mpBaseUrl) {
 		this.mpBaseUrl = mpBaseUrl;
 	}
-    
-    
+
+	public String getMpMchId() {
+		return mpMchId;
+	}
+
+	public void setMpMchId(String mpMchId) {
+		this.mpMchId = mpMchId;
+	}
+
+	public String getMpMchKey() {
+		return mpMchKey;
+	}
+
+	public void setMpMchKey(String mpMchKey) {
+		this.mpMchKey = mpMchKey;
+	}
     
  
 }

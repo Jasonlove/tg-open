@@ -44,7 +44,7 @@
 		<input id="appId" type="hidden" th:value="${websocketUrl}" />
 		<input id="timeStamp" type="hidden" th:value="${websocketUrl}" />
 		<input id="nonceStr" type="hidden" th:value="${websocketUrl}" />
-		<input id="package" type="hidden" th:value="${websocketUrl}" />
+		<input id=packageValue type="hidden" th:value="${websocketUrl}" />
 		<input id="paySign" type="hidden" th:value="${websocketUrl}" />
 		
 	</div>
@@ -54,7 +54,17 @@
 
 $("#pay").click(function(){
 	
-		
+	 var appId =  $("#appId").val();
+	 var timeStamp =  $("#timeStamp").val();
+	 var nonceStr =  $("#nonceStr").val();
+	 var packageValue =  $("#packageValue").val();
+	 var paySign =  $("#paySign").val();
+	 
+	 console.log(appId);
+	 console.log(timeStamp);
+	 console.log(nonceStr);
+	 console.log(packageValue);
+	 console.log(paySign);
 	  	
 	   WeixinJSBridge.invoke(
 	       'getBrandWCPayRequest', {

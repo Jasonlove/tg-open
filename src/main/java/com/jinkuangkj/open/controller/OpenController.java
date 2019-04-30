@@ -12,6 +12,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.github.binarywang.wxpay.bean.order.WxPayMpOrderResult;
+import com.github.binarywang.wxpay.bean.request.WxPayUnifiedOrderRequest;
+import com.github.binarywang.wxpay.constant.WxPayConstants.TradeType;
+import com.github.binarywang.wxpay.exception.WxPayException;
+import com.github.binarywang.wxpay.service.WxPayService;
 import com.jinkuangkj.open.config.exp.BusinessException;
 import com.jinkuangkj.open.config.open.OpenConfig;
 import com.jinkuangkj.open.mapper.ActUserDao;
@@ -21,6 +26,7 @@ import com.jinkuangkj.open.model.Activity;
 import com.jinkuangkj.open.service.ActOrderService;
 import com.jinkuangkj.open.service.ActUserService;
 import com.jinkuangkj.open.service.ActivityService;
+import com.jinkuangkj.open.util.AmountUtils;
 import com.jinkuangkj.open.util.URLUtil;
 
 import lombok.extern.slf4j.Slf4j;
@@ -51,6 +57,8 @@ public class OpenController {
 	private ActUserService actUserService;
 	@Autowired
 	private ActOrderService actOrderService;
+	@Autowired
+	private WxPayService wxPayService;
  
     @GetMapping("/authorize")
     public String authorize(@RequestParam("actId") Integer actId,@RequestParam(required=false) String shareId){
@@ -118,10 +126,31 @@ public class OpenController {
     
     @PostMapping("/order")
     public String order(Model model,@RequestParam Integer userId,@RequestParam Integer actId,
-    		@RequestParam String name,@RequestParam String iphone) {
+    		@RequestParam String name,@RequestParam String iphone) throws WxPayException {
     	ActOrder order = actOrderService.createOrder(userId, actId, name, iphone);
+    	
+    	String tradeNo = order.getTradeNo();
+    	
+    	WxPayUnifiedOrderRequest request = WxPayUnifiedOrderRequest.newBuilder()
+    			.body(order.getActName())
+    			.outTradeNo(tradeNo)
+    			.totalFee(AmountUtils.getPayAmount(order.getAmount()))
+    			.spbillCreateIp("127.0.0.1")
+    			.notifyUrl(getNotifyUrl(tradeNo))
+    			.tradeType(TradeType.JSAPI)
+    			.build();
+    	
+    	WxPayMpOrderResult result = wxPayService.createOrder(request);
+    	
+    	log.info("交易数据:{}",result);
+    	model.addAttribute("result", result);
     	model.addAttribute("order", order);
     	return "open/payment/pay";
+    }
+    
+    
+    private String getNotifyUrl(String tradeNo) {
+    	return openConfig.getMpBaseUrl() +"/open/notifying/" + tradeNo;
     }
 
 }

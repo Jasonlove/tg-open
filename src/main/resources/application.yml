@@ -29,5 +29,7 @@ spring:
 
 wechat:  mpAppId: wx1b3ed6da07dbdc5b
   mpAppSecret: fae00b40f6bce1059d531010bba60fe3
+  mpMchId: 1505191651
+  mpMchKey: chenxiangchuanmei2016chenxiangcm
   mpBaseUrl: http://xinghui.natapp1.cc
   
