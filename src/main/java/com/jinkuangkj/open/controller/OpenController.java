@@ -3,11 +3,15 @@ package com.jinkuangkj.open.controller;
 import java.net.URLEncoder;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -19,7 +23,6 @@ import com.github.binarywang.wxpay.exception.WxPayException;
 import com.github.binarywang.wxpay.service.WxPayService;
 import com.jinkuangkj.open.config.exp.BusinessException;
 import com.jinkuangkj.open.config.open.OpenConfig;
-import com.jinkuangkj.open.mapper.ActUserDao;
 import com.jinkuangkj.open.model.ActOrder;
 import com.jinkuangkj.open.model.ActUser;
 import com.jinkuangkj.open.model.Activity;
@@ -33,8 +36,6 @@ import lombok.extern.slf4j.Slf4j;
 import me.chanjar.weixin.common.api.WxConsts;
 import me.chanjar.weixin.common.error.WxErrorException;
 import me.chanjar.weixin.mp.api.WxMpService;
-import me.chanjar.weixin.mp.api.WxMpUserService;
-import me.chanjar.weixin.mp.api.impl.WxMpUserServiceImpl;
 import me.chanjar.weixin.mp.bean.result.WxMpOAuth2AccessToken;
 import me.chanjar.weixin.mp.bean.result.WxMpUser;
 
@@ -44,7 +45,7 @@ import me.chanjar.weixin.mp.bean.result.WxMpUser;
 @Slf4j
 @Controller
 @RequestMapping("/open")
-public class OpenController {
+public class OpenController extends AbstractController{
 	
 	
 	@Autowired
@@ -59,7 +60,13 @@ public class OpenController {
 	private ActOrderService actOrderService;
 	@Autowired
 	private WxPayService wxPayService;
- 
+	
+	/**
+	 * 授权页面
+	 * @param actId
+	 * @param shareId
+	 * @return
+	 */
     @GetMapping("/authorize")
     public String authorize(@RequestParam("actId") Integer actId,@RequestParam(required=false) String shareId){
     	Activity activity = activityService.get(actId);
@@ -76,6 +83,13 @@ public class OpenController {
         return "redirect:" + redirectURL;
     }
  
+    /**
+     * 注册用户页面
+     * @param code
+     * @param returnUrl
+     * @return
+     * @throws Exception
+     */
     @GetMapping("/userInfo")
     public String userInfo(@RequestParam("code") String code,
                          @RequestParam("state") String returnUrl) throws Exception {
@@ -106,6 +120,14 @@ public class OpenController {
     }
     
     
+    /**
+     * 活动主页
+     * @param userId
+     * @param actId
+     * @param shareId
+     * @param model
+     * @return
+     */
     @GetMapping("/act")
     public String getAct(@RequestParam Integer userId, @RequestParam String actId, 
     		@RequestParam(required=false) String shareId,Model model) {
@@ -124,16 +146,28 @@ public class OpenController {
     	return "open/index";
     }
     
+    /**
+     * 创建订单
+     * @param model
+     * @param userId
+     * @param actId
+     * @param name
+     * @param iphone
+     * @return
+     * @throws WxPayException
+     */
     @PostMapping("/order")
     public String order(Model model,@RequestParam Integer userId,@RequestParam Integer actId,
     		@RequestParam String name,@RequestParam String iphone) throws WxPayException {
+    	
+    	ActUser user = actUserService.getUserById(userId);
     	ActOrder order = actOrderService.createOrder(userId, actId, name, iphone);
     	
     	String tradeNo = order.getTradeNo();
-    	
     	WxPayUnifiedOrderRequest request = WxPayUnifiedOrderRequest.newBuilder()
     			.body(order.getActName())
     			.outTradeNo(tradeNo)
+    			.openid(user.getOpenid())
     			.totalFee(AmountUtils.getPayAmount(order.getAmount()))
     			.spbillCreateIp("127.0.0.1")
     			.notifyUrl(getNotifyUrl(tradeNo))
@@ -152,5 +186,26 @@ public class OpenController {
     private String getNotifyUrl(String tradeNo) {
     	return openConfig.getMpBaseUrl() +"/open/notifying/" + tradeNo;
     }
+    
+    
+    /**
+     * 回调接口
+     * @param tradeNo
+     * @param request
+     * @param response
+     */
+    @RequestMapping("/notifying/{tradeNo}")
+    public String notifying(@PathVariable("tradeNo") String tradeNo, HttpServletRequest request, HttpServletResponse response) {
+    	log.info("回调流水:{}",tradeNo);
+    	String xmlData = super.getRequestBody(request);
+    	
+    	
+    	response.setHeader(HTTP_CONTENT_TYPE, HTTP_CHARSET_UTF8);
+    	return returnSuccess();
+    }
+    
+    
+    
+    
 
 }

@@ -198,4 +198,11 @@
             merchant_id = #{merchantId,jdbcType=VARCHAR}
         where id = #{id,jdbcType=INTEGER}
     </update>
+    
+    <select id="selectByTradeNo" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select 
+        <include refid="Base_Column_List" />
+        from t_order
+        where trade_no = #{tradeNo,jdbcType=VARCHAR}
+    </select>
 </mapper>

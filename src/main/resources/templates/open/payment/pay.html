@@ -39,41 +39,36 @@
 		</div>
 		<div class="pay_way">
 			<p>选择支付方式</p>
-			<button id="pay">微信支付</button>
+			<button class="pay">微信支付</button>
 		</div>
-		<input id="appId" type="hidden" th:value="${websocketUrl}" />
-		<input id="timeStamp" type="hidden" th:value="${websocketUrl}" />
-		<input id="nonceStr" type="hidden" th:value="${websocketUrl}" />
-		<input id=packageValue type="hidden" th:value="${websocketUrl}" />
-		<input id="paySign" type="hidden" th:value="${websocketUrl}" />
+		<input id="appId" type="hidden" th:value="${result.appId}"></input>
+		<input id="timeStamp" type="hidden" th:value="${result.timeStamp}"></input>
+		<input id="nonceStr" type="hidden" th:value="${result.nonceStr}"></input>
+		<input id="packageValue" type="hidden" th:value="${result.packageValue}"></input>
+		<input id="paySign" type="hidden" th:value="${result.paySign}"></input>
 		
 	</div>
 </body>
 
 <script type="text/javascript">
 
-$("#pay").click(function(){
+$(".pay_way .pay").click(function(){
+	
 	
 	 var appId =  $("#appId").val();
 	 var timeStamp =  $("#timeStamp").val();
 	 var nonceStr =  $("#nonceStr").val();
 	 var packageValue =  $("#packageValue").val();
 	 var paySign =  $("#paySign").val();
-	 
-	 console.log(appId);
-	 console.log(timeStamp);
-	 console.log(nonceStr);
-	 console.log(packageValue);
-	 console.log(paySign);
-	  	
+	 	  	
 	   WeixinJSBridge.invoke(
 	       'getBrandWCPayRequest', {
-	           "appId":"wxcf53702f0700cb52",     //公众号名称，由商户传入     
-	           "timeStamp":timestamp,         //时间戳，自1970年以来的秒数     
-	           "nonceStr":noncestr, //随机串     
+	           "appId":appId,     //公众号名称，由商户传入     
+	           "timeStamp":timeStamp,         //时间戳，自1970年以来的秒数     
+	           "nonceStr":nonceStr, //随机串     
 	           "package":packageValue,     
 	           "signType":"MD5",         //微信签名方式：     
-	           "paySign":sign //微信签名 
+	           "paySign":paySign //微信签名 
 	       },
 	       function(res){     
 	           if(res.err_msg == "get_brand_wcpay_request:ok" ) {
@@ -85,10 +80,6 @@ $("#pay").click(function(){
 	   ); 
 		
  });
-
-
-
-
 
 </script>
 

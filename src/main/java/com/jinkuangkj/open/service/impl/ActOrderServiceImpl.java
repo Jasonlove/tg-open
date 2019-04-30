@@ -1,10 +1,18 @@
 package com.jinkuangkj.open.service.impl;
 
+import java.text.ParseException;
 import java.util.Date;
 
+import org.apache.commons.lang3.time.DateParser;
+import org.apache.commons.lang3.time.FastDateFormat;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.github.binarywang.wxpay.bean.notify.WxPayOrderNotifyResult;
+import com.github.binarywang.wxpay.exception.WxPayException;
+import com.github.binarywang.wxpay.service.WxPayService;
+import com.google.common.base.Strings;
+import com.jinkuangkj.open.config.exp.BusinessException;
 import com.jinkuangkj.open.constant.OrderStatus;
 import com.jinkuangkj.open.mapper.ActOrderDao;
 import com.jinkuangkj.open.mapper.ActivityDao;
@@ -13,6 +21,9 @@ import com.jinkuangkj.open.model.Activity;
 import com.jinkuangkj.open.service.ActOrderService;
 import com.jinkuangkj.open.util.PrimaryGenerater;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Service
 public class ActOrderServiceImpl implements ActOrderService{
 	
@@ -20,6 +31,11 @@ public class ActOrderServiceImpl implements ActOrderService{
 	ActOrderDao actOrderDao;
 	@Autowired
 	ActivityDao activityDao;
+	@Autowired
+	private WxPayService wxPayService;
+	
+	protected static final DateParser NOTIFY_DATE_PARSER = FastDateFormat.getInstance("yyyyMMddHHmmss");
+	
 
 	@Override
 	public ActOrder createOrder(Integer userId, Integer actId, String name, String iphone) {
@@ -39,6 +55,32 @@ public class ActOrderServiceImpl implements ActOrderService{
 		actOrderDao.insertSelective(actOrder);
 		
 		return actOrder;
+	}
+
+	@Override
+	public void doNotify(String tradeNo, String xml) throws WxPayException {
+		
+		ActOrder order = actOrderDao.selectByTradeNo(tradeNo);
+		if(null==order) {
+			throw new BusinessException("未找到该流水");
+		}
+		
+		//解析报文
+		WxPayOrderNotifyResult result = wxPayService.parseOrderNotifyResult(xml);
+		order.setOutTradeNo(result.getTransactionId());
+		order.setMerchantId(result.getMchId());
+		order.setStatus(OrderStatus.SUCCESS.getValue());
+        Date finishTime = new Date();
+        String finishTimeStr = result.getTimeEnd();
+        if (!Strings.isNullOrEmpty(finishTimeStr)) {
+            try {
+				finishTime = NOTIFY_DATE_PARSER.parse(finishTimeStr);
+			} catch (ParseException e) {
+				log.error("解析时间错误:{}",e);
+			}
+        }
+        order.setFinishTime(finishTime);
+        actOrderDao.updateSelective(order);
 	}
 	
 

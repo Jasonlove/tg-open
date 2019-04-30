@@ -20,4 +20,6 @@ public interface ActOrderDao {
     int updateSelective(ActOrder record);
 
     int updateById(ActOrder record);
+    
+    ActOrder selectByTradeNo(String tradeNo);
 }
