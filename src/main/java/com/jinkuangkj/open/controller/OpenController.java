@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.jinkuangkj.open.config.exp.BusinessException;
 import com.jinkuangkj.open.config.open.OpenConfig;
+import com.jinkuangkj.open.mapper.ActUserDao;
+import com.jinkuangkj.open.model.ActUser;
 import com.jinkuangkj.open.model.Activity;
 import com.jinkuangkj.open.service.ActivityService;
 
@@ -38,6 +40,7 @@ public class OpenController {
 	private OpenConfig openConfig;
 	@Autowired
 	private ActivityService activityService;
+	
  
     @GetMapping("/authorize")
     public String authorize(@RequestParam("actId") Integer actId,@RequestParam(required=false) String shareId){
@@ -46,9 +49,9 @@ public class OpenController {
     		throw new BusinessException("未找到该活动, 请在后台设置活动");
     	}
     	String url = openConfig.getMpBaseUrl()+"/open/userInfo";
-    	String returnUrl= openConfig.getMpBaseUrl() + activity.getUrl();
+    	String returnUrl= openConfig.getMpBaseUrl() + activity.getUrl() + "?actId="+actId;
     	if(StringUtils.isNotBlank(shareId)) {
-    		returnUrl = returnUrl +"?shareId="+shareId;
+    		returnUrl = returnUrl +"&shareId="+shareId;
     	}
         String redirectURL = wxMpService.oauth2buildAuthorizationUrl(url, WxConsts.OAuth2Scope.SNSAPI_USERINFO, URLEncoder.encode(returnUrl));
         log.info("【微信网页授权】获取code,redirectURL={}", redirectURL);
@@ -69,30 +72,20 @@ public class OpenController {
         }
         String openId = wxMpOAuth2AccessToken.getOpenId();
         
-        String url = "";
-        if(returnUrl.contains("?")) {
-        	url = returnUrl +"&openId=" + openId;
-        }else {
-        	url = returnUrl +"?openId=" + openId;
-        }
+        //注册用户信息
+        String url = returnUrl +"&openId=" + openId;
         log.info("【微信网页授权】redirect url={}", url);
-        
+    
         return "redirect:"+ url;
     }
     
     
     @GetMapping("/act")
-    public String getAct(@RequestParam String openId,@RequestParam(required=false) String shareId) {
+    public String getAct(@RequestParam String openId, @RequestParam String actId, 
+    		@RequestParam(required=false) String shareId) {
     	
-    	//进入活动页面
-    	WxMpUserService service = new WxMpUserServiceImpl(wxMpService);
-    	try {
-			WxMpUser info = service.userInfo(openId);
-			log.info("【微信获取用户信息】WxMpUser ={}", info);
-			
-		} catch (WxErrorException e) {
-			e.printStackTrace();
-		}
+    	
+    	
     	
     	return "open/index";
     }

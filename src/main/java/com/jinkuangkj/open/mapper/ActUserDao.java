@@ -20,4 +20,6 @@ public interface ActUserDao {
     int updateSelective(ActUser record);
 
     int updateById(ActUser record);
+    
+    ActUser selectByOpenId(String openId);
 }

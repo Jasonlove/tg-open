@@ -116,4 +116,12 @@
             share_income = #{shareIncome,jdbcType=DOUBLE}
         where id = #{id,jdbcType=INTEGER}
     </update>
+    
+    <select id="selectByOpenId" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select 
+        <include refid="Base_Column_List" />
+        from t_user
+        where openid = #{openid,jdbcType=VARCHAR}
+    </select>
+    
 </mapper>
