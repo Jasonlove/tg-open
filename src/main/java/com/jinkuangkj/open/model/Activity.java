@@ -2,18 +2,17 @@
  * @des @TODO 
  * @name Activity.java
  * @author Jason-pc
- * @date 2019-04-26 14:20:35
+ * @date 2019-04-30 08:57:59
  */
 package com.jinkuangkj.open.model;
 
-import java.math.BigDecimal;
 import java.util.Date;
 
 /*
  * @des @TODO 
  * @name 
  * @author Jason-pc
- * @date 2019-04-26 14:20:35
+ * @date 2019-04-30 08:57:59
  */
 public class Activity {
     private Integer id;
@@ -36,18 +35,18 @@ public class Activity {
     /**
      * 报名金额
      */
-    private BigDecimal amount;
+    private Double amount;
     /**
      * 分享金额
      */
-    private BigDecimal shareAmount;
+    private Double shareAmount;
     /**
      * 活动参与个数
      */
     private Integer joinCount;
     private Date createTime;
 
-    public Activity(Integer id, String name, Date startTime, Date endTime, String url, BigDecimal amount, BigDecimal shareAmount, Integer joinCount, Date createTime) {
+    public Activity(Integer id, String name, Date startTime, Date endTime, String url, Double amount, Double shareAmount, Integer joinCount, Date createTime) {
         this.id = id;
         this.name = name;
         this.startTime = startTime;
@@ -91,16 +90,16 @@ public class Activity {
     public void setUrl(String url) {
         this.url = url;
     }
-    public BigDecimal getAmount() {
+    public Double getAmount() {
         return amount;
     }
-    public void setAmount(BigDecimal amount) {
+    public void setAmount(Double amount) {
         this.amount = amount;
     }
-    public BigDecimal getShareAmount() {
+    public Double getShareAmount() {
         return shareAmount;
     }
-    public void setShareAmount(BigDecimal shareAmount) {
+    public void setShareAmount(Double shareAmount) {
         this.shareAmount = shareAmount;
     }
     public Integer getJoinCount() {

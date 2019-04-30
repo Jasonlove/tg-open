@@ -5,20 +5,21 @@
         <constructor>
             <idArg column="id" javaType="java.lang.Integer" jdbcType="INTEGER" />
             <arg column="act_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+            <arg column="user_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
             <arg column="name" javaType="java.lang.String" jdbcType="VARCHAR" />
             <arg column="iphone" javaType="java.lang.String" jdbcType="VARCHAR" />
-            <arg column="openId" javaType="java.lang.String" jdbcType="VARCHAR" />
-            <arg column="amount" javaType="java.math.BigDecimal" jdbcType="DECIMAL" />
+            <arg column="amount" javaType="java.lang.Double" jdbcType="DOUBLE" />
             <arg column="trade_no" javaType="java.lang.String" jdbcType="VARCHAR" />
             <arg column="out_trade_no" javaType="java.lang.String" jdbcType="VARCHAR" />
             <arg column="status" javaType="java.lang.String" jdbcType="VARCHAR" />
             <arg column="create_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
             <arg column="finish_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+            <arg column="merchant_id" javaType="java.lang.String" jdbcType="VARCHAR" />
         </constructor>
     </resultMap>
     <sql id="Base_Column_List">
-        id, act_id, name, iphone, openId, amount, trade_no, out_trade_no, status, create_time, 
-        finish_time
+        id, act_id, user_id, name, iphone, amount, trade_no, out_trade_no, status, create_time, 
+        finish_time, merchant_id
     </sql>
     <select id="selectById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
         select 
@@ -34,14 +35,14 @@
         <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
             SELECT LAST_INSERT_ID()
         </selectKey>
-        insert into t_order (act_id, name, iphone, 
-            openId, amount, trade_no, 
+        insert into t_order (act_id, user_id, name, 
+            iphone, amount, trade_no, 
             out_trade_no, status, create_time, 
-            finish_time)
-        values (#{actId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{iphone,jdbcType=VARCHAR}, 
-            #{openid,jdbcType=VARCHAR}, #{amount,jdbcType=DECIMAL}, #{tradeNo,jdbcType=VARCHAR}, 
+            finish_time, merchant_id)
+        values (#{actId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, 
+            #{iphone,jdbcType=VARCHAR}, #{amount,jdbcType=DOUBLE}, #{tradeNo,jdbcType=VARCHAR}, 
             #{outTradeNo,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
-            #{finishTime,jdbcType=TIMESTAMP})
+            #{finishTime,jdbcType=TIMESTAMP}, #{merchantId,jdbcType=VARCHAR})
     </insert>
     <insert id="insertSelective" parameterType="com.jinkuangkj.open.model.ActOrder">
         <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
@@ -52,14 +53,14 @@
             <if test="actId != null">
                 act_id,
             </if>
+            <if test="userId != null">
+                user_id,
+            </if>
             <if test="name != null">
                 name,
             </if>
             <if test="iphone != null">
                 iphone,
-            </if>
-            <if test="openid != null">
-                openId,
             </if>
             <if test="amount != null">
                 amount,
@@ -79,10 +80,16 @@
             <if test="finishTime != null">
                 finish_time,
             </if>
+            <if test="merchantId != null">
+                merchant_id,
+            </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="actId != null">
                 #{actId,jdbcType=INTEGER},
+            </if>
+            <if test="userId != null">
+                #{userId,jdbcType=INTEGER},
             </if>
             <if test="name != null">
                 #{name,jdbcType=VARCHAR},
@@ -90,11 +97,8 @@
             <if test="iphone != null">
                 #{iphone,jdbcType=VARCHAR},
             </if>
-            <if test="openid != null">
-                #{openid,jdbcType=VARCHAR},
-            </if>
             <if test="amount != null">
-                #{amount,jdbcType=DECIMAL},
+                #{amount,jdbcType=DOUBLE},
             </if>
             <if test="tradeNo != null">
                 #{tradeNo,jdbcType=VARCHAR},
@@ -111,6 +115,9 @@
             <if test="finishTime != null">
                 #{finishTime,jdbcType=TIMESTAMP},
             </if>
+            <if test="merchantId != null">
+                #{merchantId,jdbcType=VARCHAR},
+            </if>
         </trim>
     </insert>
     <update id="updateSelective" parameterType="com.jinkuangkj.open.model.ActOrder">
@@ -119,17 +126,17 @@
             <if test="actId != null">
                 act_id = #{actId,jdbcType=INTEGER},
             </if>
+            <if test="userId != null">
+                user_id = #{userId,jdbcType=INTEGER},
+            </if>
             <if test="name != null">
                 name = #{name,jdbcType=VARCHAR},
             </if>
             <if test="iphone != null">
                 iphone = #{iphone,jdbcType=VARCHAR},
             </if>
-            <if test="openid != null">
-                openId = #{openid,jdbcType=VARCHAR},
-            </if>
             <if test="amount != null">
-                amount = #{amount,jdbcType=DECIMAL},
+                amount = #{amount,jdbcType=DOUBLE},
             </if>
             <if test="tradeNo != null">
                 trade_no = #{tradeNo,jdbcType=VARCHAR},
@@ -146,21 +153,25 @@
             <if test="finishTime != null">
                 finish_time = #{finishTime,jdbcType=TIMESTAMP},
             </if>
+            <if test="merchantId != null">
+                merchant_id = #{merchantId,jdbcType=VARCHAR},
+            </if>
         </set>
         where id = #{id,jdbcType=INTEGER}
     </update>
     <update id="updateById" parameterType="com.jinkuangkj.open.model.ActOrder">
         update t_order
         set act_id = #{actId,jdbcType=INTEGER},
+            user_id = #{userId,jdbcType=INTEGER},
             name = #{name,jdbcType=VARCHAR},
             iphone = #{iphone,jdbcType=VARCHAR},
-            openId = #{openid,jdbcType=VARCHAR},
-            amount = #{amount,jdbcType=DECIMAL},
+            amount = #{amount,jdbcType=DOUBLE},
             trade_no = #{tradeNo,jdbcType=VARCHAR},
             out_trade_no = #{outTradeNo,jdbcType=VARCHAR},
             status = #{status,jdbcType=VARCHAR},
             create_time = #{createTime,jdbcType=TIMESTAMP},
-            finish_time = #{finishTime,jdbcType=TIMESTAMP}
+            finish_time = #{finishTime,jdbcType=TIMESTAMP},
+            merchant_id = #{merchantId,jdbcType=VARCHAR}
         where id = #{id,jdbcType=INTEGER}
     </update>
 </mapper>

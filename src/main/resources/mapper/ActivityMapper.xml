@@ -8,8 +8,8 @@
             <arg column="start_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
             <arg column="end_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
             <arg column="url" javaType="java.lang.String" jdbcType="VARCHAR" />
-            <arg column="amount" javaType="java.math.BigDecimal" jdbcType="DECIMAL" />
-            <arg column="share_amount" javaType="java.math.BigDecimal" jdbcType="DECIMAL" />
+            <arg column="amount" javaType="java.lang.Double" jdbcType="DOUBLE" />
+            <arg column="share_amount" javaType="java.lang.Double" jdbcType="DOUBLE" />
             <arg column="join_count" javaType="java.lang.Integer" jdbcType="INTEGER" />
             <arg column="create_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
         </constructor>
@@ -23,13 +23,6 @@
         from t_activity
         where id = #{id,jdbcType=INTEGER}
     </select>
-    
-    <select id="getList"  resultMap="BaseResultMap">
-        select 
-        <include refid="Base_Column_List" />
-        from t_activity
-    </select>
-    
     <delete id="deleteById" parameterType="java.lang.Integer">
         delete from t_activity
         where id = #{id,jdbcType=INTEGER}
@@ -42,7 +35,7 @@
             url, amount, share_amount, 
             join_count, create_time)
         values (#{name,jdbcType=VARCHAR}, #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, 
-            #{url,jdbcType=VARCHAR}, #{amount,jdbcType=DECIMAL}, #{shareAmount,jdbcType=DECIMAL}, 
+            #{url,jdbcType=VARCHAR}, #{amount,jdbcType=DOUBLE}, #{shareAmount,jdbcType=DOUBLE}, 
             #{joinCount,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP})
     </insert>
     <insert id="insertSelective" parameterType="com.jinkuangkj.open.model.Activity">
@@ -90,10 +83,10 @@
                 #{url,jdbcType=VARCHAR},
             </if>
             <if test="amount != null">
-                #{amount,jdbcType=DECIMAL},
+                #{amount,jdbcType=DOUBLE},
             </if>
             <if test="shareAmount != null">
-                #{shareAmount,jdbcType=DECIMAL},
+                #{shareAmount,jdbcType=DOUBLE},
             </if>
             <if test="joinCount != null">
                 #{joinCount,jdbcType=INTEGER},
@@ -119,10 +112,10 @@
                 url = #{url,jdbcType=VARCHAR},
             </if>
             <if test="amount != null">
-                amount = #{amount,jdbcType=DECIMAL},
+                amount = #{amount,jdbcType=DOUBLE},
             </if>
             <if test="shareAmount != null">
-                share_amount = #{shareAmount,jdbcType=DECIMAL},
+                share_amount = #{shareAmount,jdbcType=DOUBLE},
             </if>
             <if test="joinCount != null">
                 join_count = #{joinCount,jdbcType=INTEGER},
@@ -139,10 +132,17 @@
             start_time = #{startTime,jdbcType=TIMESTAMP},
             end_time = #{endTime,jdbcType=TIMESTAMP},
             url = #{url,jdbcType=VARCHAR},
-            amount = #{amount,jdbcType=DECIMAL},
-            share_amount = #{shareAmount,jdbcType=DECIMAL},
+            amount = #{amount,jdbcType=DOUBLE},
+            share_amount = #{shareAmount,jdbcType=DOUBLE},
             join_count = #{joinCount,jdbcType=INTEGER},
             create_time = #{createTime,jdbcType=TIMESTAMP}
         where id = #{id,jdbcType=INTEGER}
     </update>
+    
+    <select id="getList"  resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from t_activity
+    </select>
+    
 </mapper>

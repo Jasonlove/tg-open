@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jinkuangkj.open.mapper.TransferDao">
+    <resultMap id="BaseResultMap" type="com.jinkuangkj.open.model.Transfer">
+        <constructor>
+            <idArg column="id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+            <arg column="user_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+            <arg column="transfer_no" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="amount" javaType="java.lang.Double" jdbcType="DOUBLE" />
+            <arg column="status" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="result_code" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="result_message" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="create_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+            <arg column="merchant_id" javaType="java.lang.String" jdbcType="VARCHAR" />
+        </constructor>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, user_id, transfer_no, amount, status, result_code, result_message, create_time, 
+        merchant_id
+    </sql>
+    <select id="selectById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select 
+        <include refid="Base_Column_List" />
+        from t_transfer
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteById" parameterType="java.lang.Integer">
+        delete from t_transfer
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="com.jinkuangkj.open.model.Transfer">
+        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into t_transfer (user_id, transfer_no, amount, 
+            status, result_code, result_message, 
+            create_time, merchant_id)
+        values (#{userId,jdbcType=INTEGER}, #{transferNo,jdbcType=VARCHAR}, #{amount,jdbcType=DOUBLE}, 
+            #{status,jdbcType=VARCHAR}, #{resultCode,jdbcType=VARCHAR}, #{resultMessage,jdbcType=VARCHAR}, 
+            #{createTime,jdbcType=TIMESTAMP}, #{merchantId,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.jinkuangkj.open.model.Transfer">
+        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into t_transfer
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="transferNo != null">
+                transfer_no,
+            </if>
+            <if test="amount != null">
+                amount,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="resultCode != null">
+                result_code,
+            </if>
+            <if test="resultMessage != null">
+                result_message,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="merchantId != null">
+                merchant_id,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null">
+                #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="transferNo != null">
+                #{transferNo,jdbcType=VARCHAR},
+            </if>
+            <if test="amount != null">
+                #{amount,jdbcType=DOUBLE},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=VARCHAR},
+            </if>
+            <if test="resultCode != null">
+                #{resultCode,jdbcType=VARCHAR},
+            </if>
+            <if test="resultMessage != null">
+                #{resultMessage,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="merchantId != null">
+                #{merchantId,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateSelective" parameterType="com.jinkuangkj.open.model.Transfer">
+        update t_transfer
+        <set>
+            <if test="userId != null">
+                user_id = #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="transferNo != null">
+                transfer_no = #{transferNo,jdbcType=VARCHAR},
+            </if>
+            <if test="amount != null">
+                amount = #{amount,jdbcType=DOUBLE},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=VARCHAR},
+            </if>
+            <if test="resultCode != null">
+                result_code = #{resultCode,jdbcType=VARCHAR},
+            </if>
+            <if test="resultMessage != null">
+                result_message = #{resultMessage,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="merchantId != null">
+                merchant_id = #{merchantId,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateById" parameterType="com.jinkuangkj.open.model.Transfer">
+        update t_transfer
+        set user_id = #{userId,jdbcType=INTEGER},
+            transfer_no = #{transferNo,jdbcType=VARCHAR},
+            amount = #{amount,jdbcType=DOUBLE},
+            status = #{status,jdbcType=VARCHAR},
+            result_code = #{resultCode,jdbcType=VARCHAR},
+            result_message = #{resultMessage,jdbcType=VARCHAR},
+            create_time = #{createTime,jdbcType=TIMESTAMP},
+            merchant_id = #{merchantId,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+</mapper>

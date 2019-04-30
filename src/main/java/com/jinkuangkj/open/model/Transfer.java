@@ -1,6 +1,6 @@
 /*
  * @des @TODO 
- * @name ActOrder.java
+ * @name Transfer.java
  * @author Jason-pc
  * @date 2019-04-30 08:57:59
  */
@@ -14,62 +14,38 @@ import java.util.Date;
  * @author Jason-pc
  * @date 2019-04-30 08:57:59
  */
-public class ActOrder {
-    /**
-     * 自增主键
-     */
+public class Transfer {
     private Integer id;
-    /**
-     * 活动id
-     */
-    private Integer actId;
     private Integer userId;
-    /**
-     * 姓名
-     */
-    private String name;
-    private String iphone;
+    private String transferNo;
     private Double amount;
     /**
-     * 支付流水号
-     */
-    private String tradeNo;
-    /**
-     * 微信
-     */
-    private String outTradeNo;
-    /**
-     * success,
+     * 发红包状态
      */
     private String status;
+    private String resultCode;
+    private String resultMessage;
     /**
      * 创建时间
      */
     private Date createTime;
     /**
-     * 完成时间
-     */
-    private Date finishTime;
-    /**
-     * 商家id
+     * 商户id
      */
     private String merchantId;
 
-    public ActOrder(Integer id, Integer actId, Integer userId, String name, String iphone, Double amount, String tradeNo, String outTradeNo, String status, Date createTime, Date finishTime, String merchantId) {
+    public Transfer(Integer id, Integer userId, String transferNo, Double amount, String status, String resultCode, String resultMessage, Date createTime, String merchantId) {
         this.id = id;
-        this.actId = actId;
         this.userId = userId;
-        this.name = name;
-        this.iphone = iphone;
+        this.transferNo = transferNo;
         this.amount = amount;
-        this.tradeNo = tradeNo;
-        this.outTradeNo = outTradeNo;
         this.status = status;
+        this.resultCode = resultCode;
+        this.resultMessage = resultMessage;
         this.createTime = createTime;
-        this.finishTime = finishTime;
         this.merchantId = merchantId;
     }
-    public ActOrder() {
+    public Transfer() {
         super();
     }
     public Integer getId() {
@@ -78,29 +54,17 @@ public class ActOrder {
     public void setId(Integer id) {
         this.id = id;
     }
-    public Integer getActId() {
-        return actId;
-    }
-    public void setActId(Integer actId) {
-        this.actId = actId;
-    }
     public Integer getUserId() {
         return userId;
     }
     public void setUserId(Integer userId) {
         this.userId = userId;
     }
-    public String getName() {
-        return name;
+    public String getTransferNo() {
+        return transferNo;
     }
-    public void setName(String name) {
-        this.name = name;
-    }
-    public String getIphone() {
-        return iphone;
-    }
-    public void setIphone(String iphone) {
-        this.iphone = iphone;
+    public void setTransferNo(String transferNo) {
+        this.transferNo = transferNo;
     }
     public Double getAmount() {
         return amount;
@@ -108,35 +72,29 @@ public class ActOrder {
     public void setAmount(Double amount) {
         this.amount = amount;
     }
-    public String getTradeNo() {
-        return tradeNo;
-    }
-    public void setTradeNo(String tradeNo) {
-        this.tradeNo = tradeNo;
-    }
-    public String getOutTradeNo() {
-        return outTradeNo;
-    }
-    public void setOutTradeNo(String outTradeNo) {
-        this.outTradeNo = outTradeNo;
-    }
     public String getStatus() {
         return status;
     }
     public void setStatus(String status) {
         this.status = status;
     }
+    public String getResultCode() {
+        return resultCode;
+    }
+    public void setResultCode(String resultCode) {
+        this.resultCode = resultCode;
+    }
+    public String getResultMessage() {
+        return resultMessage;
+    }
+    public void setResultMessage(String resultMessage) {
+        this.resultMessage = resultMessage;
+    }
     public Date getCreateTime() {
         return createTime;
     }
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
-    }
-    public Date getFinishTime() {
-        return finishTime;
-    }
-    public void setFinishTime(Date finishTime) {
-        this.finishTime = finishTime;
     }
     public String getMerchantId() {
         return merchantId;
@@ -151,16 +109,13 @@ public class ActOrder {
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
-        sb.append(", actId=").append(actId);
         sb.append(", userId=").append(userId);
-        sb.append(", name=").append(name);
-        sb.append(", iphone=").append(iphone);
+        sb.append(", transferNo=").append(transferNo);
         sb.append(", amount=").append(amount);
-        sb.append(", tradeNo=").append(tradeNo);
-        sb.append(", outTradeNo=").append(outTradeNo);
         sb.append(", status=").append(status);
+        sb.append(", resultCode=").append(resultCode);
+        sb.append(", resultMessage=").append(resultMessage);
         sb.append(", createTime=").append(createTime);
-        sb.append(", finishTime=").append(finishTime);
         sb.append(", merchantId=").append(merchantId);
         sb.append("]");
         return sb.toString();
