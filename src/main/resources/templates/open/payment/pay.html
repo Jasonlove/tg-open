@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>支付</title>
+	<script src="https://cdn.bootcss.com/jquery/3.4.0/jquery.min.js"></script>
+	<script type="text/javascript" src="/open/js/myjs.js"></script>
+	<link rel="stylesheet" type="text/css" href="/open/css/style.css"></link>
+</head>
+<style>
+	body,html{
+		background-color: #f0eff4;
+	}
+</style>
+<body>
+	<div class="pay_con">
+		<p>订单详情</p>
+		<ul>
+			<li>
+				<strong>商品名称</strong>
+				<em th:text="${order.actName}"></em>
+			</li>
+			<li>
+				<strong>订单编号</strong>
+				<em th:text="${order.tradeNo}"></em>
+			</li>
+			<li>
+				<strong>商家名称</strong>
+				<em th:text="${order.merchant}"></em>
+			</li>
+			<li>
+				<strong>商品价格</strong>
+				<em class="add_color" th:text="${order.amount}"></em>
+			</li>
+		</ul>
+		<div class="pay_nother">
+			<strong>还需要支付</strong>
+			<em th:text="${order.amount}"></em>
+		</div>
+		<div class="pay_way">
+			<p>选择支付方式</p>
+			<button>微信支付</button>
+		</div>
+	</div>
+</body>
+</html>

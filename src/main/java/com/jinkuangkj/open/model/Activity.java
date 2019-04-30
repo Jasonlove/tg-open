@@ -2,7 +2,7 @@
  * @des @TODO 
  * @name Activity.java
  * @author Jason-pc
- * @date 2019-04-30 08:57:59
+ * @date 2019-04-30 12:48:39
  */
 package com.jinkuangkj.open.model;
 
@@ -12,7 +12,7 @@ import java.util.Date;
  * @des @TODO 
  * @name 
  * @author Jason-pc
- * @date 2019-04-30 08:57:59
+ * @date 2019-04-30 12:48:39
  */
 public class Activity {
     private Integer id;
@@ -20,6 +20,10 @@ public class Activity {
      * 活动名称
      */
     private String name;
+    /**
+     * 商家名称
+     */
+    private String merchant;
     /**
      * 活动时间
      */
@@ -46,9 +50,10 @@ public class Activity {
     private Integer joinCount;
     private Date createTime;
 
-    public Activity(Integer id, String name, Date startTime, Date endTime, String url, Double amount, Double shareAmount, Integer joinCount, Date createTime) {
+    public Activity(Integer id, String name, String merchant, Date startTime, Date endTime, String url, Double amount, Double shareAmount, Integer joinCount, Date createTime) {
         this.id = id;
         this.name = name;
+        this.merchant = merchant;
         this.startTime = startTime;
         this.endTime = endTime;
         this.url = url;
@@ -71,6 +76,12 @@ public class Activity {
     }
     public void setName(String name) {
         this.name = name;
+    }
+    public String getMerchant() {
+        return merchant;
+    }
+    public void setMerchant(String merchant) {
+        this.merchant = merchant;
     }
     public Date getStartTime() {
         return startTime;
@@ -122,6 +133,7 @@ public class Activity {
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
         sb.append(", name=").append(name);
+        sb.append(", merchant=").append(merchant);
         sb.append(", startTime=").append(startTime);
         sb.append(", endTime=").append(endTime);
         sb.append(", url=").append(url);

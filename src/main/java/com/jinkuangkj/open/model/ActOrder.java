@@ -2,7 +2,7 @@
  * @des @TODO 
  * @name ActOrder.java
  * @author Jason-pc
- * @date 2019-04-30 08:57:59
+ * @date 2019-04-30 12:48:39
  */
 package com.jinkuangkj.open.model;
 
@@ -12,7 +12,7 @@ import java.util.Date;
  * @des @TODO 
  * @name 
  * @author Jason-pc
- * @date 2019-04-30 08:57:59
+ * @date 2019-04-30 12:48:39
  */
 public class ActOrder {
     /**
@@ -24,6 +24,14 @@ public class ActOrder {
      */
     private Integer actId;
     private Integer userId;
+    /**
+     * 活动名称
+     */
+    private String actName;
+    /**
+     * 商家名称
+     */
+    private String merchant;
     /**
      * 姓名
      */
@@ -55,10 +63,12 @@ public class ActOrder {
      */
     private String merchantId;
 
-    public ActOrder(Integer id, Integer actId, Integer userId, String name, String iphone, Double amount, String tradeNo, String outTradeNo, String status, Date createTime, Date finishTime, String merchantId) {
+    public ActOrder(Integer id, Integer actId, Integer userId, String actName, String merchant, String name, String iphone, Double amount, String tradeNo, String outTradeNo, String status, Date createTime, Date finishTime, String merchantId) {
         this.id = id;
         this.actId = actId;
         this.userId = userId;
+        this.actName = actName;
+        this.merchant = merchant;
         this.name = name;
         this.iphone = iphone;
         this.amount = amount;
@@ -89,6 +99,18 @@ public class ActOrder {
     }
     public void setUserId(Integer userId) {
         this.userId = userId;
+    }
+    public String getActName() {
+        return actName;
+    }
+    public void setActName(String actName) {
+        this.actName = actName;
+    }
+    public String getMerchant() {
+        return merchant;
+    }
+    public void setMerchant(String merchant) {
+        this.merchant = merchant;
     }
     public String getName() {
         return name;
@@ -153,6 +175,8 @@ public class ActOrder {
         sb.append(", id=").append(id);
         sb.append(", actId=").append(actId);
         sb.append(", userId=").append(userId);
+        sb.append(", actName=").append(actName);
+        sb.append(", merchant=").append(merchant);
         sb.append(", name=").append(name);
         sb.append(", iphone=").append(iphone);
         sb.append(", amount=").append(amount);

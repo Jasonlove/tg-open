@@ -15,8 +15,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.jinkuangkj.open.config.exp.BusinessException;
 import com.jinkuangkj.open.config.open.OpenConfig;
 import com.jinkuangkj.open.mapper.ActUserDao;
+import com.jinkuangkj.open.model.ActOrder;
 import com.jinkuangkj.open.model.ActUser;
 import com.jinkuangkj.open.model.Activity;
+import com.jinkuangkj.open.service.ActOrderService;
 import com.jinkuangkj.open.service.ActUserService;
 import com.jinkuangkj.open.service.ActivityService;
 
@@ -46,7 +48,8 @@ public class OpenController {
 	private ActivityService activityService;
 	@Autowired
 	private ActUserService actUserService;
-	
+	@Autowired
+	private ActOrderService actOrderService;
  
     @GetMapping("/authorize")
     public String authorize(@RequestParam("actId") Integer actId,@RequestParam(required=false) String shareId){
@@ -107,10 +110,11 @@ public class OpenController {
     }
     
     @PostMapping("/order")
-    public String order(@RequestParam Integer userId,@RequestParam Integer actId,
+    public String order(Model model,@RequestParam Integer userId,@RequestParam Integer actId,
     		@RequestParam String name,@RequestParam String iphone) {
-    	
-    	return "";
+    	ActOrder order = actOrderService.createOrder(userId, actId, name, iphone);
+    	model.addAttribute("order", order);
+    	return "open/payment/pay";
     }
 
 }

@@ -1,4 +1,4 @@
-body,html{
+﻿body,html{
 	padding: 0;
 	margin: 0;
 	font-family: "微软雅黑";
@@ -9,6 +9,9 @@ h2,h3,p,ul,li,img{
 	margin: 0;
 	border: 0;
 	list-style: none;
+}
+input{
+	cursor: pointer;
 }
 .pic img{
 	width:100%;
@@ -285,8 +288,87 @@ body,html{
 	font-size: 40px;
 	border-radius: 10px;
 }
+
+/*限时抢购姓名电话判断*/
+.judge{
+	color:#fff;
+	z-index: 999;
+	position: fixed;
+	left:0;
+	top:0;
+	background-color: rgba(0,0,0,0.8);
+	width:100%;
+	height:100%;
+	text-align: center;
+	display: none;
+}
+.judge div{
+	margin-top:50%;
+}
+.judge p{
+	font-size: 46px;
+}
+.judge .rig_div{
+	color:#000;
+	border:0;
+	background-color:rgba(255,255,255,0.8);
+	padding:10px 40px;
+	font-size: 46px;
+	margin-top: 30px;
+}
+/*支付页面*/
+.pay_con em,.pay_con strong{
+	font-style: normal;
+}
+.pay_con p{
+	padding:20px 0px 20px 20px;
+	color:#c3c2c7;
+}
+.pay_con ul,.pay_con .pay_nother{
+	margin-top:30px;
+	background-color: #fff;
+}
+.pay_con li{
+	border-top:1px solid #ccc;
+	margin-left:40px;
+	padding:30px;
+}
+.pay_con strong{
+	/*float:left;*/
+}
+.pay_con em{
+	text-align: right;
+	float:right;
+	width:75%;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+}
+.pay_con .add_color{
+	color:#20ab1e;
+}
+.pay_con .pay_nother{
+	padding:30px;
+	padding-left:70px;
+	border:1px solid #ccc;
+}
+.pay_nother em{
+	color:#20ab1e;
+}
+.pay_way p{
+	color:#9f9ea3;
+}
+.pay_way button{
+	display: block;
+	background-color: #67c440;
+	color:#fff;
+	font-size:46px;
+	width:100%;
+	border:0;
+	padding:20px 0;
 }
 /*分享海报页面*/
 .share_con img{
 	width: 100%;
 }
+
