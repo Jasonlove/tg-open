@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.github.binarywang.wxpay.bean.order.WxPayMpOrderResult;
 import com.github.binarywang.wxpay.bean.request.WxPayUnifiedOrderRequest;
@@ -195,6 +196,7 @@ public class OpenController extends AbstractController{
      * @param response
      * @throws WxPayException 
      */
+    @ResponseBody
     @RequestMapping("/notifying/{tradeNo}")
     public String notifying(@PathVariable("tradeNo") String tradeNo, HttpServletRequest request, HttpServletResponse response) throws WxPayException {
     	log.info("回调流水:{}",tradeNo);
@@ -205,7 +207,10 @@ public class OpenController extends AbstractController{
     }
     
     
-    
+    @GetMapping("/pay/success")
+    public String getSuccess() {
+    	return "open/payment/success";
+    }
     
 
 }
