@@ -41,7 +41,7 @@ public class OpenServiceConfig {
     	config.setAppId(openConfig.getMpAppId());
     	config.setMchId(openConfig.getMpMchId());
     	config.setMchKey(openConfig.getMpMchKey());
-    	config.setKeyPath("/cert");
+    	config.setKeyPath("classpath:cert/apiclient_cert.p12");
     	wxPayService.setConfig(config);
     	return wxPayService;
     }
