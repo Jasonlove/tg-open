@@ -48,7 +48,7 @@ public class ActOrderServiceImpl implements ActOrderService{
 		Activity activity = activityDao.selectById(actId);
 		ActOrder actOrder = new ActOrder();
 		actOrder.setActId(actId);
-		actOrder.setName(iphone);
+		actOrder.setName(name);
 		actOrder.setIphone(iphone);
 		actOrder.setMerchant(activity.getMerchant());
 		actOrder.setActName(activity.getName());
