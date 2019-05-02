@@ -20,9 +20,11 @@ import com.jinkuangkj.open.constant.OrderStatus;
 import com.jinkuangkj.open.mapper.ActOrderDao;
 import com.jinkuangkj.open.mapper.ActivityDao;
 import com.jinkuangkj.open.model.ActOrder;
+import com.jinkuangkj.open.model.ActUser;
 import com.jinkuangkj.open.model.Activity;
 import com.jinkuangkj.open.model.result.OrderResult;
 import com.jinkuangkj.open.service.ActOrderService;
+import com.jinkuangkj.open.service.ActUserService;
 import com.jinkuangkj.open.util.PageUtil;
 import com.jinkuangkj.open.util.PrimaryGenerater;
 
@@ -34,6 +36,8 @@ public class ActOrderServiceImpl implements ActOrderService{
 	
 	@Autowired
 	ActOrderDao actOrderDao;
+	@Autowired
+	ActUserService actUserService;
 	@Autowired
 	ActivityDao activityDao;
 	@Autowired
@@ -69,6 +73,10 @@ public class ActOrderServiceImpl implements ActOrderService{
 		if(null==order) {
 			throw new BusinessException("未找到该流水");
 		}
+		Activity activity = activityDao.selectById(order.getActId());
+		if(null==activity) {
+			throw new BusinessException("未找到该活动");
+		}
 		
 		//解析报文
 		WxPayOrderNotifyResult result = wxPayService.parseOrderNotifyResult(xml);
@@ -86,6 +94,12 @@ public class ActOrderServiceImpl implements ActOrderService{
         }
         order.setFinishTime(finishTime);
         actOrderDao.updateSelective(order);
+        
+        //添加收入
+        ActUser user = actUserService.getUserById(order.getUserId());
+        if(null != user.getShareUserId()) {
+        	actUserService.addIncome(user.getShareUserId(), activity.getShareAmount());
+        }
 	}
 
 	@Override
@@ -108,6 +122,5 @@ public class ActOrderServiceImpl implements ActOrderService{
 		}
 		return list.getList();
 	}
-		
 
 }

@@ -1,5 +1,6 @@
 package com.jinkuangkj.open.service.impl;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
@@ -11,6 +12,7 @@ import com.jinkuangkj.open.mapper.ActivityDao;
 import com.jinkuangkj.open.model.ActUser;
 import com.jinkuangkj.open.model.Activity;
 import com.jinkuangkj.open.service.ActUserService;
+import com.jinkuangkj.open.service.TransferService;
 
 import me.chanjar.weixin.mp.bean.result.WxMpUser;
 
@@ -19,9 +21,10 @@ public class ActUserServiceImpl implements ActUserService {
 
 	@Autowired
 	private ActUserDao actUserDao;
-	
 	@Autowired
 	private ActivityDao activityDao;
+	@Autowired
+	TransferService transferService;
 	
 	@Override
 	public ActUser register(WxMpUser info,Integer actId,String shareId) {
@@ -64,6 +67,22 @@ public class ActUserServiceImpl implements ActUserService {
 	@Override
 	public List<ActUser> getListRanking() {
 		return actUserDao.getListRanking();
+	}
+
+	@Override
+	public void addIncome(Integer userId,Double income) {
+		//受益人
+		ActUser user = actUserDao.selectById(userId);
+	    BigDecimal b1=new BigDecimal(Double.toString(user.getShareIncome()));
+	    BigDecimal b2 = new BigDecimal(Double.toString(income));
+	    BigDecimal add = b1.add(b2);
+	    user.setShareIncome(add.doubleValue());
+	    
+	    Integer count = user.getShareCount() + 1;
+	    user.setActId(count);
+	    actUserDao.updateSelective(user);
+	    //添加发红包记录
+	    transferService.sendRed(user, income);
 	}
 
 }
