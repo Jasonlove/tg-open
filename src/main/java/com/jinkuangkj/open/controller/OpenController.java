@@ -138,16 +138,16 @@ public class OpenController extends AbstractController{
     public String getAct(@RequestParam Integer userId, @RequestParam String actId, 
     		@RequestParam(required=false) String shareId,Model model) {
     	
+    	//个人信息
     	ActUser user = actUserService.getUserById(userId);
     	//活动信息
     	Activity activity = activityService.get(Integer.valueOf(actId));
     	//获取人员参数列表
     	List<ActUser> userList = actUserService.getList(Integer.valueOf(actId));
-    	
     	//获取支付成功集合
     	List<OrderResult> orderList = actOrderService.getOrderList(1, 10);
-    	log.info("集合:{}",orderList);
     	//获取分享排名
+    	List<ActUser> rankList = actUserService.getListRanking();
     	
     	//分享链接请求地址
     	String shareUrl = openConfig.getMpBaseUrl() + "/open/share?actId="+actId+"&userId="+userId;
@@ -156,8 +156,8 @@ public class OpenController extends AbstractController{
     	model.addAttribute("act", activity);
     	model.addAttribute("userList", userList);
     	model.addAttribute("orderList", orderList);
+    	model.addAttribute("rankList", rankList);
     	model.addAttribute("shareUrl", shareUrl);
-    	
     	
     	return "open/index";
     }

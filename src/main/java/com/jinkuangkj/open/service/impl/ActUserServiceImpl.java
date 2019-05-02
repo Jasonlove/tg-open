@@ -12,10 +12,6 @@ import com.jinkuangkj.open.model.ActUser;
 import com.jinkuangkj.open.model.Activity;
 import com.jinkuangkj.open.service.ActUserService;
 
-import me.chanjar.weixin.common.error.WxErrorException;
-import me.chanjar.weixin.mp.api.WxMpService;
-import me.chanjar.weixin.mp.api.WxMpUserService;
-import me.chanjar.weixin.mp.api.impl.WxMpUserServiceImpl;
 import me.chanjar.weixin.mp.bean.result.WxMpUser;
 
 @Service
@@ -25,21 +21,16 @@ public class ActUserServiceImpl implements ActUserService {
 	private ActUserDao actUserDao;
 	
 	@Autowired
-    private WxMpService wxMpService;
-	
-	@Autowired
 	private ActivityDao activityDao;
 	
 	@Override
 	public ActUser register(WxMpUser info,Integer actId,String shareId) {
 		
 		//进入活动页面
-		
 		ActUser actUser = actUserDao.selectByOpenId(info.getOpenId());
 		if(null != actUser) {
 			return actUser;
 		}
-    
 		actUser = new ActUser();
 		actUser.setActId(Integer.valueOf(actId));
 		actUser.setHeadimgurl(info.getHeadImgUrl());
@@ -70,6 +61,9 @@ public class ActUserServiceImpl implements ActUserService {
 		return actUserDao.selectById(id);
 	}
 
-	
+	@Override
+	public List<ActUser> getListRanking() {
+		return actUserDao.getListRanking();
+	}
 
 }

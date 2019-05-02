@@ -13,5 +13,7 @@ public interface ActUserService {
 	ActUser getUserById(Integer id);
 	
 	List<ActUser> getList(Integer actId);
+	
+	List<ActUser> getListRanking();
 
 }

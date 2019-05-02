@@ -88,20 +88,10 @@
 							</th>
 							<th>佣金(元)</th>
 						</tr>
-						<tr>
-							<td>圣诞节</td>
-							<td>123人</td>
-							<td class="add_color">¥72.00元</td>
-						</tr>
-						<tr>
-							<td>圣诞节</td>
-							<td>123人</td>
-							<td class="add_color">¥72.00元</td>
-						</tr>
-						<tr>
-							<td>圣诞节</td>
-							<td>123人</td>
-							<td class="add_color">¥72.00元</td>
+						<tr th:each="user : ${rankList}">
+							<td th:text="${user.nickname}"></td>
+							<td th:text="@{${user.shareCount}+'人'}"></td>
+							<td class="add_color" th:text="@{'¥'+${user.shareIncome}+'元'}">¥72.00元</td>
 						</tr>
 					</table>
 					<div>

@@ -142,5 +142,11 @@
         where act_id = #{actId,jdbcType=INTEGER} order by id desc limit 0,12
     </select>
     
+    <select id="getListRanking"  resultMap="BaseResultMap">
+        select 
+        <include refid="Base_Column_List" />
+        from t_user order by share_income desc limit 0,10
+    </select>
+    
     
 </mapper>

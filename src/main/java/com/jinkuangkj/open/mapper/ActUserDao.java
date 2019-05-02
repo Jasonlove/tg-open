@@ -26,4 +26,6 @@ public interface ActUserDao {
     ActUser selectByOpenId(String openId);
     
     List<ActUser> getListByActId(Integer actId);
+    
+    List<ActUser> getListRanking();
 }
