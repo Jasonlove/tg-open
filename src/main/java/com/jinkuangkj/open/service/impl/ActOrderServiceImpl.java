@@ -2,6 +2,7 @@ package com.jinkuangkj.open.service.impl;
 
 import java.text.ParseException;
 import java.util.Date;
+import java.util.List;
 
 import org.apache.commons.lang3.time.DateParser;
 import org.apache.commons.lang3.time.FastDateFormat;
@@ -11,6 +12,8 @@ import org.springframework.stereotype.Service;
 import com.github.binarywang.wxpay.bean.notify.WxPayOrderNotifyResult;
 import com.github.binarywang.wxpay.exception.WxPayException;
 import com.github.binarywang.wxpay.service.WxPayService;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.google.common.base.Strings;
 import com.jinkuangkj.open.config.exp.BusinessException;
 import com.jinkuangkj.open.constant.OrderStatus;
@@ -18,7 +21,9 @@ import com.jinkuangkj.open.mapper.ActOrderDao;
 import com.jinkuangkj.open.mapper.ActivityDao;
 import com.jinkuangkj.open.model.ActOrder;
 import com.jinkuangkj.open.model.Activity;
+import com.jinkuangkj.open.model.result.OrderResult;
 import com.jinkuangkj.open.service.ActOrderService;
+import com.jinkuangkj.open.util.PageUtil;
 import com.jinkuangkj.open.util.PrimaryGenerater;
 
 import lombok.extern.slf4j.Slf4j;
@@ -81,6 +86,17 @@ public class ActOrderServiceImpl implements ActOrderService{
         }
         order.setFinishTime(finishTime);
         actOrderDao.updateSelective(order);
+	}
+
+	@Override
+	public PageInfo<OrderResult> getList() {
+		
+		PageHelper.startPage(1, 10);
+		List<OrderResult> order = actOrderDao.getListOrder();
+		PageInfo<OrderResult> orderList = new PageInfo<OrderResult>(order);
+		PageUtil.toPagination(orderList);
+		
+		return orderList;
 	}
 	
 

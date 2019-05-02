@@ -25,11 +25,13 @@ import com.github.binarywang.wxpay.bean.request.WxPayUnifiedOrderRequest;
 import com.github.binarywang.wxpay.constant.WxPayConstants.TradeType;
 import com.github.binarywang.wxpay.exception.WxPayException;
 import com.github.binarywang.wxpay.service.WxPayService;
+import com.github.pagehelper.PageInfo;
 import com.jinkuangkj.open.config.exp.BusinessException;
 import com.jinkuangkj.open.config.open.OpenConfig;
 import com.jinkuangkj.open.model.ActOrder;
 import com.jinkuangkj.open.model.ActUser;
 import com.jinkuangkj.open.model.Activity;
+import com.jinkuangkj.open.model.result.OrderResult;
 import com.jinkuangkj.open.service.ActOrderService;
 import com.jinkuangkj.open.service.ActUserService;
 import com.jinkuangkj.open.service.ActivityService;
@@ -142,7 +144,12 @@ public class OpenController extends AbstractController{
     	//获取人员参数列表
     	List<ActUser> list = actUserService.getList(Integer.valueOf(actId));
     	
+    	//获取支付成功集合
+    	PageInfo<OrderResult> orderList = actOrderService.getList();
+    	log.info("支付集合:{}",orderList);
+    	//获取分享排名
     	
+    	//分享链接请求地址
     	String shareUrl = openConfig.getMpBaseUrl() + "/open/share?actId="+actId+"&userId="+userId;
     	
     	model.addAttribute("user", user);

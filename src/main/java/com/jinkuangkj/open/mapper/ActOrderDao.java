@@ -6,7 +6,10 @@
  */
 package com.jinkuangkj.open.mapper;
 
+import java.util.List;
+
 import com.jinkuangkj.open.model.ActOrder;
+import com.jinkuangkj.open.model.result.OrderResult;
 
 public interface ActOrderDao {
     int deleteById(Integer id);
@@ -22,4 +25,6 @@ public interface ActOrderDao {
     int updateById(ActOrder record);
     
     ActOrder selectByTradeNo(String tradeNo);
+    
+    List<OrderResult> getListOrder();
 }

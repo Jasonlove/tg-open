@@ -158,8 +158,8 @@
 	</div>
 	<div style="clear: both"></div>
 	<div class="con_bottom">
-		<button class="btn_left">限时抢购(10.0元)</button>
-		<a th:href="${shareUrl}" class="btn_right">分享赚6元</a>
+		<button class="btn_left" th:text="@{'限时抢购('+${act.amount}+'元)'}"></button>
+		<a th:href="${shareUrl}" class="btn_right" th:text="@{'分享赚'+${act.shareAmount}+'元'}"></a>
 	</div>
 	<div class="yincang_div">
 		<div class="back_div"></div>

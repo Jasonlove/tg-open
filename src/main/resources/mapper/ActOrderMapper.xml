@@ -205,4 +205,37 @@
         from t_order
         where trade_no = #{tradeNo,jdbcType=VARCHAR}
     </select>
+    
+    
+    <resultMap id="OrderResultMap" type="com.jinkuangkj.open.model.result.OrderResult">
+        <constructor>
+            <arg column="userId" javaType="java.lang.Integer" jdbcType="INTEGER" />
+            <arg column="nickname" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="headimgurl" javaType="java.lang.String" jdbcType="VARCHAR" />
+            
+            <arg column="name" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="iphone" javaType="java.lang.String" jdbcType="VARCHAR" />
+            
+            <arg column="tradeNo" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="finishTime" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+            <arg column="amount" javaType="java.lang.Double" jdbcType="DOUBLE" />
+        </constructor>
+    </resultMap>
+    
+    
+    <select id="getListOrder" resultMap="OrderResultMap">
+		SELECT 
+		u.nickname,
+		u.headimgurl,
+		o.user_id userId,
+		o.`name`,
+		o.iphone,
+		o.finish_time finishTime,
+		o.trade_no tradeNo,
+		o.amount
+		from t_order o join t_user u on o.user_id = u.id
+		where o.`status` = 'success' order by o.id DESC
+    </select>
+    
+    
 </mapper>
