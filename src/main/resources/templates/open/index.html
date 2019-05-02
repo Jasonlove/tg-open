@@ -31,65 +31,20 @@
 				<div class="buy_record">
 					<p class="buy_num">购买记录(<strong>46</strong>)</p>
 					<ul>
-						<li>
+						<li th:each="order : ${orderList}">
 							<p class="buy_p">
-								<img src="/open/img/buy_pic.jpg"></img>
+								<img th:src="${order.headimgurl}"></img>
 							</p>
 							<p class="buy_p">
-								<em>大嫁风尚</em>
+								<em th:text="${order.name}"></em>
 								<br></br>
-								<strong>11111111111</strong>
+								<em th:text="${order.iphone}"></em>
 							</p>
 							<p class="buy_p2">
 								已经支付¥<em>10</em>元<br></br>
 								<em>2019-4-25 19:12:56</em>
 							</p>
 						</li>
-						
-						<li>
-							<p class="buy_p">
-								<img src="/open/img/buy_pic.jpg"></img>
-							</p>
-							<p class="buy_p">
-								<em>大嫁风尚</em>
-								<br></br>
-								<strong>11111111111</strong>
-							</p>
-							<p class="buy_p2">
-								已经支付¥<em>10</em>元<br></br>
-								<em>2019-4-25 19:12:56</em>
-							</p>
-						</li>
-						
-						<li>
-							<p class="buy_p">
-								<img src="/open/img/buy_pic.jpg"></img>
-							</p>
-							<p class="buy_p">
-								<em>大嫁风尚</em>
-								<br></br>
-								<strong>11111111111</strong>
-							</p>
-							<p class="buy_p2">
-								已经支付¥<em>10</em>元<br></br>
-								<em>2019-4-25 19:12:56</em>
-							</p>
-						</li>
-						<li>
-							<p class="buy_p">
-								<img src="/open/img/buy_pic.jpg"></img>
-							</p>
-							<p class="buy_p">
-								<em>大嫁风尚</em>
-								<br></br>
-								<strong>11111111111</strong>
-							</p>
-							<p class="buy_p2">
-								已经支付¥<em>10</em>元<br></br>
-								<em>2019-4-25 19:12:56</em>
-							</p>
-						</li>
-						
 						
 					</ul>
 				</div>
@@ -172,8 +127,8 @@
 					<p>	
 					<input type="text" name="iphone" placeholder="请输入您的手机号" class="inp_num"></input>
 					</p>
-					<input type="hidden" name="userId" th:value="${user.id}" id="use_inp"></input>
-					<input type="hidden" name="actId" th:value="${act.id}" id="act_inp"></input>
+					<input type="hidden" name="userId" th:value="${user.id}"></input>
+					<input type="hidden" name="actId" th:value="${act.id}"></input>
 					<button type="button" class="mon_buy">立即购买</button>
 				</div>
 			</form>    

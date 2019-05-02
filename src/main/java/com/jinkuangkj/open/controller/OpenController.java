@@ -142,11 +142,11 @@ public class OpenController extends AbstractController{
     	//活动信息
     	Activity activity = activityService.get(Integer.valueOf(actId));
     	//获取人员参数列表
-    	List<ActUser> list = actUserService.getList(Integer.valueOf(actId));
+    	List<ActUser> userList = actUserService.getList(Integer.valueOf(actId));
     	
     	//获取支付成功集合
-    	PageInfo<OrderResult> orderList = actOrderService.getList();
-    	log.info("支付集合:{}",orderList);
+    	List<OrderResult> orderList = actOrderService.getOrderList(1, 10);
+    	log.info("集合:{}",orderList);
     	//获取分享排名
     	
     	//分享链接请求地址
@@ -154,7 +154,8 @@ public class OpenController extends AbstractController{
     	
     	model.addAttribute("user", user);
     	model.addAttribute("act", activity);
-    	model.addAttribute("userList", list);
+    	model.addAttribute("userList", userList);
+    	model.addAttribute("orderList", orderList);
     	model.addAttribute("shareUrl", shareUrl);
     	
     	

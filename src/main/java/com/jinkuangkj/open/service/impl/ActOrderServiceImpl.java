@@ -89,18 +89,25 @@ public class ActOrderServiceImpl implements ActOrderService{
 	}
 
 	@Override
-	public PageInfo<OrderResult> getList() {
+	public PageInfo<OrderResult> getList(Integer pageNo, Integer pageSize) {
 		
-		PageHelper.startPage(1, 10);
+		PageHelper.startPage(pageNo, pageSize);
 		List<OrderResult> order = actOrderDao.getListOrder();
 		PageInfo<OrderResult> orderList = new PageInfo<OrderResult>(order);
 		PageUtil.toPagination(orderList);
 		
 		return orderList;
 	}
-	
 
-	
-	
+	@Override
+	public List<OrderResult> getOrderList(Integer pageNo, Integer pageSize) {
+		PageInfo<OrderResult> list = getList(pageNo,pageSize);
+		for (OrderResult result : list.getList()) {
+			String iphone = result.getIphone().replaceAll("(\\d{3})\\d{4}(\\d{4})","$1****$2");
+			result.setIphone(iphone);
+		}
+		return list.getList();
+	}
+		
 
 }
