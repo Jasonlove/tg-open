@@ -85,7 +85,6 @@ public class OpenController extends AbstractController{
     		returnUrl = returnUrl +"&shareId="+shareId;
     	}
         String redirectURL = wxMpService.oauth2buildAuthorizationUrl(url, WxConsts.OAuth2Scope.SNSAPI_USERINFO, URLEncoder.encode(returnUrl));
-        log.info("【微信网页授权】获取code,redirectURL={}", redirectURL);
         return "redirect:" + redirectURL;
     }
  
@@ -99,10 +98,7 @@ public class OpenController extends AbstractController{
     @GetMapping("/userInfo")
     public String userInfo(@RequestParam("code") String code,
                          @RequestParam("state") String returnUrl) throws Exception {
-        log.info("【微信网页授权】code={}", code);
-        log.info("【微信网页授权】state={}", returnUrl);
         WxMpOAuth2AccessToken wxMpOAuth2AccessToken;
-        
         ActUser user = null;
         
         try {
@@ -144,6 +140,8 @@ public class OpenController extends AbstractController{
     	Activity activity = activityService.get(Integer.valueOf(actId));
     	//获取人员参数列表
     	List<ActUser> userList = actUserService.getList(Integer.valueOf(actId));
+    	//支付成功个数
+    	Integer count = actOrderService.countByStatus();
     	//获取支付成功集合
     	List<OrderResult> orderList = actOrderService.getOrderList(1, 10);
     	//获取分享排名
@@ -155,6 +153,7 @@ public class OpenController extends AbstractController{
     	model.addAttribute("user", user);
     	model.addAttribute("act", activity);
     	model.addAttribute("userList", userList);
+    	model.addAttribute("count", count);
     	model.addAttribute("orderList", orderList);
     	model.addAttribute("rankList", rankList);
     	model.addAttribute("shareUrl", shareUrl);

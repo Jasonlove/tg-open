@@ -238,4 +238,10 @@
     </select>
     
     
+    <select id="countByStatus" resultType="java.lang.Integer">
+		select 
+		count(id) 
+		from t_order where `status` = 'success'
+    </select>
+    
 </mapper>

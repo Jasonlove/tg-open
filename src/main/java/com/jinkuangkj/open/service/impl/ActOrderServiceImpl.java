@@ -123,4 +123,9 @@ public class ActOrderServiceImpl implements ActOrderService{
 		return list.getList();
 	}
 
+	@Override
+	public Integer countByStatus() {
+		return actOrderDao.countByStatus();
+	}
+
 }

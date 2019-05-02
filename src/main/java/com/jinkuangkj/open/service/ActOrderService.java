@@ -18,4 +18,5 @@ public interface ActOrderService {
 	
 	List<OrderResult> getOrderList(Integer pageNo, Integer pageSize);
 
+	Integer countByStatus();
 }

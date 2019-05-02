@@ -29,7 +29,7 @@
 					<div style="clear: both"></div>
 				</div>
 				<div class="buy_record">
-					<p class="buy_num">购买记录(<strong>46</strong>)</p>
+					<p class="buy_num" th:text="@{'购买记录('+${count}+')'}"></p>
 					<ul>
 						<li th:each="order : ${orderList}">
 							<p class="buy_p">
