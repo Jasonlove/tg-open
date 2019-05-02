@@ -2,7 +2,7 @@
  * @des @TODO 
  * @name ActUser.java
  * @author Jason-pc
- * @date 2019-04-30 08:57:59
+ * @date 2019-05-02 19:39:58
  */
 package com.jinkuangkj.open.model;
 
@@ -10,7 +10,7 @@ package com.jinkuangkj.open.model;
  * @des @TODO 
  * @name 
  * @author Jason-pc
- * @date 2019-04-30 08:57:59
+ * @date 2019-05-02 19:39:58
  */
 public class ActUser {
     private Integer id;
@@ -26,8 +26,12 @@ public class ActUser {
      */
     private Integer shareUserId;
     private Double shareIncome;
+    /**
+     * 分享收益人数
+     */
+    private Integer shareCount;
 
-    public ActUser(Integer id, String openid, String nickname, String headimgurl, Integer actId, Integer shareUserId, Double shareIncome) {
+    public ActUser(Integer id, String openid, String nickname, String headimgurl, Integer actId, Integer shareUserId, Double shareIncome, Integer shareCount) {
         this.id = id;
         this.openid = openid;
         this.nickname = nickname;
@@ -35,6 +39,7 @@ public class ActUser {
         this.actId = actId;
         this.shareUserId = shareUserId;
         this.shareIncome = shareIncome;
+        this.shareCount = shareCount;
     }
     public ActUser() {
         super();
@@ -81,6 +86,12 @@ public class ActUser {
     public void setShareIncome(Double shareIncome) {
         this.shareIncome = shareIncome;
     }
+    public Integer getShareCount() {
+        return shareCount;
+    }
+    public void setShareCount(Integer shareCount) {
+        this.shareCount = shareCount;
+    }
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -94,6 +105,7 @@ public class ActUser {
         sb.append(", actId=").append(actId);
         sb.append(", shareUserId=").append(shareUserId);
         sb.append(", shareIncome=").append(shareIncome);
+        sb.append(", shareCount=").append(shareCount);
         sb.append("]");
         return sb.toString();
     }
