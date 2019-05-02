@@ -41,8 +41,8 @@
 								<em th:text="${order.iphone}"></em>
 							</p>
 							<p class="buy_p2">
-								已经支付¥<em>10</em>元<br></br>
-								<em>2019-4-25 19:12:56</em>
+								已经支付¥<em th:text="${order.amount}"></em>元<br></br>
+								<em th:text="${#dates.format(order.finishTime,'yyyy-MM-dd hh:mm:ss')}"></em>
 							</p>
 						</li>
 						
