@@ -1,11 +1,13 @@
 package com.jinkuangkj.open.controller;
 
+import java.io.File;
 import java.net.URLEncoder;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.github.binarywang.utils.qrcode.QrcodeUtils;
 import com.github.binarywang.wxpay.bean.order.WxPayMpOrderResult;
 import com.github.binarywang.wxpay.bean.request.WxPayUnifiedOrderRequest;
 import com.github.binarywang.wxpay.constant.WxPayConstants.TradeType;
@@ -206,11 +209,36 @@ public class OpenController extends AbstractController{
     	return returnSuccess();
     }
     
-    
+    /**
+     * 跳转支付成功页面
+     * @return
+     */
     @GetMapping("/pay/success")
     public String getSuccess() {
     	return "open/payment/success";
     }
+    
+    
+    @GetMapping("/share")
+    public String getShare(Model model,@RequestParam Integer userId,@RequestParam Integer actId){
+    	Activity activity = activityService.get(actId);
+    	ActUser user = actUserService.getUserById(userId);
+    	if(null==activity) {
+    		throw new BusinessException("未找到该活动");
+    	}
+    	if(null==user) {
+    		throw new BusinessException("用户不存在");
+    	}
+    	
+    	String shareUrl = openConfig.getMpBaseUrl() + activity.getUrl() +"?actId="+actId +"&shareId="+userId;
+    	String base64String = Base64.encodeBase64String(QrcodeUtils.createQrcode(shareUrl,null));
+        String url = "data:image/jpg;base64,"+base64String;
+        log.info("分享url地址:{}",shareUrl);
+        model.addAttribute("url", url);
+        
+        return "open/share";
+    }
+    
     
 
 }

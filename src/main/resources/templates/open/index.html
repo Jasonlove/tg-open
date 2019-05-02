@@ -163,7 +163,7 @@
 	</div>
 	<div class="yincang_div">
 		<div class="back_div"></div>
-			<form action="/open/order"  method = "post">>
+			<form action="/open/order"  method = "post" name="myform">
 				<div class="yin_content">
 					<h2>请填写正确信息</h2>
 					<p>	
@@ -174,7 +174,7 @@
 					</p>
 					<input type="hidden" name="userId" th:value="${user.id}"></input>
 					<input type="hidden" name="actId" th:value="${act.id}"></input>
-					<button class="mon_buy">立即购买</button>
+					<button type="button" class="mon_buy">立即购买</button>
 				</div>
 			</form>    
 		<div class="judge">
@@ -195,9 +195,29 @@
 	    $(".yincang_div").css("display","none")
 	})
 
+// 立即购买显示框
+	$(".judge .rig_div").click(function(){
+		$(".judge").hide()
+	})
+
 	// 限时抢购正则判断
 	var val=$(".yin_content .inp_name").val();
 	var val2=$(".yin_content .inp_num").val();
-	
+	var reg=/^[1][3,4,5,7,8][0-9]{9}$/;
+	$(".yin_content .mon_buy").click(function(){
+		if($(".yin_content .inp_name").val()==""){
+			$(".judge").css("display","block");
+			$(".yin_content .mon_buy").attr('href','')
+		}else if($(".yin_content .inp_num").val()==""){
+			$(".judge").css("display","block");
+			$(".judge p").html("请输入您的手机号")
+		}else if(!reg.test($(".yin_content .inp_num").val())){
+			// alert(888)
+			$(".judge").css("display","block");
+			$(".judge p").html("请输入正确手机号");
+		}else{
+			document.myform.submit();
+		}
+	})
 
 </script>

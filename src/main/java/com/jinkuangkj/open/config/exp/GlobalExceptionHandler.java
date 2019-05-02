@@ -46,7 +46,7 @@ public class GlobalExceptionHandler {
     @ResponseBody
     public ResultEntity businessExceptionHandler(HttpServletRequest req,HttpServletResponse response, BusinessException e) throws Exception {
 		//log.error("异常日志", e);
-		return buildErrorInfo(e.getExpCode(), e.getDesc(), req);
+		return buildErrorInfo(HttpStatus.INTERNAL_SERVER_ERROR.value(), e.getMessage(), req);
     }
 	
 
