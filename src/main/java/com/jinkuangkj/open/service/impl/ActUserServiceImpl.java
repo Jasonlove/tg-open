@@ -79,7 +79,7 @@ public class ActUserServiceImpl implements ActUserService {
 	    user.setShareIncome(add.doubleValue());
 	    
 	    Integer count = user.getShareCount() + 1;
-	    user.setActId(count);
+	    user.setShareCount(count);
 	    actUserDao.updateSelective(user);
 	    //添加发红包记录
 	    transferService.sendRed(user, income);
