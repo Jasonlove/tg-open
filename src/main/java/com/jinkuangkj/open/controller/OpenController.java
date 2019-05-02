@@ -142,9 +142,13 @@ public class OpenController extends AbstractController{
     	//获取人员参数列表
     	List<ActUser> list = actUserService.getList(Integer.valueOf(actId));
     	
+    	
+    	String shareUrl = openConfig.getMpBaseUrl() + "/open/share?actId="+actId+"&userId="+userId;
+    	
     	model.addAttribute("user", user);
     	model.addAttribute("act", activity);
     	model.addAttribute("userList", list);
+    	model.addAttribute("shareUrl", shareUrl);
     	
     	
     	return "open/index";
@@ -230,7 +234,7 @@ public class OpenController extends AbstractController{
     		throw new BusinessException("用户不存在");
     	}
     	
-    	String shareUrl = openConfig.getMpBaseUrl() + activity.getUrl() +"?actId="+actId +"&shareId="+userId;
+    	String shareUrl = openConfig.getMpBaseUrl() + "/open/authorize?actId="+actId +"&shareId="+userId;
     	String base64String = Base64.encodeBase64String(QrcodeUtils.createQrcode(shareUrl,null));
         String url = "data:image/jpg;base64,"+base64String;
         log.info("分享url地址:{}",shareUrl);
