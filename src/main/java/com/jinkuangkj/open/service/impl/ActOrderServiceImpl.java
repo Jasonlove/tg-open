@@ -114,7 +114,7 @@ public class ActOrderServiceImpl implements ActOrderService{
 	}
 
 	@Override
-	public List<OrderResult> getOrderList(Integer pageNo, Integer pageSize) {
+	public List<OrderResult> getListOrder(Integer pageNo, Integer pageSize) {
 		PageInfo<OrderResult> list = getList(pageNo,pageSize);
 		for (OrderResult result : list.getList()) {
 			String iphone = result.getIphone().replaceAll("(\\d{3})\\d{4}(\\d{4})","$1****$2");
@@ -126,6 +126,11 @@ public class ActOrderServiceImpl implements ActOrderService{
 	@Override
 	public Integer countByStatus() {
 		return actOrderDao.countByStatus();
+	}
+
+	@Override
+	public List<OrderResult> getListOrderByAdmin() {
+		return actOrderDao.getListOrder();
 	}
 
 }

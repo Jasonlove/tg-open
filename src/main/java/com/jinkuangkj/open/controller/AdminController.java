@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.jinkuangkj.open.model.Activity;
+import com.jinkuangkj.open.model.result.OrderResult;
+import com.jinkuangkj.open.service.ActOrderService;
 import com.jinkuangkj.open.service.ActivityService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -25,6 +27,9 @@ public class AdminController {
 	@Autowired
 	ActivityService activityService;
 	
+	@Autowired
+	ActOrderService actOrderService;
+	
 	
 	@GetMapping("/index")
 	public String index() {
@@ -32,10 +37,17 @@ public class AdminController {
 	}
 	
 	@GetMapping("/activity/index")
-	public String activity(Model model) {
+	public String activityList(Model model) {
 		List<Activity> list = activityService.getList();
 		model.addAttribute("actList", list);
 		return "admin/activity/index";
+	}
+	
+	@GetMapping("/order/index")
+	public String orderList(Model model) {
+		List<OrderResult> list = actOrderService.getListOrderByAdmin();
+		model.addAttribute("orderList", list);
+		return "admin/order/index";
 	}
 	
 	@PostMapping("/activity/save")

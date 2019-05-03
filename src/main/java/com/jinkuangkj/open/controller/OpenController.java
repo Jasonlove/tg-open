@@ -143,7 +143,7 @@ public class OpenController extends AbstractController{
     	//支付成功个数
     	Integer count = actOrderService.countByStatus();
     	//获取支付成功集合
-    	List<OrderResult> orderList = actOrderService.getOrderList(1, 10);
+    	List<OrderResult> orderList = actOrderService.getListOrder(1, 10);
     	//获取分享排名
     	List<ActUser> rankList = actUserService.getListRanking();
     	

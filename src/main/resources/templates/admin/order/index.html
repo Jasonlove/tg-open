@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="utf-8"></meta>
+   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"></meta>
+   <title>活动</title>
+      <!-- JQUERY-->
+   <script src="/admin/vendor/jquery/dist/jquery.js"></script>
+   <!-- FONT AWESOME-->
+   <link rel="stylesheet" href="/admin/vendor/fontawesome/css/font-awesome.min.css"></link>
+   <!-- SIMPLE LINE ICONS-->
+   <link rel="stylesheet" href="/admin/vendor/simple-line-icons/css/simple-line-icons.css"></link>
+   <!-- WHIRL (spinners)-->
+   <link rel="stylesheet" href="/admin/vendor/whirl/dist/whirl.css"></link>
+   <!-- =============== PAGE VENDOR STYLES ===============-->
+      <!-- DATATABLES-->
+   <link rel="stylesheet" href="/admin/vendor/datatables-colvis/css/dataTables.colVis.css"></link>
+   <link rel="stylesheet" href="/admin/vendor/datatable-bootstrap/css/dataTables.bootstrap.css"></link>
+   <!-- =============== BOOTSTRAP STYLES ===============-->
+   <link rel="stylesheet" href="/admin/css/bootstrap.css" id="bscss"></link>
+   <!-- =============== APP STYLES ===============-->
+   <link rel="stylesheet" href="/admin/css/app.css" id="maincss"></link>
+</head>
+
+<body>
+   <div class="wrapper">
+      <!-- top navbar-->
+      <header class="topnavbar-wrapper">
+         <!-- START Top Navbar-->
+         <nav role="navigation" class="navbar topnavbar">
+            <!-- START navbar header-->
+            <div class="navbar-header">
+               <a href="/admin/index" class="navbar-brand">
+                  <div class="brand-logo">
+                     <img src="/admin/img/logo.png" alt="App Logo" class="img-responsive"></img>
+                  </div>
+                  <div class="brand-logo-collapsed">
+                     <img src="/admin/img/logo-single.png" alt="App Logo" class="img-responsive"></img>
+                  </div>
+               </a>
+            </div>
+            <!-- END navbar header-->
+            <!-- START Nav wrapper-->
+            <div class="nav-wrapper">
+               <!-- START Left navbar-->
+               <ul class="nav navbar-nav">
+                  <li>
+                     <!-- Button used to collapse the left sidebar. Only visible on tablet and desktops-->
+                     <a href="#" data-toggle-state="aside-collapsed" class="hidden-xs">
+                        <em class="fa fa-navicon"></em>
+                     </a>
+                     <!-- Button to show/hide the sidebar on mobile. Visible on mobile only.-->
+                     <a href="#" data-toggle-state="aside-toggled" data-no-persist="true" class="visible-xs sidebar-toggle">
+                        <em class="fa fa-navicon"></em>
+                     </a>
+                  </li>
+               </ul>
+               <!-- END Left navbar-->
+               
+            </div>
+            <!-- END Nav wrapper-->
+            
+         </nav>
+         <!-- END Top Navbar-->
+      </header>
+      <!-- sidebar-->
+      <aside class="aside">
+         <!-- START Sidebar (left)-->
+         <div class="aside-inner">
+            <nav class="sidebar">
+               <!-- START sidebar nav-->
+               <ul class="nav">
+                  <!-- Iterates over all sidebar items-->
+                  <li class="nav-heading ">
+                     <span data-localize="sidebar.heading.HEADER"></span>
+                  </li>
+                 
+                  <li class=" active">
+                     <a href="#menuid" title="活动" data-toggle="collapse">
+                        <em class="icon-folder"></em>
+                        <span data-localize="sidebar.nav.menu.MENU">活动</span>
+                     </a>
+                     <ul id="menuid" class="nav sidebar-subnav collapse">
+                        <li class="sidebar-subnav-header">活动</li>
+                        <li class=" active">
+                           <a href="/admin/activity/index.html" title="活动列表">
+                              <em></em>
+                              <span data-localize="sidebar.nav.menu.SUBMENU">活动列表</span>
+                           </a>
+                        </li>
+                     </ul>
+                  </li>
+                  
+                  <li class=" ">
+                     <a href="#order" title="订单" data-toggle="collapse">
+                        <em class="icon-folder"></em>
+                        <span data-localize="sidebar.nav.menu.MENU">订单</span>
+                     </a>
+                     <ul id="order" class="nav sidebar-subnav collapse">
+                        <li class="sidebar-subnav-header">订单</li>
+                        <li class=" ">
+                           <a href="index.html" title="订单">
+                              <em></em>
+                              <span data-localize="sidebar.nav.menu.SUBMENU">订单列表</span>
+                           </a>
+                        </li>
+                     </ul>
+                  </li>
+                  
+               </ul>
+               <!-- END sidebar nav-->
+            </nav>
+         </div>
+         <!-- END Sidebar (left)-->
+      </aside>
+      
+      <section>
+         <!-- Page content-->
+         <div class="content-wrapper">
+         
+         	<h3>活动列表</h3>
+            <div class="row">
+            
+               <div class="col-lg-12">
+                     <div class="panel panel-default">
+                        <div class="panel-body">
+                           <table id="datatable1" class="table table-striped table-hover">
+                              <thead>
+                              	<tr>
+	                              <th>
+			                        <div class="form-group">
+			                           <button type="button" data-toggle="modal" data-target="#myModalLargeSave" class="btn btn-labeled btn-success">
+			                              <span class="btn-label">
+			                                 <em class="fa fa-plus"></em>
+			                              </span>Add</button>
+			                        </div>
+	                     		  </th>
+                              	</tr>
+                                 <tr>
+                                    <th>ID</th>
+                                    <th>活动名称</th>
+                                    <th>商户名称</th>
+                                    <th>报名金额</th>
+                                    <th>分享金额</th>
+                                    <th>开始时间</th>
+                                    <th>结束时间</th>
+                                    <th>参与人数</th>
+                                    <th>操作</th>
+                                 </tr>
+                              </thead>
+                              <tbody>
+                                 <tr th:each="m : ${actList}">
+                                    <td th:text="${m.id}"></td>
+                                    <td th:text="${m.name}"></td>
+                                    <td th:text="${m.merchant}"></td>
+                                    <td th:text="${m.amount}"></td>
+                                    <td th:text="${m.shareAmount}"></td>
+                                    <td th:text="${#dates.format(m.startTime,'yyyy-MM-dd hh:mm:ss')}"></td>
+                                    <td th:text="${#dates.format(m.endTime,'yyyy-MM-dd hh:mm:ss')}"></td>
+                                    <td th:text="${m.joinCount}"></td>
+                                    <td>
+				                        <button type="button" data-toggle="modal" data-target="#myModalLargeUpdate"  class="btn btn-sm btn-warning btn_x">
+				                           <em class="fa fa-edit"></em>
+				                        </button>
+				                    </td>
+                                 </tr>
+                              </tbody>
+                           </table>
+                        </div>
+                     </div>
+                  </div>
+               
+            </div>
+         </div>
+      </section>
+      
+      <!-- Page footer-->
+      <footer>
+         <span>&copy; 2019 - 保定泰高广告有限公司</span>
+      </footer>
+   </div>
+   <!-- =============== VENDOR SCRIPTS ===============-->
+   <!-- MODERNIZR-->
+   <script src="/admin/vendor/modernizr/modernizr.js"></script>
+   <!-- BOOTSTRAP-->
+   <script src="/admin/vendor/bootstrap/dist/js/bootstrap.js"></script>
+   <!-- STORAGE API-->
+   <script src="/admin/vendor/jQuery-Storage-API/jquery.storageapi.js"></script>
+   <!-- JQUERY EASING-->
+   <script src="/admin/vendor/jquery.easing/js/jquery.easing.js"></script>
+   <!-- ANIMO-->
+   <script src="/admin/vendor/animo.js/animo.js"></script>
+
+   <!-- =============== PAGE VENDOR SCRIPTS ===============-->
+   <!-- DATATABLES-->
+   <script src="/admin/vendor/datatables/media/js/jquery.dataTables.min.js"></script>
+   <script src="/admin/vendor/datatables-colvis/js/dataTables.colVis.js"></script>
+   <script src="/admin/vendor/datatable-bootstrap/js/dataTables.bootstrap.js"></script>
+   <script src="/admin/vendor/datatable-bootstrap/js/dataTables.bootstrapPagination.js"></script>
+   <script src="/admin/My97DatePicker/WdatePicker.js"></script>
+   <script src="/admin/js/demo-datatable.js"></script>
+   <!-- =============== APP SCRIPTS ===============-->
+   
+   
+   <script src="/admin/js/app.js"></script>
+</body>
+
+</html>

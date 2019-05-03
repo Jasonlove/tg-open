@@ -16,7 +16,9 @@ public interface ActOrderService {
 	
 	PageInfo<OrderResult> getList(Integer pageNo, Integer pageSize);
 	
-	List<OrderResult> getOrderList(Integer pageNo, Integer pageSize);
+	List<OrderResult> getListOrder(Integer pageNo, Integer pageSize);
+	
+	List<OrderResult> getListOrderByAdmin();
 
 	Integer countByStatus();
 }
