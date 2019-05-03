@@ -4,7 +4,7 @@
 <head>
    <meta charset="utf-8"></meta>
    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"></meta>
-   <title>admin</title>
+   <title>活动</title>
    <!-- FONT AWESOME-->
    <link rel="stylesheet" href="/admin/vendor/fontawesome/css/font-awesome.min.css"></link>
    <!-- SIMPLE LINE ICONS-->
@@ -138,10 +138,11 @@
                                  <tr>
                                     <th>ID</th>
                                     <th>活动名称</th>
-                                    <th>开始时间</th>
-                                    <th>结束时间</th>
+                                    <th>商户名称</th>
                                     <th>报名金额</th>
                                     <th>分享金额</th>
+                                    <th>开始时间</th>
+                                    <th>结束时间</th>
                                     <th>参与人数</th>
                                     <th>操作</th>
                                  </tr>
@@ -150,10 +151,11 @@
                                  <tr th:each="m : ${actList}">
                                     <td th:text="${m.id}"></td>
                                     <td th:text="${m.name}"></td>
-                                    <td th:text="${#dates.format(m.startTime,'yyyy-MM-dd hh:mm:ss')}"></td>
-                                    <td th:text="${#dates.format(m.endTime,'yyyy-MM-dd hh:mm:ss')}"></td>
+                                    <td th:text="${m.merchant}"></td>
                                     <td th:text="${m.amount}"></td>
                                     <td th:text="${m.shareAmount}"></td>
+                                    <td th:text="${#dates.format(m.startTime,'yyyy-MM-dd hh:mm:ss')}"></td>
+                                    <td th:text="${#dates.format(m.endTime,'yyyy-MM-dd hh:mm:ss')}"></td>
                                     <td th:text="${m.joinCount}"></td>
                                     <td>
 				                        <button type="button" class="btn btn-sm btn-warning">
@@ -210,7 +212,7 @@
                </button>
                <h4 id="myModalLabelLarge" class="modal-title">活动</h4>
             </div>
-            <form class="form-horizontal">
+            <form class="form-horizontal" action="/admin/activity/save" method="post">
             	<div class="modal-body">
             
                      <div class="form-group">
