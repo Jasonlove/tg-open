@@ -50,6 +50,13 @@ public class AdminController {
 		return "admin/order/index";
 	}
 	
+	@GetMapping("/transfer/index")
+	public String transferList(Model model) {
+		List<OrderResult> list = actOrderService.getListOrderByAdmin();
+		model.addAttribute("orderList", list);
+		return "admin/transfer/index";
+	}
+	
 	@PostMapping("/activity/save")
 	public String saveActivity(Activity activity) {
 		activityService.saveActivity(activity);
