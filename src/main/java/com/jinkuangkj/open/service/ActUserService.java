@@ -8,7 +8,7 @@ import me.chanjar.weixin.mp.bean.result.WxMpUser;
 
 public interface ActUserService {
 	
-	ActUser register(WxMpUser info,Integer actId,String shareId);
+	ActUser register(WxMpUser info,Integer actId,String shareId,String token);
 	
 	ActUser getUserById(Integer id);
 	

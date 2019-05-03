@@ -2,7 +2,7 @@
  * @des @TODO 
  * @name ActUser.java
  * @author Jason-pc
- * @date 2019-05-02 19:39:58
+ * @date 2019-05-03 21:29:07
  */
 package com.jinkuangkj.open.model;
 
@@ -10,7 +10,7 @@ package com.jinkuangkj.open.model;
  * @des @TODO 
  * @name 
  * @author Jason-pc
- * @date 2019-05-02 19:39:58
+ * @date 2019-05-03 21:29:07
  */
 public class ActUser {
     private Integer id;
@@ -20,22 +20,30 @@ public class ActUser {
     private String openid;
     private String nickname;
     private String headimgurl;
+    /**
+     * AccessToken
+     */
+    private String token;
     private Integer actId;
     /**
      * 活动分享人id
      */
     private Integer shareUserId;
+    /**
+     * 收益总金额
+     */
     private Double shareIncome;
     /**
      * 分享收益人数
      */
     private Integer shareCount;
 
-    public ActUser(Integer id, String openid, String nickname, String headimgurl, Integer actId, Integer shareUserId, Double shareIncome, Integer shareCount) {
+    public ActUser(Integer id, String openid, String nickname, String headimgurl, String token, Integer actId, Integer shareUserId, Double shareIncome, Integer shareCount) {
         this.id = id;
         this.openid = openid;
         this.nickname = nickname;
         this.headimgurl = headimgurl;
+        this.token = token;
         this.actId = actId;
         this.shareUserId = shareUserId;
         this.shareIncome = shareIncome;
@@ -67,6 +75,12 @@ public class ActUser {
     }
     public void setHeadimgurl(String headimgurl) {
         this.headimgurl = headimgurl;
+    }
+    public String getToken() {
+        return token;
+    }
+    public void setToken(String token) {
+        this.token = token;
     }
     public Integer getActId() {
         return actId;
@@ -102,6 +116,7 @@ public class ActUser {
         sb.append(", openid=").append(openid);
         sb.append(", nickname=").append(nickname);
         sb.append(", headimgurl=").append(headimgurl);
+        sb.append(", token=").append(token);
         sb.append(", actId=").append(actId);
         sb.append(", shareUserId=").append(shareUserId);
         sb.append(", shareIncome=").append(shareIncome);

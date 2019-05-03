@@ -27,18 +27,24 @@ public class ActUserServiceImpl implements ActUserService {
 	TransferService transferService;
 	
 	@Override
-	public ActUser register(WxMpUser info,Integer actId,String shareId) {
+	public ActUser register(WxMpUser info,Integer actId,String shareId,String token) {
 		
 		//进入活动页面
 		ActUser actUser = actUserDao.selectByOpenId(info.getOpenId());
 		if(null != actUser) {
+			actUser.setNickname(info.getNickname());
+			actUser.setHeadimgurl(info.getHeadImgUrl());
+			actUser.setOpenid(info.getOpenId());
+			actUser.setToken(token);
+			actUserDao.updateSelective(actUser);
 			return actUser;
 		}
 		actUser = new ActUser();
-		actUser.setActId(Integer.valueOf(actId));
+		actUser.setNickname(info.getNickname());
 		actUser.setHeadimgurl(info.getHeadImgUrl());
 		actUser.setOpenid(info.getOpenId());
-		actUser.setNickname(info.getNickname());
+		actUser.setActId(Integer.valueOf(actId));
+		actUser.setToken(token);
 		if(StringUtils.isNotBlank(shareId)) {
 			actUser.setShareUserId(Integer.valueOf(shareId));
 		}

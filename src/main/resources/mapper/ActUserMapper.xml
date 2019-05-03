@@ -7,6 +7,7 @@
             <arg column="openid" javaType="java.lang.String" jdbcType="VARCHAR" />
             <arg column="nickname" javaType="java.lang.String" jdbcType="VARCHAR" />
             <arg column="headimgurl" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="token" javaType="java.lang.String" jdbcType="VARCHAR" />
             <arg column="act_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
             <arg column="share_user_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
             <arg column="share_income" javaType="java.lang.Double" jdbcType="DOUBLE" />
@@ -14,7 +15,7 @@
         </constructor>
     </resultMap>
     <sql id="Base_Column_List">
-        id, openid, nickname, headimgurl, act_id, share_user_id, share_income, share_count
+        id, openid, nickname, headimgurl, token, act_id, share_user_id, share_income, share_count
     </sql>
     <select id="selectById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
         select 
@@ -31,11 +32,11 @@
             SELECT LAST_INSERT_ID()
         </selectKey>
         insert into t_user (openid, nickname, headimgurl, 
-            act_id, share_user_id, share_income, 
-            share_count)
+            token, act_id, share_user_id, 
+            share_income, share_count)
         values (#{openid,jdbcType=VARCHAR}, #{nickname,jdbcType=VARCHAR}, #{headimgurl,jdbcType=VARCHAR}, 
-            #{actId,jdbcType=INTEGER}, #{shareUserId,jdbcType=INTEGER}, #{shareIncome,jdbcType=DOUBLE}, 
-            #{shareCount,jdbcType=INTEGER})
+            #{token,jdbcType=VARCHAR}, #{actId,jdbcType=INTEGER}, #{shareUserId,jdbcType=INTEGER}, 
+            #{shareIncome,jdbcType=DOUBLE}, #{shareCount,jdbcType=INTEGER})
     </insert>
     <insert id="insertSelective" parameterType="com.jinkuangkj.open.model.ActUser">
         <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
@@ -51,6 +52,9 @@
             </if>
             <if test="headimgurl != null">
                 headimgurl,
+            </if>
+            <if test="token != null">
+                token,
             </if>
             <if test="actId != null">
                 act_id,
@@ -74,6 +78,9 @@
             </if>
             <if test="headimgurl != null">
                 #{headimgurl,jdbcType=VARCHAR},
+            </if>
+            <if test="token != null">
+                #{token,jdbcType=VARCHAR},
             </if>
             <if test="actId != null">
                 #{actId,jdbcType=INTEGER},
@@ -101,6 +108,9 @@
             <if test="headimgurl != null">
                 headimgurl = #{headimgurl,jdbcType=VARCHAR},
             </if>
+            <if test="token != null">
+                token = #{token,jdbcType=VARCHAR},
+            </if>
             <if test="actId != null">
                 act_id = #{actId,jdbcType=INTEGER},
             </if>
@@ -121,6 +131,7 @@
         set openid = #{openid,jdbcType=VARCHAR},
             nickname = #{nickname,jdbcType=VARCHAR},
             headimgurl = #{headimgurl,jdbcType=VARCHAR},
+            token = #{token,jdbcType=VARCHAR},
             act_id = #{actId,jdbcType=INTEGER},
             share_user_id = #{shareUserId,jdbcType=INTEGER},
             share_income = #{shareIncome,jdbcType=DOUBLE},
@@ -147,6 +158,5 @@
         <include refid="Base_Column_List" />
         from t_user order by share_income desc limit 0,10
     </select>
-    
     
 </mapper>
