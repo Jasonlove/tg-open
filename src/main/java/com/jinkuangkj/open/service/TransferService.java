@@ -1,9 +1,14 @@
 package com.jinkuangkj.open.service;
 
+import java.util.List;
+
 import com.jinkuangkj.open.model.ActUser;
+import com.jinkuangkj.open.model.Transfer;
 
 public interface TransferService {
 	
 	void sendRed(ActUser user,Double income);
+	
+	List<Transfer> getList();
 
 }

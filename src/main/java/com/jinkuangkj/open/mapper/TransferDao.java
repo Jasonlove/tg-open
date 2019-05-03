@@ -6,6 +6,8 @@
  */
 package com.jinkuangkj.open.mapper;
 
+import java.util.List;
+
 import com.jinkuangkj.open.model.Transfer;
 
 public interface TransferDao {
@@ -20,4 +22,6 @@ public interface TransferDao {
     int updateSelective(Transfer record);
 
     int updateById(Transfer record);
+    
+    List<Transfer> getList();
 }

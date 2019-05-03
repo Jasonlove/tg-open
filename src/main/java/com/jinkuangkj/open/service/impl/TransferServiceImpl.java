@@ -1,6 +1,7 @@
 package com.jinkuangkj.open.service.impl;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -35,6 +36,11 @@ public class TransferServiceImpl implements TransferService{
 		transfer.setTransferNo(PrimaryGenerater.getTradeNo());
 		transfer.setMerchantId(openConfig.getMpMchId());
 		transferDao.insertSelective(transfer);
+	}
+
+	@Override
+	public List<Transfer> getList() {
+		return transferDao.getList();
 	}
 
 }
