@@ -5,6 +5,8 @@
    <meta charset="utf-8"></meta>
    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"></meta>
    <title>活动</title>
+      <!-- JQUERY-->
+   <script src="/admin/vendor/jquery/dist/jquery.js"></script>
    <!-- FONT AWESOME-->
    <link rel="stylesheet" href="/admin/vendor/fontawesome/css/font-awesome.min.css"></link>
    <!-- SIMPLE LINE ICONS-->
@@ -128,7 +130,7 @@
                               	<tr>
 	                              <th>
 			                        <div class="form-group">
-			                           <button type="button" data-toggle="modal" data-target="#myModalLarge" class="btn btn-labeled btn-success">
+			                           <button type="button" data-toggle="modal" data-target="#myModalLargeSave" class="btn btn-labeled btn-success">
 			                              <span class="btn-label">
 			                                 <em class="fa fa-plus"></em>
 			                              </span>Add</button>
@@ -158,7 +160,7 @@
                                     <td th:text="${#dates.format(m.endTime,'yyyy-MM-dd hh:mm:ss')}"></td>
                                     <td th:text="${m.joinCount}"></td>
                                     <td>
-				                        <button type="button" class="btn btn-sm btn-warning">
+				                        <button type="button" data-toggle="modal" data-target="#myModalLargeUpdate"  class="btn btn-sm btn-warning btn_x">
 				                           <em class="fa fa-edit"></em>
 				                        </button>
 				                    </td>
@@ -181,8 +183,6 @@
    <!-- =============== VENDOR SCRIPTS ===============-->
    <!-- MODERNIZR-->
    <script src="/admin/vendor/modernizr/modernizr.js"></script>
-   <!-- JQUERY-->
-   <script src="/admin/vendor/jquery/dist/jquery.js"></script>
    <!-- BOOTSTRAP-->
    <script src="/admin/vendor/bootstrap/dist/js/bootstrap.js"></script>
    <!-- STORAGE API-->
@@ -203,7 +203,7 @@
    <!-- =============== APP SCRIPTS ===============-->
    
    <!-- Modal Large-->
-   <div id="myModalLarge" tabindex="-1" role="dialog" aria-labelledby="myModalLabelLarge" aria-hidden="true" class="modal fade">
+   <div id="myModalLargeSave" tabindex="-1" role="dialog" aria-labelledby="myModalLabelLarge" aria-hidden="true" class="modal fade">
       <div class="modal-dialog modal-lg">
          <div class="modal-content">
             <div class="modal-header">
@@ -267,6 +267,94 @@
       </div>
    </div>
    
+   <div id="myModalLargeUpdate" tabindex="-1" role="dialog" aria-labelledby="myModalLabelLarge" aria-hidden="true" class="modal fade">
+      <div class="modal-dialog modal-lg">
+         <div class="modal-content">
+            <div class="modal-header">
+               <button type="button" data-dismiss="modal" aria-label="Close" class="close">
+                  <span aria-hidden="true">&times;</span>
+               </button>
+               <h4 id="myModalLabelLarge" class="modal-title">活动</h4>
+            </div>
+            <form class="form-horizontal" action="/admin/activity/save" method="post">
+            	<input id="actId" name="id" type="hidden"></input>
+            	<div class="modal-body">
+                     <div class="form-group">
+                        <label class="col-lg-2 control-label">活动名称</label>
+                        <div class="col-lg-8">
+                           <input type="text" id="name" name="name" required="required" placeholder="活动名称" class="form-control"></input>
+                        </div>
+                     </div>
+                     <div class="form-group">
+                        <label class="col-lg-2 control-label">商户名称</label>
+                        <div class="col-lg-8">
+                           <input type="text" id="merchant" name="merchant" required="required" placeholder="商户名称" class="form-control"></input>
+                        </div>
+                     </div>
+                     <div class="form-group">
+                        <label class="col-lg-2 control-label">活动路径</label>
+                        <div class="col-lg-8">
+                           <input type="text" id="url" name="url" required="required" placeholder="主页行相对路径" class="form-control"></input>
+                        </div>
+                     </div>
+                     <div class="form-group">
+                        <label class="col-lg-2 control-label">开始时间</label>
+                        <div class="col-lg-8">
+                           <input type="text" id="startTime" name="startTime" required="required" placeholder="开始时间" class="form-control" onclick="WdatePicker({dateFmt: 'yyyy-MM-dd HH:mm:ss',isShowClear:false,readOnly:true})"></input>
+                        </div>
+                     </div>
+                     <div class="form-group">
+                        <label class="col-lg-2 control-label">结束时间</label>
+                        <div class="col-lg-8">
+                           <input type="text" id="endTime" name="endTime" required="required" placeholder="结束时间" class="form-control" onclick="WdatePicker({dateFmt: 'yyyy-MM-dd HH:mm:ss',isShowClear:false,readOnly:true})"></input>
+                        </div>
+                     </div>
+                     <div class="form-group">
+                        <label class="col-lg-2 control-label">活动金额</label>
+                        <div class="col-lg-8">
+                           <input type="text" id="amount" name="amount" required="required"  placeholder="活动金额"  class="form-control"></input>
+                        </div>
+                     </div>
+                     <div class="form-group">
+                        <label class="col-lg-2 control-label">分享金额</label>
+                        <div class="col-lg-8">
+                           <input type="text" id="shareAmount"  name="shareAmount" required="required"  placeholder="分享金额" class="form-control"></input>
+                        </div>
+                     </div>
+            	</div>
+	            <div class="modal-footer">
+	               <button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
+	               <button type="submit" class="btn btn-primary">Update</button>
+	            </div>
+            </form>
+         </div>
+      </div>
+   </div>
+   
+   <script type="text/javascript">
+   	$(".btn_x").click(function(){
+	   var actId = $(this).parent("td").siblings().html();
+	   $.ajax({
+		    url: "/admin/activity/get",
+		    type: "get",
+		    data: {"actId":actId},
+		    dataType: 'json',
+		    success: function(result){
+		    	console.log(result);
+		    	$("#actId").val(result.id);
+		    	$("#name").val(result.name);
+		    	$("#merchant").val(result.merchant);
+		    	$("#url").val(result.url);
+		    	$("#startTime").val(result.startTime);
+		    	$("#endTime").val(result.endTime);
+		    	$("#amount").val(result.amount);
+		    	$("#shareAmount").val(result.shareAmount);
+		    }
+		});
+
+	});
+   
+   </script>
    
    <script src="/admin/js/app.js"></script>
 </body>

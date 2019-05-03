@@ -1,5 +1,6 @@
 package com.jinkuangkj.open.service.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,12 @@ public class ActivityServiceImpl implements ActivityService {
 	
 	@Override
 	public void saveActivity(Activity activity) {
-		activityDao.insertSelective(activity);
+		if(null != activity.getId()) {
+			activityDao.updateSelective(activity);
+		}else {
+			activity.setCreateTime(new Date());
+			activityDao.insertSelective(activity);
+		}
 	}
 	
 	@Override

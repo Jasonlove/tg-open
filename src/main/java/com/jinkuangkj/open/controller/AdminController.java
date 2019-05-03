@@ -8,6 +8,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.jinkuangkj.open.model.Activity;
 import com.jinkuangkj.open.service.ActivityService;
@@ -29,7 +31,6 @@ public class AdminController {
 		return "admin/index";
 	}
 	
-	
 	@GetMapping("/activity/index")
 	public String activity(Model model) {
 		List<Activity> list = activityService.getList();
@@ -41,6 +42,12 @@ public class AdminController {
 	public String saveActivity(Activity activity) {
 		activityService.saveActivity(activity);
 		return "redirect:/admin/activity/index";
+	}
+	
+	@ResponseBody
+	@GetMapping("/activity/get")
+	public Activity getActivity(@RequestParam Integer actId) {
+		return activityService.get(actId);
 	}
 	
 	
