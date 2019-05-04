@@ -1,3 +1,5 @@
+
+
 function FreshTime()
 {
 	var time=$("#time_x").val();
@@ -14,7 +16,7 @@ function FreshTime()
     //document.getElementById("LeftTime").innerHTML=d+"天"+h+"小时"+m+"分"+s+"秒";
     $("#LeftTime").html(d+"<em>天</em>"+h+"<em>小时</em>"+m+"<em>分</em>"+s+"<em>秒</em>");
    
-    if(lefttime <0){
+    if(lefttime <=0){
 	    document.getElementById("LeftTime").innerHTML="团购已结束";
 	    clearInterval(sh);
 	    $(".con_bottom").css("display","none");

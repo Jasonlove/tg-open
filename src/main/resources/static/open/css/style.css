@@ -189,6 +189,12 @@ input{
 .tg_p td{
 	padding:20px;
 	font-size: 36px;
+
+}
+.tg_p .yi_x{
+	overflow: hidden;
+	white-space: nowrap; 
+	text-overflow: ellipsis;	
 }
 .tg_p div{
 	background-color: #a08b86;
@@ -287,6 +293,11 @@ body,html{
 	border:0;
 	font-size: 40px;
 	border-radius: 10px;
+}
+/*首页add css*/
+.teno_p p{
+	padding:5px 0;
+	font-size:36px;
 }
 
 /*限时抢购姓名电话判断*/
