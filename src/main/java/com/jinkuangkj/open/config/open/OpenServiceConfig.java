@@ -11,7 +11,9 @@ import com.github.binarywang.wxpay.service.impl.WxPayServiceImpl;
 import me.chanjar.weixin.mp.api.WxMpConfigStorage;
 import me.chanjar.weixin.mp.api.WxMpInMemoryConfigStorage;
 import me.chanjar.weixin.mp.api.WxMpService;
+import me.chanjar.weixin.mp.api.WxMpTemplateMsgService;
 import me.chanjar.weixin.mp.api.impl.WxMpServiceImpl;
+import me.chanjar.weixin.mp.api.impl.WxMpTemplateMsgServiceImpl;
 
 @Component
 public class OpenServiceConfig {
@@ -19,12 +21,6 @@ public class OpenServiceConfig {
     @Autowired
     private OpenConfig openConfig;
  
-    @Bean
-    public WxMpService wxMpService(){
-        WxMpService wxMpService = new WxMpServiceImpl();
-        wxMpService.setWxMpConfigStorage(wxMpConfigStorage());
-        return wxMpService;
-    }
  
     @Bean
     public WxMpConfigStorage wxMpConfigStorage(){
@@ -33,6 +29,20 @@ public class OpenServiceConfig {
         wxMpConfigStorage.setSecret(openConfig.getMpAppSecret());
         return wxMpConfigStorage;
     }
+    
+    @Bean
+    public WxMpService wxMpService(){
+    	WxMpService wxMpService = new WxMpServiceImpl();
+    	wxMpService.setWxMpConfigStorage(wxMpConfigStorage());
+    	return wxMpService;
+    }
+    
+    @Bean
+    public WxMpTemplateMsgService wxMpTemplateMsgService(){
+    	WxMpTemplateMsgService service = new WxMpTemplateMsgServiceImpl(wxMpService());
+    	return service;
+    }
+    
     
     @Bean
     public WxPayService getWxPayService() {

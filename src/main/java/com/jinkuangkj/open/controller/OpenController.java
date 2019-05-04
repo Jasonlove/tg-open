@@ -109,6 +109,7 @@ public class OpenController extends AbstractController{
             String shareId = URLUtil.getParamByUrl(returnUrl, "shareId");
             log.info("【微信网页获取参数】actId={},shareId={}", actId,shareId);
             user = actUserService.register(info,Integer.valueOf(actId),shareId,wxMpOAuth2AccessToken.getAccessToken());
+            log.info("【微信网页获取参数】atoken={}",wxMpOAuth2AccessToken.getAccessToken());
         } catch (WxErrorException e) {
             log.error("【微信网页授权】{}", e);
             throw new Exception(e.getError().getErrorMsg());
@@ -228,6 +229,7 @@ public class OpenController extends AbstractController{
     public String getSuccess() {
     	return "open/payment/success";
     }
+    
     
     
     @GetMapping("/share")

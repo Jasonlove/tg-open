@@ -1,16 +1,23 @@
 package com.jinkuangkj.open;
 
+import java.util.List;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.github.binarywang.wxpay.bean.request.WxPaySendRedpackRequest;
 import com.github.binarywang.wxpay.exception.WxPayException;
 import com.github.binarywang.wxpay.service.WxPayService;
 import com.jinkuangkj.open.util.PrimaryGenerater;
+
+import me.chanjar.weixin.common.error.WxErrorException;
+import me.chanjar.weixin.mp.api.WxMpTemplateMsgService;
+import me.chanjar.weixin.mp.bean.template.WxMpTemplate;
+import me.chanjar.weixin.mp.bean.template.WxMpTemplateIndustry;
+import me.chanjar.weixin.mp.bean.template.WxMpTemplateIndustry.Industry;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -19,6 +26,8 @@ public class TgOpenApplicationTests {
 	
 	@Autowired
 	private WxPayService wxPayService;
+	@Autowired
+	private WxMpTemplateMsgService msgService;
 
 	@Test
 	public void contextLoads() throws WxPayException {
@@ -35,6 +44,34 @@ public class TgOpenApplicationTests {
 			.build();
 		
 		wxPayService.sendRedpack(request);
+		
+	}
+	
+	@Test
+	public void msg() throws WxPayException, WxErrorException {
+		
+		
+		
+		/*
+		 * WxMpTemplateIndustry wxMpIndustry = new WxMpTemplateIndustry(); Industry
+		 * industry1 = new Industry(); Industry industry2 = new Industry();
+		 * industry1.setId("1"); industry2.setId("4");
+		 * wxMpIndustry.setPrimaryIndustry(industry1);
+		 * wxMpIndustry.setSecondIndustry(industry2);
+		 * 
+		 * boolean b = msgService.setIndustry(wxMpIndustry);
+		 */
+		 
+		
+		/*
+		 * WxMpTemplateIndustry industry = msgService.getIndustry();
+		 * System.out.println(industry);
+		 */
+		
+		List<WxMpTemplate> list = msgService.getAllPrivateTemplate();
+		System.out.println(list);
+		  
+		  
 		
 	}
 	
