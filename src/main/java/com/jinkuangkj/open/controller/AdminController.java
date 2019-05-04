@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.jinkuangkj.open.model.Activity;
 import com.jinkuangkj.open.model.Transfer;
 import com.jinkuangkj.open.model.result.OrderResult;
+import com.jinkuangkj.open.model.result.TransferResult;
 import com.jinkuangkj.open.service.ActOrderService;
 import com.jinkuangkj.open.service.ActivityService;
 import com.jinkuangkj.open.service.TransferService;
@@ -55,7 +56,7 @@ public class AdminController {
 	
 	@GetMapping("/transfer/index")
 	public String transferList(Model model) {
-		List<Transfer> list = transferService.getList();
+		List<TransferResult> list = transferService.getList();
 		model.addAttribute("transferList", list);
 		return "admin/transfer/index";
 	}

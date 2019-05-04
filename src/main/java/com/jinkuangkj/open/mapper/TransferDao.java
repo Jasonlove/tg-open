@@ -9,6 +9,7 @@ package com.jinkuangkj.open.mapper;
 import java.util.List;
 
 import com.jinkuangkj.open.model.Transfer;
+import com.jinkuangkj.open.model.result.TransferResult;
 
 public interface TransferDao {
     int deleteById(Integer id);
@@ -23,5 +24,5 @@ public interface TransferDao {
 
     int updateById(Transfer record);
     
-    List<Transfer> getList();
+    List<TransferResult> getList();
 }

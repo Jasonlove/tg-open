@@ -11,6 +11,7 @@ import com.jinkuangkj.open.constant.OrderStatus;
 import com.jinkuangkj.open.mapper.TransferDao;
 import com.jinkuangkj.open.model.ActUser;
 import com.jinkuangkj.open.model.Transfer;
+import com.jinkuangkj.open.model.result.TransferResult;
 import com.jinkuangkj.open.service.TransferService;
 import com.jinkuangkj.open.util.PrimaryGenerater;
 
@@ -39,7 +40,7 @@ public class TransferServiceImpl implements TransferService{
 	}
 
 	@Override
-	public List<Transfer> getList() {
+	public List<TransferResult> getList() {
 		return transferDao.getList();
 	}
 

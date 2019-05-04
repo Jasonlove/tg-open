@@ -140,10 +140,42 @@
         where id = #{id,jdbcType=INTEGER}
     </update>
     
-    <select id="getList"  resultMap="BaseResultMap">
-        select 
-        <include refid="Base_Column_List" />
-        from t_transfer
+    
+    <resultMap id="listResultMap" type="com.jinkuangkj.open.model.result.TransferResult">
+        <constructor>
+            <arg column="openid" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="nickname" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="headimgurl" javaType="java.lang.String" jdbcType="VARCHAR" />
+            
+            <arg column="user_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+            <arg column="transfer_no" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="amount" javaType="java.lang.Double" jdbcType="DOUBLE" />
+            <arg column="status" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="result_code" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="result_message" javaType="java.lang.String" jdbcType="VARCHAR" />
+            
+            <arg column="create_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+            <arg column="merchant_id" javaType="java.lang.String" jdbcType="VARCHAR" />
+        </constructor>
+    </resultMap>
+    
+    
+    <select id="getList"  resultMap="listResultMap">
+        SELECT
+			openid,
+			nickname,
+			headimgurl,
+			user_id,
+			transfer_no,
+			amount,
+			STATUS,
+			result_code,
+			result_message,
+			create_time,
+			merchant_id
+		FROM
+			t_transfer t
+		JOIN t_user u ON t.user_id = u.id
     </select>
     
     
