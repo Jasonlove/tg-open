@@ -137,6 +137,32 @@
 	                <target>1.8</target>
 	            </configuration>
 	        </plugin>
+	        <plugin>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>copy</id>
+                        <phase>package</phase>
+                        <configuration>
+                            <tasks>
+                                <copy todir="${project.build.directory}/${project.artifactId}/">
+                                    <fileset dir="${project.build.directory}">
+                                        <include name="*.jar"/>
+                                    </fileset>
+                                </copy>
+                                <copy todir="${project.build.directory}/${project.artifactId}/bin/">
+                                    <fileset dir="${project.basedir}/bin">
+                                        <include name="*.sh"/>
+                                    </fileset>
+                                </copy>
+                            </tasks>
+                        </configuration>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
 		</plugins>
 	</build>
 
