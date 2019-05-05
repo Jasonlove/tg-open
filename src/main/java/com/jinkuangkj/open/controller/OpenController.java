@@ -256,19 +256,14 @@ public class OpenController extends AbstractController{
         return "open/share";
     }
     
-    @GetMapping("company")
+    @GetMapping("/company")
     public String company() {
-    	return  "open/create";
+    	return  "open/sign/create";
     }
-    
-    @ResponseBody
     @PostMapping("company")
-    public boolean savecompany(Contact contact) {
-    	int i = contactDao.insertSelective(contact);
-    	if(i>0) {
-    		return true;
-    	}
-    	return  false;
+    public String savecompany(Contact contact) {
+    	contactDao.insertSelective(contact);
+    	return  "open/sign/success";
     }
     
 
