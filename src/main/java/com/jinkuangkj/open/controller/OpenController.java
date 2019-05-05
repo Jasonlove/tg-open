@@ -255,6 +255,7 @@ public class OpenController extends AbstractController{
     @GetMapping("getAddMerchant")
     public String addMerchant() {
     	
+    	
     	return  "open/create";
     }
     
