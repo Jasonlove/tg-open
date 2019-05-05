@@ -44,6 +44,8 @@ import lombok.extern.slf4j.Slf4j;
 import me.chanjar.weixin.common.api.WxConsts;
 import me.chanjar.weixin.common.error.WxErrorException;
 import me.chanjar.weixin.mp.api.WxMpService;
+import me.chanjar.weixin.mp.api.WxMpSubscribeMsgService;
+import me.chanjar.weixin.mp.api.impl.WxMpSubscribeMsgServiceImpl;
 import me.chanjar.weixin.mp.bean.result.WxMpOAuth2AccessToken;
 import me.chanjar.weixin.mp.bean.result.WxMpUser;
 
@@ -264,6 +266,24 @@ public class OpenController extends AbstractController{
     public String savecompany(Contact contact) {
     	contactDao.insertSelective(contact);
     	return  "open/sign/success";
+    }
+    
+    @GetMapping("/sub")
+    public String subscribe() {
+    	String authUrl = openConfig.getMpBaseUrl() + "/open/auth";
+    	WxMpSubscribeMsgService service = new WxMpSubscribeMsgServiceImpl(wxMpService);
+    	String subscribeMsgAuthorizationUrl = service.subscribeMsgAuthorizationUrl(authUrl, 0000, null);
+    	return "redirect:"+ subscribeMsgAuthorizationUrl;
+    }
+    
+    @GetMapping("/auth")
+    public String auth(@RequestParam String openid,@RequestParam String template_id, @RequestParam String action, @RequestParam String scene) {
+    	log.info("关注成功{}",openid);
+    	log.info("关注成功{}",template_id);
+    	log.info("关注成功{}",action);
+    	log.info("关注成功{}",scene);
+    	
+    	return "open/sign/success";
     }
     
 
