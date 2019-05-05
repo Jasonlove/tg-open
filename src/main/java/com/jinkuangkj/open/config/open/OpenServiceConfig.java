@@ -27,6 +27,7 @@ public class OpenServiceConfig {
         WxMpInMemoryConfigStorage wxMpConfigStorage = new WxMpInMemoryConfigStorage();
         wxMpConfigStorage.setAppId(openConfig.getMpAppId());
         wxMpConfigStorage.setSecret(openConfig.getMpAppSecret());
+        wxMpConfigStorage.setTemplateId("1WmEgWAe_JRiwKs0hXQ5tJExWozEqjzBRHKZ7WpHEG0");
         return wxMpConfigStorage;
     }
     
