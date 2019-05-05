@@ -252,6 +252,11 @@ public class OpenController extends AbstractController{
         return "open/share";
     }
     
+    @GetMapping("getAddMerchant")
+    public String addMerchant() {
+    	
+    	return  "open/create";
+    }
     
 
 }
