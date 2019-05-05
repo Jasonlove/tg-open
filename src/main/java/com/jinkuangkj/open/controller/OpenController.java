@@ -28,9 +28,11 @@ import com.github.binarywang.wxpay.service.WxPayService;
 import com.github.pagehelper.PageInfo;
 import com.jinkuangkj.open.config.exp.BusinessException;
 import com.jinkuangkj.open.config.open.OpenConfig;
+import com.jinkuangkj.open.mapper.ContactDao;
 import com.jinkuangkj.open.model.ActOrder;
 import com.jinkuangkj.open.model.ActUser;
 import com.jinkuangkj.open.model.Activity;
+import com.jinkuangkj.open.model.Contact;
 import com.jinkuangkj.open.model.result.OrderResult;
 import com.jinkuangkj.open.service.ActOrderService;
 import com.jinkuangkj.open.service.ActUserService;
@@ -66,6 +68,8 @@ public class OpenController extends AbstractController{
 	private ActOrderService actOrderService;
 	@Autowired
 	private WxPayService wxPayService;
+	@Autowired
+	private ContactDao contactDao;
 	
 	/**
 	 * 授权页面
@@ -252,11 +256,19 @@ public class OpenController extends AbstractController{
         return "open/share";
     }
     
-    @GetMapping("getAddMerchant")
-    public String addMerchant() {
-    	
-    	
+    @GetMapping("company")
+    public String company() {
     	return  "open/create";
+    }
+    
+    @ResponseBody
+    @PostMapping("company")
+    public boolean savecompany(Contact contact) {
+    	int i = contactDao.insertSelective(contact);
+    	if(i>0) {
+    		return true;
+    	}
+    	return  false;
     }
     
 
