@@ -228,15 +228,7 @@ public class OpenController extends AbstractController{
     	return returnSuccess();
     }
     
-    /**
-     * 跳转支付成功页面
-     * @return
-     */
-    @GetMapping("/pay/success")
-    public String getSuccess() {
-    	return "open/payment/success";
-    }
-    
+
     
     
     @GetMapping("/share")
