@@ -48,6 +48,7 @@ import me.chanjar.weixin.mp.api.WxMpSubscribeMsgService;
 import me.chanjar.weixin.mp.api.impl.WxMpSubscribeMsgServiceImpl;
 import me.chanjar.weixin.mp.bean.result.WxMpOAuth2AccessToken;
 import me.chanjar.weixin.mp.bean.result.WxMpUser;
+import me.chanjar.weixin.mp.bean.subscribe.WxMpSubscribeMessage;
 
 
 
@@ -270,19 +271,19 @@ public class OpenController extends AbstractController{
     
     @GetMapping("/sub")
     public String subscribe() {
-    	String authUrl = openConfig.getMpBaseUrl() + "/open/auth";
+    	String authUrl = openConfig.getMpBaseUrl()+"/open/auth";
     	WxMpSubscribeMsgService service = new WxMpSubscribeMsgServiceImpl(wxMpService);
-    	String subscribeMsgAuthorizationUrl = service.subscribeMsgAuthorizationUrl(authUrl, 0000, null);
+    	String subscribeMsgAuthorizationUrl = service.subscribeMsgAuthorizationUrl(authUrl, 1000, "");
+    	log.info("url:{}",subscribeMsgAuthorizationUrl);
     	return "redirect:"+ subscribeMsgAuthorizationUrl;
     }
     
     @GetMapping("/auth")
-    public String auth(@RequestParam String openid,@RequestParam String template_id, @RequestParam String action, @RequestParam String scene) {
-    	log.info("关注成功{}",openid);
-    	log.info("关注成功{}",template_id);
-    	log.info("关注成功{}",action);
-    	log.info("关注成功{}",scene);
-    	
+    public String auth(@RequestParam String openid,@RequestParam String template_id, @RequestParam String action, @RequestParam String scene) throws WxErrorException {
+    	log.info("接收消息-openid:{},action:{},scene:{}",openid,action,scene);
+    	WxMpSubscribeMsgService service = new WxMpSubscribeMsgServiceImpl(wxMpService);
+    	WxMpSubscribeMessage message = WxMpSubscribeMessage.builder().toUser(openid).contentValue("订单支付成功").scene(scene).title("支付消息").build();
+    	service.sendSubscribeMessage(message);
     	return "open/sign/success";
     }
     
