@@ -281,10 +281,12 @@ public class OpenController extends AbstractController{
     @GetMapping("/auth")
     public String auth(@RequestParam String openid,@RequestParam String template_id, @RequestParam String action, @RequestParam String scene) throws WxErrorException {
     	log.info("接收消息-openid:{},action:{},scene:{}",openid,action,scene);
-    	WxMpSubscribeMsgService service = new WxMpSubscribeMsgServiceImpl(wxMpService);
-    	WxMpSubscribeMessage message = WxMpSubscribeMessage.builder().toUser(openid).contentValue("订单支付成功").scene(scene).title("支付消息").build();
-    	service.sendSubscribeMessage(message);
-    	return "open/sign/success";
+    	if("confirm".equals(action)) {
+    		WxMpSubscribeMsgService service = new WxMpSubscribeMsgServiceImpl(wxMpService);
+    		WxMpSubscribeMessage message = WxMpSubscribeMessage.builder().toUser(openid).contentValue("订单支付成功").scene(scene).title("支付消息").build();
+    		service.sendSubscribeMessage(message);
+    	}
+    	return "open/payment/success";
     }
     
 
