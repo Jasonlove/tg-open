@@ -29,6 +29,11 @@ spring:
         logAbandoned: true
     thymeleaf:
       cache: false
+    servlet:
+      multipart:
+        enabled: true
+        file-size-threshold: 0
+        location: D:/upload
       
 wechat:
   mpAppId: wxa2c54680eabde041
