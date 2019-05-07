@@ -29,9 +29,7 @@ spring:
         logAbandoned: true
     thymeleaf:
       cache: false
-    servlet:
-      multipart:
-        enabled: true
+    http:      multipart:        enabled: true
         file-size-threshold: 0
         location: D:/upload
       

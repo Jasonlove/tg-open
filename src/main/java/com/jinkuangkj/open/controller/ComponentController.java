@@ -26,7 +26,7 @@ import lombok.extern.slf4j.Slf4j;
 public class ComponentController {
 	
 	
-	@Value("${spring.servlet.multipart.location}")
+	@Value("${spring.http.multipart.location}")
     private String uploadPicturePath;
 	
 	@javax.annotation.Resource
