@@ -67,15 +67,4 @@ public class ComponentController {
    	 		return ResponseEntity.notFound().build();
 		}
     }
-
-	@RequestMapping("index")
-	public String getUpload() {
-		return "admin/upload/index";
-	}
-	
-	@RequestMapping("img")
-	public String img() {
-		return "admin/upload/img";
-	}
-
 }

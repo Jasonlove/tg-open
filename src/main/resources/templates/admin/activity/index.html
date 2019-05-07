@@ -244,12 +244,6 @@
                         </div>
                      </div>
                      <div class="form-group">
-                        <label class="col-lg-2 control-label">活动路径</label>
-                        <div class="col-lg-8">
-                           <input type="text" name="url"  placeholder="主页行相对路径" class="form-control"></input>
-                        </div>
-                     </div>
-                     <div class="form-group">
                         <label class="col-lg-2 control-label">开始时间</label>
                         <div class="col-lg-8">
                            <input type="text" name="startTime" required="required" placeholder="开始时间" class="form-control" onclick="WdatePicker({dateFmt: 'yyyy-MM-dd HH:mm:ss',isShowClear:false,readOnly:true})"></input>
@@ -276,8 +270,12 @@
                      
                      <div class="form-group">
                         <label class="col-lg-2 control-label">首页图片</label>
-                        <div class="col-lg-8">
-                           <input type="file" name="firstImg" required="required"  placeholder="首页图片" class="form-control"></input>
+                        <input type="hidden" name="firstImg"  placeholder="首页图片" class="form-control"></input>
+                        <div class="col-lg-4">
+                        	<input type="file" placeholder="首页图片" id="save_file_first" class="form-control"></input>
+                        </div>
+                        <div class="col-lg-2">
+                        	<button type="button" class="btn btn-success btn_first">上传</button>
                         </div>
                      </div>
                      
@@ -375,8 +373,33 @@
 		    	$("#shareAmount").val(result.shareAmount);
 		    }
 		});
-
 	});
+   	
+   	
+   	$(".btn_first").click(function(){
+   		var formData = new FormData();
+   		var file = document.getElementById("save_file_first").files[0];
+   		formData.append('file', file);
+	   $.ajax({
+           url: "/component/upload",
+           type: "post",
+           data: formData,
+           contentType: false,
+           processData: false,
+           mimeType: "multipart/form-data",
+           success: function (data) {
+               console.log(data);
+           },
+           error: function (data) {
+               console.log(data);
+           }
+       });
+ 	});
+   	
+   	
+   	
+   	
+   	
    
    </script>
    
