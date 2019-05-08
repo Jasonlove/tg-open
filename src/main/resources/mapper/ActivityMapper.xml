@@ -8,16 +8,22 @@
             <arg column="merchant" javaType="java.lang.String" jdbcType="VARCHAR" />
             <arg column="start_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
             <arg column="end_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
-            <arg column="url" javaType="java.lang.String" jdbcType="VARCHAR" />
             <arg column="amount" javaType="java.lang.Double" jdbcType="DOUBLE" />
             <arg column="share_amount" javaType="java.lang.Double" jdbcType="DOUBLE" />
+            <arg column="limit_count" javaType="java.lang.Integer" jdbcType="INTEGER" />
             <arg column="join_count" javaType="java.lang.Integer" jdbcType="INTEGER" />
             <arg column="create_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+            <arg column="first_img" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="info_img" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="foot_img" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="share_img" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="tech_info" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="act_url" javaType="java.lang.String" jdbcType="VARCHAR" />
         </constructor>
     </resultMap>
     <sql id="Base_Column_List">
-        id, name, merchant, start_time, end_time, url, amount, share_amount, join_count, 
-        create_time
+        id, name, merchant, start_time, end_time, amount, share_amount, limit_count, join_count, 
+        create_time, first_img, info_img, foot_img, share_img, tech_info, act_url
     </sql>
     <select id="selectById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
         select 
@@ -34,12 +40,16 @@
             SELECT LAST_INSERT_ID()
         </selectKey>
         insert into t_activity (name, merchant, start_time, 
-            end_time, url, amount, 
-            share_amount, join_count, create_time
+            end_time, amount, share_amount, 
+            limit_count, join_count, create_time, 
+            first_img, info_img, foot_img, 
+            share_img, tech_info, act_url
             )
         values (#{name,jdbcType=VARCHAR}, #{merchant,jdbcType=VARCHAR}, #{startTime,jdbcType=TIMESTAMP}, 
-            #{endTime,jdbcType=TIMESTAMP}, #{url,jdbcType=VARCHAR}, #{amount,jdbcType=DOUBLE}, 
-            #{shareAmount,jdbcType=DOUBLE}, #{joinCount,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}
+            #{endTime,jdbcType=TIMESTAMP}, #{amount,jdbcType=DOUBLE}, #{shareAmount,jdbcType=DOUBLE}, 
+            #{limitCount,jdbcType=INTEGER}, #{joinCount,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
+            #{firstImg,jdbcType=VARCHAR}, #{infoImg,jdbcType=VARCHAR}, #{footImg,jdbcType=VARCHAR}, 
+            #{shareImg,jdbcType=VARCHAR}, #{techInfo,jdbcType=VARCHAR}, #{actUrl,jdbcType=VARCHAR}
             )
     </insert>
     <insert id="insertSelective" parameterType="com.jinkuangkj.open.model.Activity">
@@ -60,20 +70,38 @@
             <if test="endTime != null">
                 end_time,
             </if>
-            <if test="url != null">
-                url,
-            </if>
             <if test="amount != null">
                 amount,
             </if>
             <if test="shareAmount != null">
                 share_amount,
             </if>
+            <if test="limitCount != null">
+                limit_count,
+            </if>
             <if test="joinCount != null">
                 join_count,
             </if>
             <if test="createTime != null">
                 create_time,
+            </if>
+            <if test="firstImg != null">
+                first_img,
+            </if>
+            <if test="infoImg != null">
+                info_img,
+            </if>
+            <if test="footImg != null">
+                foot_img,
+            </if>
+            <if test="shareImg != null">
+                share_img,
+            </if>
+            <if test="techInfo != null">
+                tech_info,
+            </if>
+            <if test="actUrl != null">
+                act_url,
             </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -89,20 +117,38 @@
             <if test="endTime != null">
                 #{endTime,jdbcType=TIMESTAMP},
             </if>
-            <if test="url != null">
-                #{url,jdbcType=VARCHAR},
-            </if>
             <if test="amount != null">
                 #{amount,jdbcType=DOUBLE},
             </if>
             <if test="shareAmount != null">
                 #{shareAmount,jdbcType=DOUBLE},
             </if>
+            <if test="limitCount != null">
+                #{limitCount,jdbcType=INTEGER},
+            </if>
             <if test="joinCount != null">
                 #{joinCount,jdbcType=INTEGER},
             </if>
             <if test="createTime != null">
                 #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="firstImg != null">
+                #{firstImg,jdbcType=VARCHAR},
+            </if>
+            <if test="infoImg != null">
+                #{infoImg,jdbcType=VARCHAR},
+            </if>
+            <if test="footImg != null">
+                #{footImg,jdbcType=VARCHAR},
+            </if>
+            <if test="shareImg != null">
+                #{shareImg,jdbcType=VARCHAR},
+            </if>
+            <if test="techInfo != null">
+                #{techInfo,jdbcType=VARCHAR},
+            </if>
+            <if test="actUrl != null">
+                #{actUrl,jdbcType=VARCHAR},
             </if>
         </trim>
     </insert>
@@ -121,20 +167,38 @@
             <if test="endTime != null">
                 end_time = #{endTime,jdbcType=TIMESTAMP},
             </if>
-            <if test="url != null">
-                url = #{url,jdbcType=VARCHAR},
-            </if>
             <if test="amount != null">
                 amount = #{amount,jdbcType=DOUBLE},
             </if>
             <if test="shareAmount != null">
                 share_amount = #{shareAmount,jdbcType=DOUBLE},
             </if>
+            <if test="limitCount != null">
+                limit_count = #{limitCount,jdbcType=INTEGER},
+            </if>
             <if test="joinCount != null">
                 join_count = #{joinCount,jdbcType=INTEGER},
             </if>
             <if test="createTime != null">
                 create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="firstImg != null">
+                first_img = #{firstImg,jdbcType=VARCHAR},
+            </if>
+            <if test="infoImg != null">
+                info_img = #{infoImg,jdbcType=VARCHAR},
+            </if>
+            <if test="footImg != null">
+                foot_img = #{footImg,jdbcType=VARCHAR},
+            </if>
+            <if test="shareImg != null">
+                share_img = #{shareImg,jdbcType=VARCHAR},
+            </if>
+            <if test="techInfo != null">
+                tech_info = #{techInfo,jdbcType=VARCHAR},
+            </if>
+            <if test="actUrl != null">
+                act_url = #{actUrl,jdbcType=VARCHAR},
             </if>
         </set>
         where id = #{id,jdbcType=INTEGER}
@@ -145,11 +209,17 @@
             merchant = #{merchant,jdbcType=VARCHAR},
             start_time = #{startTime,jdbcType=TIMESTAMP},
             end_time = #{endTime,jdbcType=TIMESTAMP},
-            url = #{url,jdbcType=VARCHAR},
             amount = #{amount,jdbcType=DOUBLE},
             share_amount = #{shareAmount,jdbcType=DOUBLE},
+            limit_count = #{limitCount,jdbcType=INTEGER},
             join_count = #{joinCount,jdbcType=INTEGER},
-            create_time = #{createTime,jdbcType=TIMESTAMP}
+            create_time = #{createTime,jdbcType=TIMESTAMP},
+            first_img = #{firstImg,jdbcType=VARCHAR},
+            info_img = #{infoImg,jdbcType=VARCHAR},
+            foot_img = #{footImg,jdbcType=VARCHAR},
+            share_img = #{shareImg,jdbcType=VARCHAR},
+            tech_info = #{techInfo,jdbcType=VARCHAR},
+            act_url = #{actUrl,jdbcType=VARCHAR}
         where id = #{id,jdbcType=INTEGER}
     </update>
     
@@ -158,4 +228,5 @@
         <include refid="Base_Column_List" />
         from t_activity order by id desc
     </select>
+    
 </mapper>

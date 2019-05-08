@@ -87,7 +87,7 @@ public class OpenController extends AbstractController{
     		throw new BusinessException("未找到该活动, 请在后台设置活动");
     	}
     	String url = openConfig.getMpBaseUrl()+"/open/userInfo";
-    	String returnUrl= openConfig.getMpBaseUrl() + activity.getUrl() + "?actId="+actId;
+    	String returnUrl= openConfig.getMpBaseUrl() + "/open/act?actId="+actId;
     	if(StringUtils.isNotBlank(shareId)) {
     		returnUrl = returnUrl +"&shareId="+shareId;
     	}

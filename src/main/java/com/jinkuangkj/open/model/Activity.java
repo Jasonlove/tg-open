@@ -2,19 +2,17 @@
  * @des @TODO 
  * @name Activity.java
  * @author Jason-pc
- * @date 2019-04-30 12:48:39
+ * @date 2019-05-08 10:39:47
  */
 package com.jinkuangkj.open.model;
 
 import java.util.Date;
 
-import org.springframework.format.annotation.DateTimeFormat;
-
 /*
  * @des @TODO 
  * @name 
  * @author Jason-pc
- * @date 2019-04-30 12:48:39
+ * @date 2019-05-08 10:39:47
  */
 public class Activity {
     private Integer id;
@@ -29,17 +27,11 @@ public class Activity {
     /**
      * 活动时间
      */
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date startTime;
     /**
      * 截止时间
      */
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date endTime;
-    /**
-     * 活动页面地址
-     */
-    private String url;
     /**
      * 报名金额
      */
@@ -49,22 +41,59 @@ public class Activity {
      */
     private Double shareAmount;
     /**
+     * 活动限制名额
+     */
+    private Integer limitCount;
+    /**
      * 活动参与个数
      */
     private Integer joinCount;
+    /**
+     * 创建时间
+     */
     private Date createTime;
+    /**
+     * 首部图片
+     */
+    private String firstImg;
+    /**
+     * 商品信息
+     */
+    private String infoImg;
+    /**
+     * 尾部图片
+     */
+    private String footImg;
+    /**
+     * 分享也url地址
+     */
+    private String shareImg;
+    /**
+     * 推荐信息文字
+     */
+    private String techInfo;
+    /**
+     * 生成url地址
+     */
+    private String actUrl;
 
-    public Activity(Integer id, String name, String merchant, Date startTime, Date endTime, String url, Double amount, Double shareAmount, Integer joinCount, Date createTime) {
+    public Activity(Integer id, String name, String merchant, Date startTime, Date endTime, Double amount, Double shareAmount, Integer limitCount, Integer joinCount, Date createTime, String firstImg, String infoImg, String footImg, String shareImg, String techInfo, String actUrl) {
         this.id = id;
         this.name = name;
         this.merchant = merchant;
         this.startTime = startTime;
         this.endTime = endTime;
-        this.url = url;
         this.amount = amount;
         this.shareAmount = shareAmount;
+        this.limitCount = limitCount;
         this.joinCount = joinCount;
         this.createTime = createTime;
+        this.firstImg = firstImg;
+        this.infoImg = infoImg;
+        this.footImg = footImg;
+        this.shareImg = shareImg;
+        this.techInfo = techInfo;
+        this.actUrl = actUrl;
     }
     public Activity() {
         super();
@@ -99,12 +128,6 @@ public class Activity {
     public void setEndTime(Date endTime) {
         this.endTime = endTime;
     }
-    public String getUrl() {
-        return url;
-    }
-    public void setUrl(String url) {
-        this.url = url;
-    }
     public Double getAmount() {
         return amount;
     }
@@ -116,6 +139,12 @@ public class Activity {
     }
     public void setShareAmount(Double shareAmount) {
         this.shareAmount = shareAmount;
+    }
+    public Integer getLimitCount() {
+        return limitCount;
+    }
+    public void setLimitCount(Integer limitCount) {
+        this.limitCount = limitCount;
     }
     public Integer getJoinCount() {
         return joinCount;
@@ -129,6 +158,42 @@ public class Activity {
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
     }
+    public String getFirstImg() {
+        return firstImg;
+    }
+    public void setFirstImg(String firstImg) {
+        this.firstImg = firstImg;
+    }
+    public String getInfoImg() {
+        return infoImg;
+    }
+    public void setInfoImg(String infoImg) {
+        this.infoImg = infoImg;
+    }
+    public String getFootImg() {
+        return footImg;
+    }
+    public void setFootImg(String footImg) {
+        this.footImg = footImg;
+    }
+    public String getShareImg() {
+        return shareImg;
+    }
+    public void setShareImg(String shareImg) {
+        this.shareImg = shareImg;
+    }
+    public String getTechInfo() {
+        return techInfo;
+    }
+    public void setTechInfo(String techInfo) {
+        this.techInfo = techInfo;
+    }
+    public String getActUrl() {
+        return actUrl;
+    }
+    public void setActUrl(String actUrl) {
+        this.actUrl = actUrl;
+    }
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -140,11 +205,17 @@ public class Activity {
         sb.append(", merchant=").append(merchant);
         sb.append(", startTime=").append(startTime);
         sb.append(", endTime=").append(endTime);
-        sb.append(", url=").append(url);
         sb.append(", amount=").append(amount);
         sb.append(", shareAmount=").append(shareAmount);
+        sb.append(", limitCount=").append(limitCount);
         sb.append(", joinCount=").append(joinCount);
         sb.append(", createTime=").append(createTime);
+        sb.append(", firstImg=").append(firstImg);
+        sb.append(", infoImg=").append(infoImg);
+        sb.append(", footImg=").append(footImg);
+        sb.append(", shareImg=").append(shareImg);
+        sb.append(", techInfo=").append(techInfo);
+        sb.append(", actUrl=").append(actUrl);
         sb.append("]");
         return sb.toString();
     }

@@ -2,7 +2,7 @@
  * @des @TODO 
  * @name Contact.java
  * @author Jason-pc
- * @date 2019-04-30 08:57:59
+ * @date 2019-05-08 10:39:47
  */
 package com.jinkuangkj.open.model;
 
@@ -10,7 +10,7 @@ package com.jinkuangkj.open.model;
  * @des @TODO 
  * @name 
  * @author Jason-pc
- * @date 2019-04-30 08:57:59
+ * @date 2019-05-08 10:39:47
  */
 public class Contact {
     /**
@@ -26,12 +26,17 @@ public class Contact {
      * 手机号
      */
     private String phone;
+    /**
+     * 公司名称
+     */
+    private String company;
 
-    public Contact(Integer id, Integer userId, String name, String phone) {
+    public Contact(Integer id, Integer userId, String name, String phone, String company) {
         this.id = id;
         this.userId = userId;
         this.name = name;
         this.phone = phone;
+        this.company = company;
     }
     public Contact() {
         super();
@@ -60,6 +65,12 @@ public class Contact {
     public void setPhone(String phone) {
         this.phone = phone;
     }
+    public String getCompany() {
+        return company;
+    }
+    public void setCompany(String company) {
+        this.company = company;
+    }
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -70,6 +81,7 @@ public class Contact {
         sb.append(", userId=").append(userId);
         sb.append(", name=").append(name);
         sb.append(", phone=").append(phone);
+        sb.append(", company=").append(company);
         sb.append("]");
         return sb.toString();
     }

@@ -7,10 +7,11 @@
             <arg column="user_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
             <arg column="name" javaType="java.lang.String" jdbcType="VARCHAR" />
             <arg column="phone" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="company" javaType="java.lang.String" jdbcType="VARCHAR" />
         </constructor>
     </resultMap>
     <sql id="Base_Column_List">
-        id, user_id, name, phone
+        id, user_id, name, phone, company
     </sql>
     <select id="selectById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
         select 
@@ -26,10 +27,10 @@
         <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
             SELECT LAST_INSERT_ID()
         </selectKey>
-        insert into t_contact (user_id, name, phone
-            )
-        values (#{userId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}
-            )
+        insert into t_contact (user_id, name, phone, 
+            company)
+        values (#{userId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
+            #{company,jdbcType=VARCHAR})
     </insert>
     <insert id="insertSelective" parameterType="com.jinkuangkj.open.model.Contact">
         <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
@@ -46,6 +47,9 @@
             <if test="phone != null">
                 phone,
             </if>
+            <if test="company != null">
+                company,
+            </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="userId != null">
@@ -56,6 +60,9 @@
             </if>
             <if test="phone != null">
                 #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="company != null">
+                #{company,jdbcType=VARCHAR},
             </if>
         </trim>
     </insert>
@@ -71,6 +78,9 @@
             <if test="phone != null">
                 phone = #{phone,jdbcType=VARCHAR},
             </if>
+            <if test="company != null">
+                company = #{company,jdbcType=VARCHAR},
+            </if>
         </set>
         where id = #{id,jdbcType=INTEGER}
     </update>
@@ -78,7 +88,8 @@
         update t_contact
         set user_id = #{userId,jdbcType=INTEGER},
             name = #{name,jdbcType=VARCHAR},
-            phone = #{phone,jdbcType=VARCHAR}
+            phone = #{phone,jdbcType=VARCHAR},
+            company = #{company,jdbcType=VARCHAR}
         where id = #{id,jdbcType=INTEGER}
     </update>
 </mapper>
