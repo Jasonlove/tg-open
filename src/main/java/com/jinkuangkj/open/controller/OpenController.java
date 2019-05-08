@@ -247,6 +247,7 @@ public class OpenController extends AbstractController{
         String url = "data:image/jpg;base64,"+base64String;
         log.info("分享url地址:{}",shareUrl);
         model.addAttribute("url", url);
+        model.addAttribute("act", activity);
         
         return "open/share";
     }
