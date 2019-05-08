@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50162
 File Encoding         : 65001
 
-Date: 2019-05-08 10:43:02
+Date: 2019-05-08 14:32:10
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -37,7 +37,13 @@ CREATE TABLE `t_activity` (
   `tech_info` varchar(255) DEFAULT NULL COMMENT '推荐信息文字',
   `act_url` varchar(255) DEFAULT NULL COMMENT '生成url地址',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of t_activity
+-- ----------------------------
+INSERT INTO `t_activity` VALUES ('1', '测试活动', '瑞辛咖啡', '2019-05-08 13:58:27', '2019-05-11 13:58:29', '1.00', '1.00', '1', '0', '2019-05-08 13:59:05', '/component/1557295142959.jpg', '/component/1557295144049.jpg', null, '/component/1557295144634.jpg', '测试文字说明', 'http://xinghui.natapp1.cc/open/authorize?actId=1');
+INSERT INTO `t_activity` VALUES ('2', '测试活动2', '瑞辛咖啡', '2019-05-08 14:03:22', '2019-05-08 14:03:24', '1.00', '1.00', '1', '0', '2019-05-08 14:03:49', '/component/1557295426729.jpg', '/component/1557295427397.jpg', null, '/component/1557295427931.jpg', '', 'http://xinghui.natapp1.cc/open/authorize?actId=2');
 
 -- ----------------------------
 -- Table structure for t_contact
@@ -51,6 +57,10 @@ CREATE TABLE `t_contact` (
   `company` varchar(64) DEFAULT NULL COMMENT '公司名称',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of t_contact
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for t_order
@@ -75,6 +85,10 @@ CREATE TABLE `t_order` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
+-- Records of t_order
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for t_transfer
 -- ----------------------------
 DROP TABLE IF EXISTS `t_transfer`;
@@ -92,6 +106,10 @@ CREATE TABLE `t_transfer` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
+-- Records of t_transfer
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for t_user
 -- ----------------------------
 DROP TABLE IF EXISTS `t_user`;
@@ -107,4 +125,9 @@ CREATE TABLE `t_user` (
   `share_count` int(10) DEFAULT '0' COMMENT '分享收益人数',
   PRIMARY KEY (`id`),
   KEY `openid` (`openid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of t_user
+-- ----------------------------
+INSERT INTO `t_user` VALUES ('1', 'o-Kqa1BNqdwvmFOKDRU7k1SuHvFo', 'Jason', 'http://thirdwx.qlogo.cn/mmopen/vi_32/PiajxSqBRaELZgkbEzPLolXa8dly3ok0hjxty8EppVzFCyMvIIF2wxzAAmp1e2YkFJeyUW0xlfoPDkqU4laluLQ/132', '21_De32d5_ftCwWfImCorLzSSWa549Rg_YihOoWvPewLZwQDI5OmkqW1GQ5zLTLtqW3-yPIjTL0Vz2tF7292W4k8f58pcDOaczO8AXrIpDlvzw', '1', null, '0.00', '0');
