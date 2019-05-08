@@ -233,48 +233,52 @@
             
                      <div class="form-group">
                         <label class="col-lg-2 control-label">活动名称</label>
-                        <div class="col-lg-8">
+                        <div class="col-lg-3">
                            <input type="text" name="name" required="required" placeholder="活动名称" class="form-control"></input>
                         </div>
-                     </div>
-                     <div class="form-group">
                         <label class="col-lg-2 control-label">商户名称</label>
-                        <div class="col-lg-8">
+                        <div class="col-lg-3">
                            <input type="text" name="merchant" required="required" placeholder="商户名称" class="form-control"></input>
                         </div>
                      </div>
                      <div class="form-group">
                         <label class="col-lg-2 control-label">开始时间</label>
-                        <div class="col-lg-8">
+                        <div class="col-lg-3">
                            <input type="text" name="startTime" required="required" placeholder="开始时间" class="form-control" onclick="WdatePicker({dateFmt: 'yyyy-MM-dd HH:mm:ss',isShowClear:false,readOnly:true})"></input>
                         </div>
-                     </div>
-                     <div class="form-group">
                         <label class="col-lg-2 control-label">结束时间</label>
-                        <div class="col-lg-8">
+                        <div class="col-lg-3">
                            <input type="text" name="endTime" required="required" placeholder="结束时间" class="form-control" onclick="WdatePicker({dateFmt: 'yyyy-MM-dd HH:mm:ss',isShowClear:false,readOnly:true})"></input>
                         </div>
                      </div>
+
                      <div class="form-group">
                         <label class="col-lg-2 control-label">活动金额</label>
-                        <div class="col-lg-8">
+                        <div class="col-lg-3">
                            <input type="text" name="amount" required="required"  placeholder="活动金额"  class="form-control"></input>
                         </div>
-                     </div>
-                     <div class="form-group">
                         <label class="col-lg-2 control-label">分享金额</label>
-                        <div class="col-lg-8">
+                        <div class="col-lg-3">
                            <input type="text" name="shareAmount" required="required"  placeholder="分享金额" class="form-control"></input>
+                        </div>
+                     </div>
+
+                     <div class="form-group">
+                        <label class="col-lg-2 control-label">限制人数</label>
+                        <div class="col-lg-8">
+                           <input type="text" name="limitCount" placeholder="最多参加人数" class="form-control"></input>
                         </div>
                      </div>
                      
                      <div class="form-group">
                         <label class="col-lg-2 control-label">首页图片</label>
-                        <input type="hidden" name="firstImg"  placeholder="首页图片" class="form-control"></input>
                         <div class="col-lg-4">
-                        	<input type="file" placeholder="首页图片" id="save_file_first" class="form-control"></input>
+                        	<input type="text" required="required" disabled="disabled" name="firstImg"  class="form-control firstImg"></input>
                         </div>
-                        <div class="col-lg-2">
+                        <div class="col-lg-4">
+                        	<input type="file" placeholder="首页图片"  oninvalid="setCustomValidity('上传首部图片')" id="save_file_first" class="form-control"></input>
+                        </div>
+                        <div class="col-lg-1">
                         	<button type="button" class="btn btn-success btn_first">上传</button>
                         </div>
                      </div>
@@ -311,12 +315,6 @@
                         <label class="col-lg-2 control-label">商户名称</label>
                         <div class="col-lg-8">
                            <input type="text" id="merchant" name="merchant" required="required" placeholder="商户名称" class="form-control"></input>
-                        </div>
-                     </div>
-                     <div class="form-group">
-                        <label class="col-lg-2 control-label">活动路径</label>
-                        <div class="col-lg-8">
-                           <input type="text" id="url" name="url"  placeholder="主页行相对路径" class="form-control"></input>
                         </div>
                      </div>
                      <div class="form-group">
@@ -388,11 +386,13 @@
            processData: false,
            mimeType: "multipart/form-data",
            success: function (data) {
-               if(data.code=true){
-            	  $(".firstImg").val(data.value);
-               }else{
-            	   console.log(data.msg);
-               }
+        	 	var value =  jQuery.parseJSON(data);
+        	   	if(value.code == "true"){
+        	   		console.log(value);
+        	   		$(".firstImg").val(value.url);
+        	   	}else{
+        	   		console.log(value.msg);
+        	   	}
            }
        });
  	});

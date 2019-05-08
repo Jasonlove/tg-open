@@ -34,21 +34,21 @@ public class ComponentController {
 	
 	@ResponseBody
 	@RequestMapping("upload")
-	public Map<String,Object> upload(@RequestParam("file") MultipartFile multipartFile) {
-		Map<String,Object> map = new HashMap<String, Object>();
+	public Map<String,String> upload(@RequestParam("file") MultipartFile multipartFile) {
+		Map<String,String> map = new HashMap<String, String>();
 		try {
 			String fileName = multipartFile.getOriginalFilename();
 			String fileTyle=fileName.substring(multipartFile.getOriginalFilename().lastIndexOf("."),fileName.length());
 			String newName = String.valueOf(System.currentTimeMillis()) + fileTyle;
 			File file = new File(newName);
 			multipartFile.transferTo(file);
-			map.put("code", true);
+			map.put("code", "true");
 			map.put("msg", "上传成功");
-			map.put("value", "/component/"+newName);
+			map.put("url", "/component/"+newName);
 		} catch (IOException e) {
 			log.error("上传图片错误:{}",e);
-			map.put("code", false);
-			map.put("value", "上传失败");
+			map.put("code", "false");
+			map.put("msg", "上传失败");
 		}
 		return map;
 	}
