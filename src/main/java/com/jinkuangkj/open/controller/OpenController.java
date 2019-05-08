@@ -267,7 +267,9 @@ public class OpenController extends AbstractController{
     public String subscribe() {
     	String authUrl = openConfig.getMpBaseUrl()+"/open/auth";
     	WxMpSubscribeMsgService service = new WxMpSubscribeMsgServiceImpl(wxMpService);
-    	String subscribeMsgAuthorizationUrl = service.subscribeMsgAuthorizationUrl(authUrl, 1000, "");
+    	String reserved = String.valueOf(System.currentTimeMillis());
+    	String subscribeMsgAuthorizationUrl = service.subscribeMsgAuthorizationUrl(authUrl, 1001, reserved);
+    	
     	log.info("url:{}",subscribeMsgAuthorizationUrl);
     	return "redirect:"+ subscribeMsgAuthorizationUrl;
     }
