@@ -139,11 +139,11 @@
         where id = #{id,jdbcType=INTEGER}
     </update>
     
-    <select id="selectByOpenId" parameterType="java.lang.String" resultMap="BaseResultMap">
+    <select id="selectUser" resultMap="BaseResultMap">
         select 
         <include refid="Base_Column_List" />
         from t_user
-        where openid = #{openid,jdbcType=VARCHAR}
+        where openid = #{openid,jdbcType=VARCHAR} and act_id = #{actId,jdbcType=INTEGER}
     </select>
     
     <select id="getListByActId" parameterType="java.lang.Integer" resultMap="BaseResultMap">

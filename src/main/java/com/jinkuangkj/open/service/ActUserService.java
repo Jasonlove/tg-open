@@ -12,6 +12,8 @@ public interface ActUserService {
 	
 	ActUser getUserById(Integer id);
 	
+	ActUser getUserByOpenIdAndActId(String openId, Integer actId);
+	
 	List<ActUser> getList(Integer actId);
 	
 	List<ActUser> getListRanking();

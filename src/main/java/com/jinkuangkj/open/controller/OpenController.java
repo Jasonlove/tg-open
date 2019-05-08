@@ -142,16 +142,17 @@ public class OpenController extends AbstractController{
     public String getAct(@RequestParam Integer userId, @RequestParam String actId, 
     		@RequestParam(required=false) String shareId,Model model) {
     	
+    	Integer aid = Integer.valueOf(actId);
     	//个人信息
     	ActUser user = actUserService.getUserById(userId);
     	//活动信息
-    	Activity activity = activityService.get(Integer.valueOf(actId));
+    	Activity activity = activityService.get(aid);
     	//获取人员参数列表
-    	List<ActUser> userList = actUserService.getList(Integer.valueOf(actId));
+    	List<ActUser> userList = actUserService.getList(aid);
     	//支付成功个数
-    	Integer count = actOrderService.countByStatus();
+    	Integer count = actOrderService.countByStatus(aid);
     	//获取支付成功集合
-    	List<OrderResult> orderList = actOrderService.getListOrder(1, 10);
+    	List<OrderResult> orderList = actOrderService.getListOrder(aid,1, 10);
     	//获取分享排名
     	List<ActUser> rankList = actUserService.getListRanking();
     	

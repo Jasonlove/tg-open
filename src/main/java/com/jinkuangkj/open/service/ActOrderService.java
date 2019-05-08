@@ -14,11 +14,11 @@ public interface ActOrderService {
 	
 	void doNotify(String tradeNo,String xml)throws WxPayException;
 	
-	PageInfo<OrderResult> getList(Integer pageNo, Integer pageSize);
+	PageInfo<OrderResult> getList(Integer actId,Integer pageNo, Integer pageSize);
 	
-	List<OrderResult> getListOrder(Integer pageNo, Integer pageSize);
+	List<OrderResult> getListOrder(Integer actId,Integer pageNo, Integer pageSize);
 	
 	List<OrderResult> getListOrderByAdmin();
 
-	Integer countByStatus();
+	Integer countByStatus(Integer actId);
 }

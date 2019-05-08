@@ -26,7 +26,6 @@ public interface ActOrderDao {
     
     ActOrder selectByTradeNo(String tradeNo);
     
-    List<OrderResult> getListOrder();
-    
-    Integer countByStatus();
+    List<OrderResult> getListOrder(Integer actId);
+    Integer countByStatus(Integer actId);
 }

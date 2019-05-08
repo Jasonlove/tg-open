@@ -30,7 +30,7 @@ public class ActUserServiceImpl implements ActUserService {
 	public ActUser register(WxMpUser info,Integer actId,String shareId,String token) {
 		
 		//进入活动页面
-		ActUser actUser = actUserDao.selectByOpenId(info.getOpenId());
+		ActUser actUser = this.getUserByOpenIdAndActId(info.getOpenId(), actId);
 		if(null != actUser) {
 			actUser.setNickname(info.getNickname());
 			actUser.setHeadimgurl(info.getHeadImgUrl());
@@ -89,6 +89,14 @@ public class ActUserServiceImpl implements ActUserService {
 	    actUserDao.updateSelective(user);
 	    //添加发红包记录
 	    transferService.sendRed(user, income);
+	}
+
+	@Override
+	public ActUser getUserByOpenIdAndActId(String openId, Integer actId) {
+		ActUser user = new  ActUser();
+		user.setOpenid(openId);
+		user.setActId(actId);
+		return actUserDao.selectUser(user);
 	}
 
 }

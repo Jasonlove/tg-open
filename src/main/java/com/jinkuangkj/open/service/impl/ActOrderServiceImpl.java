@@ -103,10 +103,10 @@ public class ActOrderServiceImpl implements ActOrderService{
 	}
 
 	@Override
-	public PageInfo<OrderResult> getList(Integer pageNo, Integer pageSize) {
+	public PageInfo<OrderResult> getList(Integer actId,Integer pageNo, Integer pageSize) {
 		
 		PageHelper.startPage(pageNo, pageSize);
-		List<OrderResult> order = actOrderDao.getListOrder();
+		List<OrderResult> order = actOrderDao.getListOrder(actId);
 		PageInfo<OrderResult> orderList = new PageInfo<OrderResult>(order);
 		PageUtil.toPagination(orderList);
 		
@@ -114,8 +114,8 @@ public class ActOrderServiceImpl implements ActOrderService{
 	}
 
 	@Override
-	public List<OrderResult> getListOrder(Integer pageNo, Integer pageSize) {
-		PageInfo<OrderResult> list = getList(pageNo,pageSize);
+	public List<OrderResult> getListOrder(Integer actId,Integer pageNo, Integer pageSize) {
+		PageInfo<OrderResult> list = getList(actId,pageNo,pageSize);
 		for (OrderResult result : list.getList()) {
 			String iphone = result.getIphone().replaceAll("(\\d{3})\\d{4}(\\d{4})","$1****$2");
 			result.setIphone(iphone);
@@ -124,13 +124,13 @@ public class ActOrderServiceImpl implements ActOrderService{
 	}
 
 	@Override
-	public Integer countByStatus() {
-		return actOrderDao.countByStatus();
+	public Integer countByStatus(Integer actId) {
+		return actOrderDao.countByStatus(actId);
 	}
 
 	@Override
 	public List<OrderResult> getListOrderByAdmin() {
-		return actOrderDao.getListOrder();
+		return actOrderDao.getListOrder(null);
 	}
 
 }

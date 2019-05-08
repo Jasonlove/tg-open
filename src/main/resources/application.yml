@@ -33,12 +33,12 @@ spring:
         file-size-threshold: 0
         location: D:/data/tg-open/upload
       
-#wechat:
-#  mpAppId: wxa2c54680eabde041
-#  mpAppSecret: 1f3ddde1803db2e188092ab0a928b86a
-#  mpMchId: 1505191651
-#  mpMchKey: chenxiangchuanmei2016chenxiangcm
-#  mpBaseUrl: http://xinghui.natapp1.cc
+wechat:
+  mpAppId: wxa2c54680eabde041
+  mpAppSecret: 1f3ddde1803db2e188092ab0a928b86a
+  mpMchId: 1505191651
+  mpMchKey: chenxiangchuanmei2016chenxiangcm
+  mpBaseUrl: http://xinghui.natapp1.cc
 
 #wechat:#  mpAppId: wx1b3ed6da07dbdc5b
 #  mpAppSecret: fae00b40f6bce1059d531010bba60fe3
