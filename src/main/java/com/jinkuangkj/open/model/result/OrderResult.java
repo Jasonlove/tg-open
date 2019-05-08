@@ -10,12 +10,14 @@ public class OrderResult {
 	}
 	
 	
-	public OrderResult(Integer userId, String nickname, String headimgurl, String name, String iphone, String tradeNo,
+	public OrderResult(Integer userId, String nickname, String headimgurl,String actName,String merchant, String name, String iphone, String tradeNo,
 			Date finishTime, Double amount) {
 		super();
 		this.userId = userId;
 		this.nickname = nickname;
 		this.headimgurl = headimgurl;
+		this.actName = actName;
+		this.merchant = merchant;
 		this.name = name;
 		this.iphone = iphone;
 		this.tradeNo = tradeNo;
@@ -29,6 +31,8 @@ public class OrderResult {
 	private String nickname;
     private String headimgurl;
     
+    private String actName;
+    private String merchant;
     private String name;
     private String iphone;
     
@@ -84,4 +88,18 @@ public class OrderResult {
 	public void setAmount(Double amount) {
 		this.amount = amount;
 	}
+	public String getActName() {
+		return actName;
+	}
+	public void setActName(String actName) {
+		this.actName = actName;
+	}
+	public String getMerchant() {
+		return merchant;
+	}
+	public void setMerchant(String merchant) {
+		this.merchant = merchant;
+	}
+	
+	
 }

@@ -145,6 +145,7 @@
                               <thead>
                                  <tr>
                                     <th>交易记录</th>
+                                    <th>活动名称</th>
                                     <th>昵称</th>
                                     <th>头像</th>
                                     <th>姓名</th>
@@ -156,6 +157,7 @@
                               <tbody>
                                  <tr th:each="order : ${orderList}">
                                     <td th:text="${order.tradeNo}"></td>
+                                    <td th:text="${order.actName}"></td>
                                     <td th:text="${order.nickname}"></td>
                                     <td >
                                     	<img th:src="${order.headimgurl}" style="width:30px;"></img>
