@@ -146,7 +146,7 @@
                               	<tr>
 	                              <th>
 			                        <div class="form-group">
-			                           <button type="button" data-toggle="modal" data-target="#myModalLargeSave" class="btn btn-labeled btn-success">
+			                           <button type="button" data-toggle="modal" data-target="#myModalLarge" class="btn btn-labeled btn-success btn_add">
 			                              <span class="btn-label">
 			                                 <em class="fa fa-plus"></em>
 			                              </span>Add</button>
@@ -176,7 +176,7 @@
                                     <td th:text="${#dates.format(m.endTime,'yyyy-MM-dd HH:mm:ss')}"></td>
                                     <td th:text="${m.joinCount}"></td>
                                     <td>
-				                        <button type="button" data-toggle="modal" data-target="#myModalLargeUpdate"  class="btn btn-sm btn-warning btn_x">
+				                        <button type="button" data-toggle="modal" data-target="#myModalLarge"  class="btn btn-sm btn-warning btn_update">
 				                           <em class="fa fa-edit"></em>
 				                        </button>
 				                    </td>
@@ -219,7 +219,7 @@
    <!-- =============== APP SCRIPTS ===============-->
    
    <!-- Modal Large-->
-   <div id="myModalLargeSave" tabindex="-1" role="dialog" aria-labelledby="myModalLabelLarge" aria-hidden="true" class="modal fade">
+   <div id="myModalLarge" tabindex="-1" role="dialog" aria-labelledby="myModalLabelLarge" aria-hidden="true" class="modal fade">
       <div class="modal-dialog modal-lg">
          <div class="modal-content">
             <div class="modal-header">
@@ -228,9 +228,9 @@
                </button>
                <h4 id="myModalLabelLarge" class="modal-title">活动</h4>
             </div>
-            <form class="form-horizontal" action="/admin/activity/save" method="post">
+            <form class="form-horizontal" action="/admin/activity/save" method="post" id="formAct">
+            	<input id="actId" name="id" type="hidden"></input>
             	<div class="modal-body">
-            
                      <div class="form-group">
                         <label class="col-lg-2 control-label">活动名称</label>
                         <div class="col-lg-3">
@@ -255,104 +255,88 @@
                      <div class="form-group">
                         <label class="col-lg-2 control-label">活动金额</label>
                         <div class="col-lg-3">
-                           <input type="text" name="amount" required="required"  placeholder="活动金额"  class="form-control"></input>
+                           <input type="text" name="amount" required="required"  placeholder="整数或小数"  class="form-control"></input>
                         </div>
                         <label class="col-lg-2 control-label">分享金额</label>
                         <div class="col-lg-3">
-                           <input type="text" name="shareAmount" required="required"  placeholder="分享金额" class="form-control"></input>
+                           <input type="text" name="shareAmount" required="required"  placeholder="整数或小数" class="form-control"></input>
                         </div>
                      </div>
 
                      <div class="form-group">
                         <label class="col-lg-2 control-label">限制人数</label>
                         <div class="col-lg-8">
-                           <input type="text" name="limitCount" placeholder="最多参加人数" class="form-control"></input>
+                           <input type="number" name="limitCount" placeholder="最多参加人数" class="form-control"></input>
                         </div>
                      </div>
                      
                      <div class="form-group">
                         <label class="col-lg-2 control-label">首页图片</label>
                         <div class="col-lg-4">
-                        	<input type="text" required="required" disabled="disabled" name="firstImg"  class="form-control firstImg"></input>
+                        	<input type="text" name="firstImg"  required="required" class="form-control"></input>
                         </div>
                         <div class="col-lg-4">
-                        	<input type="file" placeholder="首页图片"  oninvalid="setCustomValidity('上传首部图片')" id="save_file_first" class="form-control"></input>
+                        	<input type="file"  id="save_file_first" class="form-control"></input>
                         </div>
                         <div class="col-lg-1">
                         	<button type="button" class="btn btn-success btn_first">上传</button>
                         </div>
                      </div>
                      
+                     <div class="form-group">
+                        <label class="col-lg-2 control-label">商品图片</label>
+                        <div class="col-lg-4">
+                        	<input type="text" name="infoImg"  required="required" class="form-control"></input>
+                        </div>
+                        <div class="col-lg-4">
+                        	<input type="file"  id="save_file_info" class="form-control"></input>
+                        </div>
+                        <div class="col-lg-1">
+                        	<button type="button" class="btn btn-success btn_info">上传</button>
+                        </div>
+                     </div>
+                     
+                     <div class="form-group">
+                        <label class="col-lg-2 control-label">分享图片</label>
+                        <div class="col-lg-4">
+                        	<input type="text" name="shareImg"  required="required" class="form-control"></input>
+                        </div>
+                        <div class="col-lg-4">
+                        	<input type="file"  id="save_file_share" class="form-control"></input>
+                        </div>
+                        <div class="col-lg-1">
+                        	<button type="button" class="btn btn-success btn_share">上传</button>
+                        </div>
+                     </div>
+                     
+                     <div class="form-group">
+                        <label class="col-lg-2 control-label">技术支持</label>
+                        <div class="col-lg-8">
+                        	<textarea name="techInfo" class="form-control" placeholder="技术支持：河北辰祥广告传媒 创建活动：19933395887" ></textarea>
+                        </div>
+                     </div>
+                     
             	</div>
 	            <div class="modal-footer">
-	               <button type="reset"  class="btn btn-default">Reset</button>
-	               <button type="submit" class="btn btn-primary">Save</button>
+               		<button type="reset"  class="btn btn-default btn_reset">Reset</button>
+               		<button type="submit" class="btn btn-primary">Save</button>
 	            </div>
             </form>
          </div>
       </div>
    </div>
    
-   <div id="myModalLargeUpdate" tabindex="-1" role="dialog" aria-labelledby="myModalLabelLarge" aria-hidden="true" class="modal fade">
-      <div class="modal-dialog modal-lg">
-         <div class="modal-content">
-            <div class="modal-header">
-               <button type="button" data-dismiss="modal" aria-label="Close" class="close">
-                  <span aria-hidden="true">&times;</span>
-               </button>
-               <h4 id="myModalLabelLarge" class="modal-title">活动</h4>
-            </div>
-            <form class="form-horizontal" action="/admin/activity/save" method="post">
-            	<input id="actId" name="id" type="hidden"></input>
-            	<div class="modal-body">
-                     <div class="form-group">
-                        <label class="col-lg-2 control-label">活动名称</label>
-                        <div class="col-lg-8">
-                           <input type="text" id="name" name="name" required="required" placeholder="活动名称" class="form-control"></input>
-                        </div>
-                     </div>
-                     <div class="form-group">
-                        <label class="col-lg-2 control-label">商户名称</label>
-                        <div class="col-lg-8">
-                           <input type="text" id="merchant" name="merchant" required="required" placeholder="商户名称" class="form-control"></input>
-                        </div>
-                     </div>
-                     <div class="form-group">
-                        <label class="col-lg-2 control-label">开始时间</label>
-                        <div class="col-lg-8">
-                           <input type="text" id="startTime" name="startTime" required="required" placeholder="开始时间" class="form-control" onclick="WdatePicker({dateFmt: 'yyyy-MM-dd HH:mm:ss',isShowClear:false,readOnly:true})"></input>
-                        </div>
-                     </div>
-                     <div class="form-group">
-                        <label class="col-lg-2 control-label">结束时间</label>
-                        <div class="col-lg-8">
-                           <input type="text" id="endTime" name="endTime" required="required" placeholder="结束时间" class="form-control" onclick="WdatePicker({dateFmt: 'yyyy-MM-dd HH:mm:ss',isShowClear:false,readOnly:true})"></input>
-                        </div>
-                     </div>
-                     <div class="form-group">
-                        <label class="col-lg-2 control-label">活动金额</label>
-                        <div class="col-lg-8">
-                           <input type="text" id="amount" name="amount" required="required"  placeholder="活动金额"  class="form-control"></input>
-                        </div>
-                     </div>
-                     <div class="form-group">
-                        <label class="col-lg-2 control-label">分享金额</label>
-                        <div class="col-lg-8">
-                           <input type="text" id="shareAmount"  name="shareAmount" required="required"  placeholder="分享金额" class="form-control"></input>
-                        </div>
-                     </div>
-            	</div>
-	            <div class="modal-footer">
-	               <button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
-	               <button type="submit" class="btn btn-primary">Update</button>
-	            </div>
-            </form>
-         </div>
-      </div>
-   </div>
    
    <script type="text/javascript">
-   	$(".btn_x").click(function(){
+   
+   $(".btn_add").click(function(){
+	   $("#formAct")[0].reset();
+	   $(".btn_reset").attr("disabled",false);
+   });
+   
+   
+   	$(".btn_update").click(function(){
+   		$(".btn_reset").attr("disabled",true);
 	   var actId = $(this).parent("td").siblings().html();
 	   $.ajax({
 		    url: "/admin/activity/get",
@@ -361,14 +345,18 @@
 		    dataType: 'json',
 		    success: function(result){
 		    	console.log(result);
-		    	$("#actId").val(result.id);
-		    	$("#name").val(result.name);
-		    	$("#merchant").val(result.merchant);
-		    	$("#url").val(result.url);
-		    	$("#startTime").val(result.startTime);
-		    	$("#endTime").val(result.endTime);
-		    	$("#amount").val(result.amount);
-		    	$("#shareAmount").val(result.shareAmount);
+		    	$("input[name='id']").val(result.id);
+		    	$("input[name='name']").val(result.name);
+		    	$("input[name='merchant']").val(result.merchant);
+		    	$("input[name='startTime']").val(result.startTime);
+		    	$("input[name='endTime']").val(result.endTime);
+		    	$("input[name='amount']").val(result.amount);
+		    	$("input[name='shareAmount']").val(result.shareAmount);
+		    	$("input[name='limitCount']").val(result.limitCount);
+		    	$("input[name='firstImg']").val(result.firstImg);
+		    	$("input[name='infoImg']").val(result.infoImg);
+		    	$("input[name='shareImg']").val(result.shareImg);
+		    	$("input[name='techInfo']").val(result.techInfo);
 		    }
 		});
 	});
@@ -389,7 +377,7 @@
         	 	var value =  jQuery.parseJSON(data);
         	   	if(value.code == "true"){
         	   		console.log(value);
-        	   		$(".firstImg").val(value.url);
+        	   		$("input[name='firstImg']").val(value.url);
         	   	}else{
         	   		console.log(value.msg);
         	   	}
@@ -398,7 +386,51 @@
  	});
    	
    	
+   	$(".btn_info").click(function(){
+   		var formData = new FormData();
+   		var file = document.getElementById("save_file_info").files[0];
+   		formData.append('file', file);
+	   $.ajax({
+           url: "/component/upload",
+           type: "post",
+           data: formData,
+           contentType: false,
+           processData: false,
+           mimeType: "multipart/form-data",
+           success: function (data) {
+        	 	var value =  jQuery.parseJSON(data);
+        	   	if(value.code == "true"){
+        	   		console.log(value);
+        	   		$("input[name='infoImg']").val(value.url);
+        	   	}else{
+        	   		console.log(value.msg);
+        	   	}
+           }
+       });
+ 	});
    	
+   	$(".btn_share").click(function(){
+   		var formData = new FormData();
+   		var file = document.getElementById("save_file_share").files[0];
+   		formData.append('file', file);
+	   $.ajax({
+           url: "/component/upload",
+           type: "post",
+           data: formData,
+           contentType: false,
+           processData: false,
+           mimeType: "multipart/form-data",
+           success: function (data) {
+        	 	var value =  jQuery.parseJSON(data);
+        	   	if(value.code == "true"){
+        	   		console.log(value);
+        	   		$("input[name='shareImg']").val(value.url);
+        	   	}else{
+        	   		console.log(value.msg);
+        	   	}
+           }
+       });
+ 	});
    	
    	
    

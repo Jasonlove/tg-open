@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.jinkuangkj.open.config.open.OpenConfig;
 import com.jinkuangkj.open.mapper.ActivityDao;
 import com.jinkuangkj.open.model.Activity;
 import com.jinkuangkj.open.service.ActivityService;
@@ -16,6 +17,9 @@ public class ActivityServiceImpl implements ActivityService {
 	@Autowired
 	ActivityDao activityDao;
 	
+	@Autowired
+	private OpenConfig openConfig;
+	
 	@Override
 	public void saveActivity(Activity activity) {
 		if(null != activity.getId()) {
@@ -23,6 +27,9 @@ public class ActivityServiceImpl implements ActivityService {
 		}else {
 			activity.setCreateTime(new Date());
 			activityDao.insertSelective(activity);
+			String actUrl = openConfig.getMpBaseUrl() + "/open/act?actId="+activity.getId();
+			activity.setActUrl(actUrl);
+			activityDao.updateSelective(activity);
 		}
 	}
 	
