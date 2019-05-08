@@ -71,8 +71,8 @@ public class ActUserServiceImpl implements ActUserService {
 	}
 
 	@Override
-	public List<ActUser> getListRanking() {
-		return actUserDao.getListRanking();
+	public List<ActUser> getListRanking(Integer actId) {
+		return actUserDao.getListRanking(actId);
 	}
 
 	@Override

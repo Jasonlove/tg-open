@@ -16,7 +16,7 @@ public interface ActUserService {
 	
 	List<ActUser> getList(Integer actId);
 	
-	List<ActUser> getListRanking();
+	List<ActUser> getListRanking(Integer actId);
 	
 	void addIncome(Integer userId,Double income);
 }

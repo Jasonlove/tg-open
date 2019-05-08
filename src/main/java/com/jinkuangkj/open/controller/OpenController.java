@@ -154,7 +154,7 @@ public class OpenController extends AbstractController{
     	//获取支付成功集合
     	List<OrderResult> orderList = actOrderService.getListOrder(aid,1, 10);
     	//获取分享排名
-    	List<ActUser> rankList = actUserService.getListRanking();
+    	List<ActUser> rankList = actUserService.getListRanking(aid);
     	
     	//分享链接请求地址
     	String shareUrl = openConfig.getMpBaseUrl() + "/open/share?actId="+actId+"&userId="+userId;

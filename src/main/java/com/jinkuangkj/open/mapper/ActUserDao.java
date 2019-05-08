@@ -28,5 +28,5 @@ public interface ActUserDao {
     
     List<ActUser> getListByActId(Integer actId);
     
-    List<ActUser> getListRanking();
+    List<ActUser> getListRanking(Integer actId);
 }
