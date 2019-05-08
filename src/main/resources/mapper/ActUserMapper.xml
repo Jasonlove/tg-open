@@ -139,7 +139,7 @@
         where id = #{id,jdbcType=INTEGER}
     </update>
     
-    <select id="selectUser" resultMap="BaseResultMap">
+    <select id="selectUser" parameterType="com.jinkuangkj.open.model.ActUser" resultMap="BaseResultMap">
         select 
         <include refid="Base_Column_List" />
         from t_user

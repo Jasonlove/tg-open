@@ -8,6 +8,8 @@ package com.jinkuangkj.open.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.jinkuangkj.open.model.ActOrder;
 import com.jinkuangkj.open.model.result.OrderResult;
 
@@ -26,6 +28,7 @@ public interface ActOrderDao {
     
     ActOrder selectByTradeNo(String tradeNo);
     
-    List<OrderResult> getListOrder(Integer actId);
-    Integer countByStatus(Integer actId);
+    List<OrderResult> getListOrder(@Param(value = "actId") Integer actId);
+    
+    Integer countByStatus(@Param(value = "actId") Integer actId);
 }

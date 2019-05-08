@@ -235,9 +235,9 @@
 		o.amount
 		from t_order o join t_user u on o.user_id = u.id
 		where o.`status` = 'success' 
-		<isNotEmpty property="actId">
-			and o.act_id = #{actId,jdbcType=INTEGER}
-        </isNotEmpty>
+		<if test="actId != null"> 
+			and o.act_id = #{actId}
+		</if>
 		order by o.id DESC
     </select>
     
@@ -245,7 +245,7 @@
     <select id="countByStatus" parameterType="java.lang.Integer" resultType="java.lang.Integer">
 		select 
 		count(id) 
-		from t_order where `status` = 'success' and act_id = #{actId,jdbcType=INTEGER}
+		from t_order where `status` = 'success' and act_id = #{actId}
     </select>
     
 </mapper>
