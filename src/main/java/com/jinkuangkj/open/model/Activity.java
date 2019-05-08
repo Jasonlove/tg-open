@@ -8,6 +8,8 @@ package com.jinkuangkj.open.model;
 
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 /*
  * @des @TODO 
  * @name 
@@ -27,10 +29,12 @@ public class Activity {
     /**
      * 活动时间
      */
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date startTime;
     /**
      * 截止时间
      */
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date endTime;
     /**
      * 报名金额
