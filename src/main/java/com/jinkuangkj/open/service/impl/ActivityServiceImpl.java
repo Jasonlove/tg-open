@@ -27,7 +27,7 @@ public class ActivityServiceImpl implements ActivityService {
 		}else {
 			activity.setCreateTime(new Date());
 			activityDao.insertSelective(activity);
-			String actUrl = openConfig.getMpBaseUrl() + "/open/act?actId="+activity.getId();
+			String actUrl = openConfig.getMpBaseUrl() + "/open/authorize?actId="+activity.getId();
 			activity.setActUrl(actUrl);
 			activityDao.updateSelective(activity);
 		}

@@ -162,6 +162,7 @@
                                     <th>开始时间</th>
                                     <th>结束时间</th>
                                     <th>参与人数</th>
+                                    <th>活动链接</th>
                                     <th>操作</th>
                                  </tr>
                               </thead>
@@ -175,6 +176,7 @@
                                     <td th:text="${#dates.format(m.startTime,'yyyy-MM-dd HH:mm:ss')}"></td>
                                     <td th:text="${#dates.format(m.endTime,'yyyy-MM-dd HH:mm:ss')}"></td>
                                     <td th:text="${m.joinCount}"></td>
+                                    <td th:text="${m.actUrl}"></td>
                                     <td>
 				                        <button type="button" data-toggle="modal" data-target="#myModalLarge"  class="btn btn-sm btn-warning btn_update">
 				                           <em class="fa fa-edit"></em>
@@ -356,7 +358,7 @@
 		    	$("input[name='firstImg']").val(result.firstImg);
 		    	$("input[name='infoImg']").val(result.infoImg);
 		    	$("input[name='shareImg']").val(result.shareImg);
-		    	$("input[name='techInfo']").val(result.techInfo);
+		    	$("textarea[name='techInfo']").val(result.techInfo);
 		    }
 		});
 	});

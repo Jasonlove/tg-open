@@ -12,7 +12,7 @@
 	<div id="main">
 		<div class="main_content">
 			<div class="pic">
-				<img src="/open/img/top_pic.jpg"></img>
+				<img th:src="${act.firstImg}"></img>
 			</div>
 			<div class="record">
 				<div class="tm">
@@ -53,7 +53,7 @@
 				</div>
 				<div class="product_mess">
 					<p>商品信息</p>
-					<img src="/open/img/pro_pic.jpg"></img>
+					<img th:src="${act.infoImg}"></img>
 				</div>
 				<!-- <div class="intro_mess">
 					<img src="/open/img/intro_pic.jpg"></img>
@@ -78,7 +78,8 @@
 					<img src="/open/img/ewm.jpg"></img>
 				</div> -->
 				<div class="teno_p">
-					<p>技术支持：河北辰祥广告传媒 创建活动：19933395887</p>
+					<p th:if="${act.techInfo != null}" th:text="${act.techInfo}"></p>
+					<p th:if="${act.techInfo == null}">技术支持：河北辰祥广告传媒 创建活动：19933395887</p>
 				</div>
 				<div class="tg_p">
 					<p>推广排名</p>
@@ -94,7 +95,7 @@
 						<tr th:each="user : ${rankList}">
 							<td class="yi_x" th:text="${user.nickname}"></td>
 							<td th:text="@{${user.shareCount}+'人'}"></td>
-							<td class="add_color" th:text="@{'¥'+${user.shareIncome}+'元'}">¥72.00元</td>
+							<td class="add_color" th:text="@{'¥'+${user.shareIncome}+'元'}"></td>
 						</tr>
 					</table>
 					<div>

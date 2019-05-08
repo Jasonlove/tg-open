@@ -61,7 +61,6 @@ public class ComponentController {
 		{
     		//resourceLoader.getResource("file:" + uploadPicturePath + fileName) 返回指定路径的资源句柄，这里返回的就是URL [file:D:/springboot/upload/test.png]
     		//ResponseEntity.ok(T) 返回指定内容主体
-        	log.info("下载文件:{}",fileName);
         	return ResponseEntity.ok(resourceLoader.getResource("file:" + uploadPicturePath +"/" + fileName));
 		} catch (Exception e) {
    	 		return ResponseEntity.notFound().build();
