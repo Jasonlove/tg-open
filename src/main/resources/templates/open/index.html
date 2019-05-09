@@ -56,31 +56,9 @@
 					<p>商品信息</p>
 					<img th:src="${act.infoImg}"></img>
 				</div>
-				<!-- <div class="intro_mess">
-					<img src="/open/img/intro_pic.jpg"></img>
-					<img src="/open/img/intro_pic2.jpg"></img>
-					<img src="/open/img/intro_pic3.jpg"></img>
-					<img src="/open/img/intro_pic4.jpg"></img>
-					<img src="/open/img/intro_pic5.jpg"></img>			
-				</div>
-				<div class="acti_rule">
-					<p>活动规则</p>
-					<ul>
-						<li><em>分享该海报至您的朋友圈有用户下单购买成功后</em></li>
-						<li><em>您将获得6元红包现金奖励,立即到账</em></li>
-						<li><em>1、海报推广-生成推广专属海报,分享给你的朋友,或是转发到朋友圈;</em></li>
-						<li><em>2、朋友通过你的海报购买后,你将获得6元红包现金奖励;</em></li>
-						<li><em>3、本产品为活动促销产品不予退换,如有疑问请联系商家</em></li>
-						<li><em>活动咨询电话:0912-2277287</em></li>
-						<li><em>活动最终解释权归主办方所有。</em></li>
-					</ul>
-				</div>
-				<div class="ewm">
-					<img src="/open/img/ewm.jpg"></img>
-				</div> -->
 				<div class="teno_p">
-					<p th:if="${act.techInfo != null}" th:text="${act.techInfo}"></p>
-					<p th:if="${act.techInfo == null}">技术支持：河北辰祥广告传媒 创建活动：19933395887</p>
+					<p th:if="${act.techInfo != '' &amp;&amp; act.techInfo != null}" th:text="${act.techInfo}"></p>
+					<p th:if="${act.techInfo == '' || act.techInfo== null }">技术支持：河北辰祥广告传媒 创建活动：19933395887</p>
 				</div>
 				<div class="tg_p">
 					<p>推广排名</p>
