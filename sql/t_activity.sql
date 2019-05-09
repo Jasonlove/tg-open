@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50162
 File Encoding         : 65001
 
-Date: 2019-05-08 14:32:10
+Date: 2019-05-09 14:32:53
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -40,10 +40,15 @@ CREATE TABLE `t_activity` (
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of t_activity
+-- Table structure for t_admin
 -- ----------------------------
-INSERT INTO `t_activity` VALUES ('1', '测试活动', '瑞辛咖啡', '2019-05-08 13:58:27', '2019-05-11 13:58:29', '1.00', '1.00', '1', '0', '2019-05-08 13:59:05', '/component/1557295142959.jpg', '/component/1557295144049.jpg', null, '/component/1557295144634.jpg', '测试文字说明', 'http://xinghui.natapp1.cc/open/authorize?actId=1');
-INSERT INTO `t_activity` VALUES ('2', '测试活动2', '瑞辛咖啡', '2019-05-08 14:03:22', '2019-05-08 14:03:24', '1.00', '1.00', '1', '0', '2019-05-08 14:03:49', '/component/1557295426729.jpg', '/component/1557295427397.jpg', null, '/component/1557295427931.jpg', '', 'http://xinghui.natapp1.cc/open/authorize?actId=2');
+DROP TABLE IF EXISTS `t_admin`;
+CREATE TABLE `t_admin` (
+  `id` int(11) NOT NULL,
+  `username` varchar(64) DEFAULT NULL COMMENT '用户名密码',
+  `password` varchar(64) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for t_contact
@@ -55,12 +60,9 @@ CREATE TABLE `t_contact` (
   `name` varchar(64) DEFAULT NULL COMMENT '联系人',
   `phone` varchar(64) DEFAULT NULL COMMENT '手机号',
   `company` varchar(64) DEFAULT NULL COMMENT '公司名称',
+  `create_time` datetime DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of t_contact
--- ----------------------------
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for t_order
@@ -82,11 +84,7 @@ CREATE TABLE `t_order` (
   `finish_time` datetime DEFAULT NULL COMMENT '完成时间',
   `merchant_id` varchar(64) DEFAULT NULL COMMENT '收款商户id',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of t_order
--- ----------------------------
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for t_transfer
@@ -94,7 +92,8 @@ CREATE TABLE `t_order` (
 DROP TABLE IF EXISTS `t_transfer`;
 CREATE TABLE `t_transfer` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `user_id` int(11) DEFAULT NULL,
+  `user_id` int(11) NOT NULL COMMENT '用户id',
+  `act_id` int(10) NOT NULL COMMENT '活动id',
   `transfer_no` varchar(64) DEFAULT NULL,
   `amount` double(10,2) DEFAULT NULL,
   `status` varchar(32) DEFAULT NULL COMMENT '发红包状态',
@@ -103,11 +102,7 @@ CREATE TABLE `t_transfer` (
   `create_time` datetime DEFAULT NULL COMMENT '创建时间',
   `merchant_id` varchar(64) DEFAULT NULL COMMENT '商户id',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of t_transfer
--- ----------------------------
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for t_user
@@ -125,9 +120,4 @@ CREATE TABLE `t_user` (
   `share_count` int(10) DEFAULT '0' COMMENT '分享收益人数',
   PRIMARY KEY (`id`),
   KEY `openid` (`openid`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of t_user
--- ----------------------------
-INSERT INTO `t_user` VALUES ('1', 'o-Kqa1BNqdwvmFOKDRU7k1SuHvFo', 'Jason', 'http://thirdwx.qlogo.cn/mmopen/vi_32/PiajxSqBRaELZgkbEzPLolXa8dly3ok0hjxty8EppVzFCyMvIIF2wxzAAmp1e2YkFJeyUW0xlfoPDkqU4laluLQ/132', '21_De32d5_ftCwWfImCorLzSSWa549Rg_YihOoWvPewLZwQDI5OmkqW1GQ5zLTLtqW3-yPIjTL0Vz2tF7292W4k8f58pcDOaczO8AXrIpDlvzw', '1', null, '0.00', '0');
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;

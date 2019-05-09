@@ -164,6 +164,7 @@
                                     <th>商家名称</th>
                                     <th>联系人</th>
                                     <th>手机号</th>
+                                    <th>创建时间</th>
                                  </tr>
                               </thead>
                               <tbody>
@@ -171,6 +172,7 @@
                                     <td th:text="${t.company}"></td>
                                     <td th:text="${t.phone}"></td>
                                     <td th:text="${t.name}"></td>
+                                    <td th:text="${#dates.format(t.createTime,'yyyy-MM-dd HH:mm:ss')}"></td>
                                  </tr>
                               </tbody>
                            </table>
