@@ -4,6 +4,7 @@
 	<title>周年店庆</title>
 	<script src="https://cdn.bootcss.com/jquery/3.4.0/jquery.min.js"></script>
 	<script type="text/javascript" src="/open/js/myjs.js"></script>
+	<script type="text/javascript" src="http://res2.wx.qq.com/open/js/jweixin-1.4.0.js"></script>
 	<link rel="stylesheet" type="text/css" href="/open/css/style.css"></link>
 </head>
 
@@ -135,9 +136,7 @@
 	</div>
 </body>
 </html>
-<script>
-
-
+<script th:inline="javascript">
 
 	// 限时抢购点击
 	$(".con_bottom .btn_left").click(function(){
@@ -171,5 +170,39 @@
 			document.myform.submit();
 		}
 	})
+	
+	//分享功能
+	var sign = [[${sign}]];
+	wx.config({
+	    debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+	    appId: sign.appId, // 必填，公众号的唯一标识
+	    timestamp: sign.timestamp, // 必填，生成签名的时间戳
+	    nonceStr: sign.nonceStr, // 必填，生成签名的随机串
+	    signature: sign.signature,// 必填，签名
+	    jsApiList: ['onMenuShareTimeline','onMenuShareAppMessage'] // 必填，需要使用的JS接口列表
+	});
+	
+	wx.ready(function () {   //需在用户可能点击分享按钮前就先调用
+	    wx.onMenuShareTimeline({ 
+	        title: '自定义分享', // 分享标题
+	        desc: '描述', // 分享描述
+	        link: 'http://xinghui.natapp1.cc/open/authorize?actId=1', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+	        imgUrl: 'http://xinghui.natapp1.cc/open/img/1.jpg', // 分享图标
+	        success: function () {
+	          // 设置成功
+	        }
+	    });
+		wx.onMenuShareAppMessage({
+			title: '自定义分享', // 分享标题
+			desc: '描述', // 分享描述
+			link: 'http://xinghui.natapp1.cc/open/authorize?actId=1', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+			imgUrl: 'http://xinghui.natapp1.cc/open/img/1.jpg', // 分享图标
+			success: function () {
+			// 用户点击了分享后执行的回调函数
+			}
+		});
+	});
+	
+	
 	
 </script>

@@ -43,6 +43,7 @@ import com.jinkuangkj.open.util.URLUtil;
 
 import lombok.extern.slf4j.Slf4j;
 import me.chanjar.weixin.common.api.WxConsts;
+import me.chanjar.weixin.common.bean.WxJsapiSignature;
 import me.chanjar.weixin.common.error.WxErrorException;
 import me.chanjar.weixin.mp.api.WxMpService;
 import me.chanjar.weixin.mp.api.WxMpSubscribeMsgService;
@@ -106,27 +107,21 @@ public class OpenController extends AbstractController{
     @GetMapping("/userInfo")
     public String userInfo(@RequestParam("code") String code,
                          @RequestParam("state") String returnUrl) throws Exception {
+    	ActUser user = null;
         WxMpOAuth2AccessToken wxMpOAuth2AccessToken;
-        ActUser user = null;
-        
+        String actId = URLUtil.getParamByUrl(returnUrl, "actId");
+        String shareId = URLUtil.getParamByUrl(returnUrl, "shareId");
         try {
             wxMpOAuth2AccessToken = wxMpService.oauth2getAccessToken(code);
             WxMpUser info = wxMpService.oauth2getUserInfo(wxMpOAuth2AccessToken, null);
             //用户注册
-            String actId = URLUtil.getParamByUrl(returnUrl, "actId");
-            String shareId = URLUtil.getParamByUrl(returnUrl, "shareId");
             log.info("【微信网页获取参数】actId={},shareId={}", actId,shareId);
             user = actUserService.register(info,Integer.valueOf(actId),shareId,wxMpOAuth2AccessToken.getAccessToken());
-            log.info("【微信网页获取参数】atoken={}",wxMpOAuth2AccessToken.getAccessToken());
         } catch (WxErrorException e) {
             log.error("【微信网页授权】{}", e);
             throw new Exception(e.getError().getErrorMsg());
         }
-        
-        //注册用户信息
-        String url = returnUrl +"&userId=" + user.getId();
-        log.info("【微信网页授权】redirect url={}", url);
-    
+        String url =  openConfig.getMpBaseUrl()+"/open/act?actId="+actId+"&userId="+user.getId();
         return "redirect:"+ url;
     }
     
@@ -140,33 +135,40 @@ public class OpenController extends AbstractController{
      * @return
      */
     @GetMapping("/act")
-    public String getAct(@RequestParam Integer userId, @RequestParam String actId, 
-    		@RequestParam(required=false) String shareId,Model model) {
+    public String getAct(@RequestParam String actId,@RequestParam Integer userId, Model model) {
+    		//页面加权限分享功能
+    		try {
+    			String url =  openConfig.getMpBaseUrl()+"/open/act?actId="+actId+"&userId="+userId;
+    			WxJsapiSignature sign = wxMpService.createJsapiSignature(url);
+    			model.addAttribute("sign", sign);
+	    	} catch (WxErrorException e) {
+	    		log.error("签名异常:{}",e);
+	    	}
     	
-    	Integer aid = Integer.valueOf(actId);
-    	//个人信息
-    	ActUser user = actUserService.getUserById(userId);
-    	//活动信息
-    	Activity activity = activityService.get(aid);
-    	//获取人员参数列表
-    	List<ActUser> userList = actUserService.getList(aid);
-    	//支付成功个数
-    	Integer count = actOrderService.countByStatus(aid);
-    	//获取支付成功集合
-    	List<OrderResult> orderList = actOrderService.getListOrder(aid,1, 10);
-    	//获取分享排名
-    	List<ActUser> rankList = actUserService.getListRanking(aid);
-    	
-    	//分享链接请求地址
-    	String shareUrl = openConfig.getMpBaseUrl() + "/open/share?actId="+actId+"&userId="+userId;
-    	
-    	model.addAttribute("user", user);
-    	model.addAttribute("act", activity);
-    	model.addAttribute("userList", userList);
-    	model.addAttribute("count", count);
-    	model.addAttribute("orderList", orderList);
-    	model.addAttribute("rankList", rankList);
-    	model.addAttribute("shareUrl", shareUrl);
+	    	Integer aid = Integer.valueOf(actId);
+	    	//个人信息
+	    	ActUser user = actUserService.getUserById(userId);
+	    	//活动信息
+	    	Activity activity = activityService.get(aid);
+	    	//获取人员参数列表
+	    	List<ActUser> userList = actUserService.getList(aid);
+	    	//支付成功个数
+	    	Integer count = actOrderService.countByStatus(aid);
+	    	//获取支付成功集合
+	    	List<OrderResult> orderList = actOrderService.getListOrder(aid,1, 10);
+	    	//获取分享排名
+	    	List<ActUser> rankList = actUserService.getListRanking(aid);
+	    	
+	    	//分享链接请求地址
+	    	String shareUrl = openConfig.getMpBaseUrl() + "/open/share?actId="+actId+"&userId="+userId;
+	    	
+	    	model.addAttribute("user", user);
+	    	model.addAttribute("act", activity);
+	    	model.addAttribute("userList", userList);
+	    	model.addAttribute("count", count);
+	    	model.addAttribute("orderList", orderList);
+	    	model.addAttribute("rankList", rankList);
+	    	model.addAttribute("shareUrl", shareUrl);
     	
     	return "open/index";
     }
