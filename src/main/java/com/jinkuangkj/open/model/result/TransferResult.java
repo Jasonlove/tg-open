@@ -8,7 +8,11 @@ public class TransferResult {
     private String nickname;
     private String headimgurl;
 	
+    private String actName;
+    private String merchant;
+    
 	private Integer userId;
+	private Integer actId;
     private String transferNo;
     private Double amount;
     /**
@@ -30,13 +34,16 @@ public class TransferResult {
 	public TransferResult() {
 	}
 	
-	public TransferResult(String openid, String nickname, String headimgurl, Integer userId, String transferNo,
+	public TransferResult(String openid, String nickname, String headimgurl,String actName,String merchant, Integer userId,Integer actId, String transferNo,
 			Double amount, String status, String resultCode, String resultMessage, Date createTime, String merchantId) {
 		super();
 		this.openid = openid;
 		this.nickname = nickname;
 		this.headimgurl = headimgurl;
+		this.actName = actName;
+		this.merchant = merchant;
 		this.userId = userId;
+		this.actId = actId;
 		this.transferNo = transferNo;
 		this.amount = amount;
 		this.status = status;
@@ -115,5 +122,25 @@ public class TransferResult {
 	public void setMerchantId(String merchantId) {
 		this.merchantId = merchantId;
 	}
+	public Integer getActId() {
+		return actId;
+	}
+	public void setActId(Integer actId) {
+		this.actId = actId;
+	}
+	public String getActName() {
+		return actName;
+	}
+	public void setActName(String actName) {
+		this.actName = actName;
+	}
+	public String getMerchant() {
+		return merchant;
+	}
+	public void setMerchant(String merchant) {
+		this.merchant = merchant;
+	}
+	
+	
 
 }

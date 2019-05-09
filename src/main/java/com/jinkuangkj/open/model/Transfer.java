@@ -2,7 +2,7 @@
  * @des @TODO 
  * @name Transfer.java
  * @author Jason-pc
- * @date 2019-04-30 08:57:59
+ * @date 2019-05-09 10:00:21
  */
 package com.jinkuangkj.open.model;
 
@@ -12,11 +12,18 @@ import java.util.Date;
  * @des @TODO 
  * @name 
  * @author Jason-pc
- * @date 2019-04-30 08:57:59
+ * @date 2019-05-09 10:00:21
  */
 public class Transfer {
     private Integer id;
+    /**
+     * 用户id
+     */
     private Integer userId;
+    /**
+     * 活动id
+     */
+    private Integer actId;
     private String transferNo;
     private Double amount;
     /**
@@ -34,9 +41,10 @@ public class Transfer {
      */
     private String merchantId;
 
-    public Transfer(Integer id, Integer userId, String transferNo, Double amount, String status, String resultCode, String resultMessage, Date createTime, String merchantId) {
+    public Transfer(Integer id, Integer userId, Integer actId, String transferNo, Double amount, String status, String resultCode, String resultMessage, Date createTime, String merchantId) {
         this.id = id;
         this.userId = userId;
+        this.actId = actId;
         this.transferNo = transferNo;
         this.amount = amount;
         this.status = status;
@@ -59,6 +67,12 @@ public class Transfer {
     }
     public void setUserId(Integer userId) {
         this.userId = userId;
+    }
+    public Integer getActId() {
+        return actId;
+    }
+    public void setActId(Integer actId) {
+        this.actId = actId;
     }
     public String getTransferNo() {
         return transferNo;
@@ -110,6 +124,7 @@ public class Transfer {
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
         sb.append(", userId=").append(userId);
+        sb.append(", actId=").append(actId);
         sb.append(", transferNo=").append(transferNo);
         sb.append(", amount=").append(amount);
         sb.append(", status=").append(status);

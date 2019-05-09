@@ -41,7 +41,7 @@ public class TransferServiceImpl implements TransferService{
 
 	@Override
 	public List<TransferResult> getList() {
-		return transferDao.getList();
+		return transferDao.getList(null);
 	}
 
 }

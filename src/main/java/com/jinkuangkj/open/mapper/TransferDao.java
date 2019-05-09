@@ -24,5 +24,5 @@ public interface TransferDao {
 
     int updateById(Transfer record);
     
-    List<TransferResult> getList();
+    List<TransferResult> getList(Integer actId);
 }

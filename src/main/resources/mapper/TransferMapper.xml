@@ -5,6 +5,7 @@
         <constructor>
             <idArg column="id" javaType="java.lang.Integer" jdbcType="INTEGER" />
             <arg column="user_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+            <arg column="act_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
             <arg column="transfer_no" javaType="java.lang.String" jdbcType="VARCHAR" />
             <arg column="amount" javaType="java.lang.Double" jdbcType="DOUBLE" />
             <arg column="status" javaType="java.lang.String" jdbcType="VARCHAR" />
@@ -15,7 +16,7 @@
         </constructor>
     </resultMap>
     <sql id="Base_Column_List">
-        id, user_id, transfer_no, amount, status, result_code, result_message, create_time, 
+        id, user_id, act_id, transfer_no, amount, status, result_code, result_message, create_time, 
         merchant_id
     </sql>
     <select id="selectById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
@@ -32,12 +33,14 @@
         <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
             SELECT LAST_INSERT_ID()
         </selectKey>
-        insert into t_transfer (user_id, transfer_no, amount, 
-            status, result_code, result_message, 
-            create_time, merchant_id)
-        values (#{userId,jdbcType=INTEGER}, #{transferNo,jdbcType=VARCHAR}, #{amount,jdbcType=DOUBLE}, 
-            #{status,jdbcType=VARCHAR}, #{resultCode,jdbcType=VARCHAR}, #{resultMessage,jdbcType=VARCHAR}, 
-            #{createTime,jdbcType=TIMESTAMP}, #{merchantId,jdbcType=VARCHAR})
+        insert into t_transfer (user_id, act_id, transfer_no, 
+            amount, status, result_code, 
+            result_message, create_time, merchant_id
+            )
+        values (#{userId,jdbcType=INTEGER}, #{actId,jdbcType=INTEGER}, #{transferNo,jdbcType=VARCHAR}, 
+            #{amount,jdbcType=DOUBLE}, #{status,jdbcType=VARCHAR}, #{resultCode,jdbcType=VARCHAR}, 
+            #{resultMessage,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{merchantId,jdbcType=VARCHAR}
+            )
     </insert>
     <insert id="insertSelective" parameterType="com.jinkuangkj.open.model.Transfer">
         <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
@@ -47,6 +50,9 @@
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="userId != null">
                 user_id,
+            </if>
+            <if test="actId != null">
+                act_id,
             </if>
             <if test="transferNo != null">
                 transfer_no,
@@ -73,6 +79,9 @@
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="userId != null">
                 #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="actId != null">
+                #{actId,jdbcType=INTEGER},
             </if>
             <if test="transferNo != null">
                 #{transferNo,jdbcType=VARCHAR},
@@ -103,6 +112,9 @@
             <if test="userId != null">
                 user_id = #{userId,jdbcType=INTEGER},
             </if>
+            <if test="actId != null">
+                act_id = #{actId,jdbcType=INTEGER},
+            </if>
             <if test="transferNo != null">
                 transfer_no = #{transferNo,jdbcType=VARCHAR},
             </if>
@@ -130,6 +142,7 @@
     <update id="updateById" parameterType="com.jinkuangkj.open.model.Transfer">
         update t_transfer
         set user_id = #{userId,jdbcType=INTEGER},
+            act_id = #{actId,jdbcType=INTEGER},
             transfer_no = #{transferNo,jdbcType=VARCHAR},
             amount = #{amount,jdbcType=DOUBLE},
             status = #{status,jdbcType=VARCHAR},
@@ -140,14 +153,17 @@
         where id = #{id,jdbcType=INTEGER}
     </update>
     
-    
     <resultMap id="listResultMap" type="com.jinkuangkj.open.model.result.TransferResult">
         <constructor>
             <arg column="openid" javaType="java.lang.String" jdbcType="VARCHAR" />
             <arg column="nickname" javaType="java.lang.String" jdbcType="VARCHAR" />
             <arg column="headimgurl" javaType="java.lang.String" jdbcType="VARCHAR" />
             
+            <arg column="actName" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="merchant" javaType="java.lang.String" jdbcType="VARCHAR" />
+            
             <arg column="user_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+            <arg column="act_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
             <arg column="transfer_no" javaType="java.lang.String" jdbcType="VARCHAR" />
             <arg column="amount" javaType="java.lang.Double" jdbcType="DOUBLE" />
             <arg column="status" javaType="java.lang.String" jdbcType="VARCHAR" />
@@ -160,23 +176,29 @@
     </resultMap>
     
     
-    <select id="getList"  resultMap="listResultMap">
+    <select id="getList" parameterType="java.lang.Integer"  resultMap="listResultMap">
         SELECT
-			openid,
-			nickname,
-			headimgurl,
-			user_id,
-			transfer_no,
-			amount,
-			STATUS,
-			result_code,
-			result_message,
-			create_time,
-			merchant_id
+			u.openid,
+			u.nickname,
+			u.headimgurl,
+      		a.`name` actName,
+			a.merchant,
+      		t.user_id,
+      		t.act_id,
+			t.transfer_no,
+			t.amount,
+			t.`status`,
+			t.result_code,
+			t.result_message,
+			t.create_time,
+			t.merchant_id
 		FROM
 			t_transfer t
-		JOIN t_user u ON t.user_id = u.id
+		JOIN t_user u ON t.user_id = u.id 
+		JOIN t_activity a ON t.act_id = a.id
+		where 1=1
+		<if test="actId != null"> 
+			and o.act_id = #{actId}
+		</if>
     </select>
-    
-    
 </mapper>
