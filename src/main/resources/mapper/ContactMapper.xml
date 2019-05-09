@@ -92,4 +92,10 @@
             company = #{company,jdbcType=VARCHAR}
         where id = #{id,jdbcType=INTEGER}
     </update>
+    
+    <select id="getList"  resultMap="BaseResultMap">
+        select 
+        <include refid="Base_Column_List" />
+        from t_contact
+    </select>
 </mapper>

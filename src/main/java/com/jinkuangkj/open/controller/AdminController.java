@@ -12,11 +12,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.jinkuangkj.open.model.Activity;
+import com.jinkuangkj.open.model.Contact;
 import com.jinkuangkj.open.model.Transfer;
 import com.jinkuangkj.open.model.result.OrderResult;
 import com.jinkuangkj.open.model.result.TransferResult;
 import com.jinkuangkj.open.service.ActOrderService;
 import com.jinkuangkj.open.service.ActivityService;
+import com.jinkuangkj.open.service.ContactService;
 import com.jinkuangkj.open.service.TransferService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -33,6 +35,8 @@ public class AdminController {
 	ActOrderService actOrderService;
 	@Autowired
 	TransferService transferService;
+	@Autowired
+	ContactService contactService;
 	
 	
 	@GetMapping("/index")
@@ -63,8 +67,8 @@ public class AdminController {
 	
 	@GetMapping("/contact/index")
 	public String contactList(Model model) {
-		List<TransferResult> list = transferService.getList();
-		model.addAttribute("transferList", list);
+		 List<Contact> list = contactService.getList();
+		model.addAttribute("contactList", list);
 		return "admin/contact/index";
 	}
 	

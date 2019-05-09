@@ -6,6 +6,8 @@
  */
 package com.jinkuangkj.open.mapper;
 
+import java.util.List;
+
 import com.jinkuangkj.open.model.Contact;
 
 public interface ContactDao {
@@ -20,4 +22,6 @@ public interface ContactDao {
     int updateSelective(Contact record);
 
     int updateById(Contact record);
+    
+    List<Contact> getList();
 }
