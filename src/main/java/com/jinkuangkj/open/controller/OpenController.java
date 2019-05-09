@@ -227,7 +227,7 @@ public class OpenController extends AbstractController{
     public String notifying(@PathVariable("tradeNo") String tradeNo, HttpServletRequest request, HttpServletResponse response) throws WxPayException {
     	log.info("回调流水:{}",tradeNo);
     	String xmlData = super.getRequestBody(request);
-    	actOrderService.doNotify(tradeNo, xmlData);
+    	actOrderService.activateNotify(tradeNo, xmlData);
     	response.setHeader(HTTP_CONTENT_TYPE, HTTP_CHARSET_UTF8);
     	return returnSuccess();
     }

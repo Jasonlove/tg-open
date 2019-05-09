@@ -67,7 +67,7 @@ public class ActOrderServiceImpl implements ActOrderService{
 	}
 
 	@Override
-	public void doNotify(String tradeNo, String xml) throws WxPayException {
+	public void activateNotify(String tradeNo, String xml) throws WxPayException {
 		
 		ActOrder order = actOrderDao.selectByTradeNo(tradeNo);
 		if(null==order) {

@@ -31,6 +31,7 @@ public class TransferServiceImpl implements TransferService{
 		//添加插入记录
 		Transfer transfer = new Transfer();
 		transfer.setUserId(user.getId());
+		transfer.setActId(user.getActId());
 		transfer.setCreateTime(new Date());
 		transfer.setAmount(income);
 		transfer.setStatus(OrderStatus.PENDING.getValue());

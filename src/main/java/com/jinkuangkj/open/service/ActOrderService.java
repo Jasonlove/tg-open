@@ -12,7 +12,7 @@ public interface ActOrderService {
 	
 	ActOrder createOrder(Integer userId,Integer actId,String name,String iphone);
 	
-	void doNotify(String tradeNo,String xml)throws WxPayException;
+	void activateNotify(String tradeNo,String xml)throws WxPayException;
 	
 	PageInfo<OrderResult> getList(Integer actId,Integer pageNo, Integer pageSize);
 	
