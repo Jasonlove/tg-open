@@ -2,6 +2,7 @@ package com.jinkuangkj.open.controller;
 
 import java.io.File;
 import java.net.URLEncoder;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -260,6 +261,7 @@ public class OpenController extends AbstractController{
     }
     @PostMapping("company")
     public String savecompany(Contact contact) {
+    	contact.setCreateTime(new Date());
     	contactDao.insertSelective(contact);
     	return  "open/contact/success";
     }

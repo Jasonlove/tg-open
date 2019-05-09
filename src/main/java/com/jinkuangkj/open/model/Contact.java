@@ -2,15 +2,17 @@
  * @des @TODO 
  * @name Contact.java
  * @author Jason-pc
- * @date 2019-05-08 10:39:47
+ * @date 2019-05-09 14:14:34
  */
 package com.jinkuangkj.open.model;
+
+import java.util.Date;
 
 /*
  * @des @TODO 
  * @name 
  * @author Jason-pc
- * @date 2019-05-08 10:39:47
+ * @date 2019-05-09 14:14:34
  */
 public class Contact {
     /**
@@ -30,13 +32,18 @@ public class Contact {
      * 公司名称
      */
     private String company;
+    /**
+     * 创建时间
+     */
+    private Date createTime;
 
-    public Contact(Integer id, Integer userId, String name, String phone, String company) {
+    public Contact(Integer id, Integer userId, String name, String phone, String company, Date createTime) {
         this.id = id;
         this.userId = userId;
         this.name = name;
         this.phone = phone;
         this.company = company;
+        this.createTime = createTime;
     }
     public Contact() {
         super();
@@ -71,6 +78,12 @@ public class Contact {
     public void setCompany(String company) {
         this.company = company;
     }
+    public Date getCreateTime() {
+        return createTime;
+    }
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -82,6 +95,7 @@ public class Contact {
         sb.append(", name=").append(name);
         sb.append(", phone=").append(phone);
         sb.append(", company=").append(company);
+        sb.append(", createTime=").append(createTime);
         sb.append("]");
         return sb.toString();
     }

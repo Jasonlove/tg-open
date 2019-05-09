@@ -8,10 +8,11 @@
             <arg column="name" javaType="java.lang.String" jdbcType="VARCHAR" />
             <arg column="phone" javaType="java.lang.String" jdbcType="VARCHAR" />
             <arg column="company" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="create_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
         </constructor>
     </resultMap>
     <sql id="Base_Column_List">
-        id, user_id, name, phone, company
+        id, user_id, name, phone, company, create_time
     </sql>
     <select id="selectById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
         select 
@@ -28,9 +29,9 @@
             SELECT LAST_INSERT_ID()
         </selectKey>
         insert into t_contact (user_id, name, phone, 
-            company)
+            company, create_time)
         values (#{userId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
-            #{company,jdbcType=VARCHAR})
+            #{company,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP})
     </insert>
     <insert id="insertSelective" parameterType="com.jinkuangkj.open.model.Contact">
         <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
@@ -50,6 +51,9 @@
             <if test="company != null">
                 company,
             </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="userId != null">
@@ -63,6 +67,9 @@
             </if>
             <if test="company != null">
                 #{company,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
             </if>
         </trim>
     </insert>
@@ -81,6 +88,9 @@
             <if test="company != null">
                 company = #{company,jdbcType=VARCHAR},
             </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
         </set>
         where id = #{id,jdbcType=INTEGER}
     </update>
@@ -89,7 +99,8 @@
         set user_id = #{userId,jdbcType=INTEGER},
             name = #{name,jdbcType=VARCHAR},
             phone = #{phone,jdbcType=VARCHAR},
-            company = #{company,jdbcType=VARCHAR}
+            company = #{company,jdbcType=VARCHAR},
+            create_time = #{createTime,jdbcType=TIMESTAMP}
         where id = #{id,jdbcType=INTEGER}
     </update>
     
