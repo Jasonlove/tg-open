@@ -61,6 +61,13 @@ public class AdminController {
 		return "admin/transfer/index";
 	}
 	
+	@GetMapping("/contact/index")
+	public String contactList(Model model) {
+		List<TransferResult> list = transferService.getList();
+		model.addAttribute("transferList", list);
+		return "admin/contact/index";
+	}
+	
 	@PostMapping("/activity/save")
 	public String saveActivity(Activity activity) {
 		activityService.saveActivity(activity);
