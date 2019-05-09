@@ -59,7 +59,8 @@
 </style>
 <body>
 	<div class="act_name">
-		<form action="/open/company" method="post" name="myform">
+		<form action="/open/company" method="post" name="companyform">
+			<input type="hidden" name="userId" th:value="${userId}"></input>
 			<h2>商家报名中心</h2>
 			<p>	
 			<input type="text" name="" placeholder="请输入公司名称" class="inp_company"></input>
@@ -105,7 +106,7 @@
 			setTimeout(show, 1000);
 		}else{
 			//添加数据
-			document.myform.submit();
+			document.companyform.submit();
 		}
 	})
 </script>

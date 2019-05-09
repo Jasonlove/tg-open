@@ -253,14 +253,15 @@ public class OpenController extends AbstractController{
         return "open/share";
     }
     
-    @GetMapping("/company")
-    public String company() {
-    	return  "open/sign/create";
+    @GetMapping("/company/{userId}")
+    public String company(Model model,@PathVariable("userId") Integer userId) {
+    	model.addAttribute("userId", userId);
+    	return  "open/contact/create";
     }
     @PostMapping("company")
     public String savecompany(Contact contact) {
     	contactDao.insertSelective(contact);
-    	return  "open/sign/success";
+    	return  "open/contact/success";
     }
     
     @GetMapping("/sub")
