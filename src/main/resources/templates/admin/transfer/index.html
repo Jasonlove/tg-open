@@ -145,17 +145,20 @@
                               <thead>
                                  <tr>
                                     <th>转账流水</th>
+                                    <th>活动</th>
+                                    <th>商家</th>
                                     <th>昵称</th>
                                     <th>头像</th>
-                                    <th>金额</th>
+                                    <th>分享金额</th>
                                     <th>状态</th>
                                     <th>创建时间</th>
-                                    <th>转账商户号</th>
                                  </tr>
                               </thead>
                               <tbody>
                                  <tr th:each="t : ${transferList}">
                                     <td th:text="${t.transferNo}"></td>
+                                    <td th:text="${t.actName}"></td>
+                                    <td th:text="${t.merchant}"></td>
                                     <td th:text="${t.nickname}"></td>
                                     <td >
                                     	<img th:src="${t.headimgurl}" style="width:30px;"></img>
@@ -163,7 +166,6 @@
                                     <td th:text="${t.amount}"></td>
                                     <td th:text="${t.status}"></td>
                                     <td th:text="${#dates.format(t.createTime,'yyyy-MM-dd HH:mm:ss')}"></td>
-                                    <td th:text="${t.merchantId}"></td>
                                  </tr>
                               </tbody>
                            </table>
