@@ -44,6 +44,11 @@ public class AdminController {
 		return "admin/index";
 	}
 	
+	@GetMapping("/login")
+	public String login() {
+		return "admin/login";
+	}
+	
 	@GetMapping("/activity/index")
 	public String activityList(Model model) {
 		List<Activity> list = activityService.getList();
