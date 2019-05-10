@@ -38,16 +38,27 @@ public class AdminController {
 	@Autowired
 	ContactService contactService;
 	
+	@GetMapping("/login")
+	public String loginIndex() {
+		return "admin/login";
+	}
+	
+	
+	@PostMapping("/login")
+	public String login(Model model) {
+		
+		
+		
+		return "admin/index";
+	}
+	
+	
 	
 	@GetMapping("/index")
 	public String index() {
 		return "admin/index";
 	}
 	
-	@GetMapping("/login")
-	public String login() {
-		return "admin/login";
-	}
 	
 	@GetMapping("/activity/index")
 	public String activityList(Model model) {
