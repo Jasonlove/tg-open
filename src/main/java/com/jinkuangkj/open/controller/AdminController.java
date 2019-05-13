@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.jinkuangkj.open.model.Activity;
+import com.jinkuangkj.open.model.Admin;
 import com.jinkuangkj.open.model.Contact;
 import com.jinkuangkj.open.model.Transfer;
 import com.jinkuangkj.open.model.result.OrderResult;
@@ -45,7 +46,7 @@ public class AdminController {
 	
 	
 	@PostMapping("/login")
-	public String login(Model model) {
+	public String login(@RequestParam("username")String userName,@RequestParam("password")String password) {
 		
 		
 		
