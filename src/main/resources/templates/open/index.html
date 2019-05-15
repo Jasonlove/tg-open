@@ -1,15 +1,57 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<meta name="referrer" content="never"></meta>
 	<title>周年店庆</title>
 	<script src="https://cdn.bootcss.com/jquery/3.4.0/jquery.min.js"></script>
 	<script type="text/javascript" src="/open/js/myjs.js"></script>
 	<script type="text/javascript" src="http://res2.wx.qq.com/open/js/jweixin-1.4.0.js"></script>
 	<link rel="stylesheet" type="text/css" href="/open/css/style.css"></link>
 </head>
-
+<style>
+	body,html{
+		position:relative;
+	}
+	.horse{
+		position:absolute;
+		top:20px;
+		right:0px;
+		z-index:999;
+		font-size:32px;
+		background-color:rgba(255,255,255,0.5);
+		width:100%;
+		text-align:center;
+		padding:10px 0;
+		font-family:"微软雅黑";
+	}
+	.horse em,.horse strong,.horse i{
+		font-style:normal;
+		font-weight:normal;
+		color:red;
+	}
+	.music{
+		position:absolute;
+		top:120px;
+		right:25px;
+		z-index:999;
+	}
+	.music img{
+		width:60px;	
+	}
+	
+</style>
 
 <body>
+	<div class="horse">
+		<marquee width="100%" direction="left" align="middle">用户<em>宋幸会</em>通过<strong>肖佳佳</strong>的分享抢购成功,<strong>肖佳佳</strong>获得佣金<i>3</i>元</marquee>
+	</div>
+	<div class="music">
+		<img alt="" src="/open/img/open.png"></img>
+		<audio autoplay="autoplay" id="bgMusic">
+			<source src="/open/music/music.mp3"></source>
+		</audio>
+	</div>
+
 	<div id="main">
 		<div class="main_content">
 			<div class="pic">
@@ -146,6 +188,19 @@
 			$(".judge p").html("请输入正确手机号");
 		}else{
 			document.myform.submit();
+		}
+	})
+	
+	//音乐点击自动播放
+	var music = document.getElementById("bgMusic");
+	$(".music img").click(function(){
+		$(this).attr("src","/open/img/close.png");
+		if(music.paused){
+			music.play();
+			$(this).attr("src","/open/img/open.png");
+		}else{
+			music.pause();
+			
 		}
 	})
 	
