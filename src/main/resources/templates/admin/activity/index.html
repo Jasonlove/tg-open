@@ -379,76 +379,48 @@
 		});
 	});
    	
-   	
    	$(".btn_first").click(function(){
    		var formData = new FormData();
    		var file = document.getElementById("save_file_first").files[0];
    		formData.append('file', file);
-	   $.ajax({
-           url: "/component/upload",
-           type: "post",
-           data: formData,
-           contentType: false,
-           processData: false,
-           mimeType: "multipart/form-data",
-           success: function (data) {
-        	 	var value =  jQuery.parseJSON(data);
-        	   	if(value.code == "true"){
-        	   		console.log(value);
-        	   		$("input[name='firstImg']").val(value.url);
-        	   	}else{
-        	   		console.log(value.msg);
-        	   	}
-           }
-       });
+   		$("input[name='firstImg']").val(upload(formData).url);
  	});
-   	
    	
    	$(".btn_info").click(function(){
    		var formData = new FormData();
    		var file = document.getElementById("save_file_info").files[0];
    		formData.append('file', file);
-	   $.ajax({
-           url: "/component/upload",
-           type: "post",
-           data: formData,
-           contentType: false,
-           processData: false,
-           mimeType: "multipart/form-data",
-           success: function (data) {
-        	 	var value =  jQuery.parseJSON(data);
-        	   	if(value.code == "true"){
-        	   		console.log(value);
-        	   		$("input[name='infoImg']").val(value.url);
-        	   	}else{
-        	   		console.log(value.msg);
-        	   	}
-           }
-       });
+   		$("input[name='infoImg']").val(upload(formData).url);
  	});
    	
    	$(".btn_share").click(function(){
    		var formData = new FormData();
    		var file = document.getElementById("save_file_share").files[0];
    		formData.append('file', file);
-	   $.ajax({
-           url: "/component/upload",
-           type: "post",
-           data: formData,
-           contentType: false,
-           processData: false,
-           mimeType: "multipart/form-data",
-           success: function (data) {
-        	 	var value =  jQuery.parseJSON(data);
-        	   	if(value.code == "true"){
-        	   		console.log(value);
-        	   		$("input[name='shareImg']").val(value.url);
-        	   	}else{
-        	   		console.log(value.msg);
-        	   	}
-           }
-       });
+        $("input[name='shareImg']").val(upload(formData).url);
  	});
+   	
+   	//上
+   	function upload(formData){
+    	var value; 
+   		$.ajax({
+   			async:false,
+            url: "/component/upload",
+            type: "post",
+            data: formData,
+            contentType: false,
+            processData: false,
+            mimeType: "multipart/form-data",
+            success: function (data) {
+         	 	value =  jQuery.parseJSON(data);
+         	   	if(value.code == "true"){
+         	   	}else{
+         	   		console.log(value.msg);
+         	   	}
+            }
+        });
+   		return value;
+   	}
    	
    	
    
