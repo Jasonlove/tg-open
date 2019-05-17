@@ -2,7 +2,7 @@
  * @des @TODO 
  * @name Activity.java
  * @author Jason-pc
- * @date 2019-05-08 10:39:47
+ * @date 2019-05-17 10:13:24
  */
 package com.jinkuangkj.open.model;
 
@@ -14,7 +14,7 @@ import org.springframework.format.annotation.DateTimeFormat;
  * @des @TODO 
  * @name 
  * @author Jason-pc
- * @date 2019-05-08 10:39:47
+ * @date 2019-05-17 10:13:24
  */
 public class Activity {
     private Integer id;
@@ -65,7 +65,7 @@ public class Activity {
      */
     private String infoImg;
     /**
-     * 尾部图片
+     * 保留字段，尾部页面
      */
     private String footImg;
     /**
@@ -80,8 +80,21 @@ public class Activity {
      * 生成url地址
      */
     private String actUrl;
+    /**
+     * 音乐
+     */
+    private String music;
+    /**
+     * 分享标题
+     */
+    private String shareTitle;
+    /**
+     * 分享描述
+     */
+    private String shareDesc;
+    private String shareSmallImg;
 
-    public Activity(Integer id, String name, String merchant, Date startTime, Date endTime, Double amount, Double shareAmount, Integer limitCount, Integer joinCount, Date createTime, String firstImg, String infoImg, String footImg, String shareImg, String techInfo, String actUrl) {
+    public Activity(Integer id, String name, String merchant, Date startTime, Date endTime, Double amount, Double shareAmount, Integer limitCount, Integer joinCount, Date createTime, String firstImg, String infoImg, String footImg, String shareImg, String techInfo, String actUrl, String music, String shareTitle, String shareDesc, String shareSmallImg) {
         this.id = id;
         this.name = name;
         this.merchant = merchant;
@@ -98,6 +111,10 @@ public class Activity {
         this.shareImg = shareImg;
         this.techInfo = techInfo;
         this.actUrl = actUrl;
+        this.music = music;
+        this.shareTitle = shareTitle;
+        this.shareDesc = shareDesc;
+        this.shareSmallImg = shareSmallImg;
     }
     public Activity() {
         super();
@@ -198,6 +215,30 @@ public class Activity {
     public void setActUrl(String actUrl) {
         this.actUrl = actUrl;
     }
+    public String getMusic() {
+        return music;
+    }
+    public void setMusic(String music) {
+        this.music = music;
+    }
+    public String getShareTitle() {
+        return shareTitle;
+    }
+    public void setShareTitle(String shareTitle) {
+        this.shareTitle = shareTitle;
+    }
+    public String getShareDesc() {
+        return shareDesc;
+    }
+    public void setShareDesc(String shareDesc) {
+        this.shareDesc = shareDesc;
+    }
+    public String getShareSmallImg() {
+        return shareSmallImg;
+    }
+    public void setShareSmallImg(String shareSmallImg) {
+        this.shareSmallImg = shareSmallImg;
+    }
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -220,6 +261,10 @@ public class Activity {
         sb.append(", shareImg=").append(shareImg);
         sb.append(", techInfo=").append(techInfo);
         sb.append(", actUrl=").append(actUrl);
+        sb.append(", music=").append(music);
+        sb.append(", shareTitle=").append(shareTitle);
+        sb.append(", shareDesc=").append(shareDesc);
+        sb.append(", shareSmallImg=").append(shareSmallImg);
         sb.append("]");
         return sb.toString();
     }

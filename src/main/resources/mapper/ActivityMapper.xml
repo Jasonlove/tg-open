@@ -19,11 +19,16 @@
             <arg column="share_img" javaType="java.lang.String" jdbcType="VARCHAR" />
             <arg column="tech_info" javaType="java.lang.String" jdbcType="VARCHAR" />
             <arg column="act_url" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="music" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="share_title" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="share_desc" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="share_small_img" javaType="java.lang.String" jdbcType="VARCHAR" />
         </constructor>
     </resultMap>
     <sql id="Base_Column_List">
         id, name, merchant, start_time, end_time, amount, share_amount, limit_count, join_count, 
-        create_time, first_img, info_img, foot_img, share_img, tech_info, act_url
+        create_time, first_img, info_img, foot_img, share_img, tech_info, act_url, music, 
+        share_title, share_desc, share_small_img
     </sql>
     <select id="selectById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
         select 
@@ -43,14 +48,16 @@
             end_time, amount, share_amount, 
             limit_count, join_count, create_time, 
             first_img, info_img, foot_img, 
-            share_img, tech_info, act_url
-            )
+            share_img, tech_info, act_url, 
+            music, share_title, share_desc, 
+            share_small_img)
         values (#{name,jdbcType=VARCHAR}, #{merchant,jdbcType=VARCHAR}, #{startTime,jdbcType=TIMESTAMP}, 
             #{endTime,jdbcType=TIMESTAMP}, #{amount,jdbcType=DOUBLE}, #{shareAmount,jdbcType=DOUBLE}, 
             #{limitCount,jdbcType=INTEGER}, #{joinCount,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
             #{firstImg,jdbcType=VARCHAR}, #{infoImg,jdbcType=VARCHAR}, #{footImg,jdbcType=VARCHAR}, 
-            #{shareImg,jdbcType=VARCHAR}, #{techInfo,jdbcType=VARCHAR}, #{actUrl,jdbcType=VARCHAR}
-            )
+            #{shareImg,jdbcType=VARCHAR}, #{techInfo,jdbcType=VARCHAR}, #{actUrl,jdbcType=VARCHAR}, 
+            #{music,jdbcType=VARCHAR}, #{shareTitle,jdbcType=VARCHAR}, #{shareDesc,jdbcType=VARCHAR}, 
+            #{shareSmallImg,jdbcType=VARCHAR})
     </insert>
     <insert id="insertSelective" parameterType="com.jinkuangkj.open.model.Activity">
         <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
@@ -103,6 +110,18 @@
             <if test="actUrl != null">
                 act_url,
             </if>
+            <if test="music != null">
+                music,
+            </if>
+            <if test="shareTitle != null">
+                share_title,
+            </if>
+            <if test="shareDesc != null">
+                share_desc,
+            </if>
+            <if test="shareSmallImg != null">
+                share_small_img,
+            </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="name != null">
@@ -149,6 +168,18 @@
             </if>
             <if test="actUrl != null">
                 #{actUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="music != null">
+                #{music,jdbcType=VARCHAR},
+            </if>
+            <if test="shareTitle != null">
+                #{shareTitle,jdbcType=VARCHAR},
+            </if>
+            <if test="shareDesc != null">
+                #{shareDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="shareSmallImg != null">
+                #{shareSmallImg,jdbcType=VARCHAR},
             </if>
         </trim>
     </insert>
@@ -200,6 +231,18 @@
             <if test="actUrl != null">
                 act_url = #{actUrl,jdbcType=VARCHAR},
             </if>
+            <if test="music != null">
+                music = #{music,jdbcType=VARCHAR},
+            </if>
+            <if test="shareTitle != null">
+                share_title = #{shareTitle,jdbcType=VARCHAR},
+            </if>
+            <if test="shareDesc != null">
+                share_desc = #{shareDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="shareSmallImg != null">
+                share_small_img = #{shareSmallImg,jdbcType=VARCHAR},
+            </if>
         </set>
         where id = #{id,jdbcType=INTEGER}
     </update>
@@ -219,7 +262,11 @@
             foot_img = #{footImg,jdbcType=VARCHAR},
             share_img = #{shareImg,jdbcType=VARCHAR},
             tech_info = #{techInfo,jdbcType=VARCHAR},
-            act_url = #{actUrl,jdbcType=VARCHAR}
+            act_url = #{actUrl,jdbcType=VARCHAR},
+            music = #{music,jdbcType=VARCHAR},
+            share_title = #{shareTitle,jdbcType=VARCHAR},
+            share_desc = #{shareDesc,jdbcType=VARCHAR},
+            share_small_img = #{shareSmallImg,jdbcType=VARCHAR}
         where id = #{id,jdbcType=INTEGER}
     </update>
     
@@ -228,5 +275,5 @@
         <include refid="Base_Column_List" />
         from t_activity order by id desc
     </select>
-    
+	
 </mapper>

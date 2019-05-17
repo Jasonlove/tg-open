@@ -2,7 +2,7 @@
  * @des @TODO 
  * @name Transfer.java
  * @author Jason-pc
- * @date 2019-05-09 10:00:21
+ * @date 2019-05-17 10:13:24
  */
 package com.jinkuangkj.open.model;
 
@@ -12,7 +12,7 @@ import java.util.Date;
  * @des @TODO 
  * @name 
  * @author Jason-pc
- * @date 2019-05-09 10:00:21
+ * @date 2019-05-17 10:13:24
  */
 public class Transfer {
     private Integer id;
@@ -40,8 +40,12 @@ public class Transfer {
      * 商户id
      */
     private String merchantId;
+    /**
+     * 分享人用户id
+     */
+    private Integer shareUid;
 
-    public Transfer(Integer id, Integer userId, Integer actId, String transferNo, Double amount, String status, String resultCode, String resultMessage, Date createTime, String merchantId) {
+    public Transfer(Integer id, Integer userId, Integer actId, String transferNo, Double amount, String status, String resultCode, String resultMessage, Date createTime, String merchantId, Integer shareUid) {
         this.id = id;
         this.userId = userId;
         this.actId = actId;
@@ -52,6 +56,7 @@ public class Transfer {
         this.resultMessage = resultMessage;
         this.createTime = createTime;
         this.merchantId = merchantId;
+        this.shareUid = shareUid;
     }
     public Transfer() {
         super();
@@ -116,6 +121,12 @@ public class Transfer {
     public void setMerchantId(String merchantId) {
         this.merchantId = merchantId;
     }
+    public Integer getShareUid() {
+        return shareUid;
+    }
+    public void setShareUid(Integer shareUid) {
+        this.shareUid = shareUid;
+    }
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -132,6 +143,7 @@ public class Transfer {
         sb.append(", resultMessage=").append(resultMessage);
         sb.append(", createTime=").append(createTime);
         sb.append(", merchantId=").append(merchantId);
+        sb.append(", shareUid=").append(shareUid);
         sb.append("]");
         return sb.toString();
     }
