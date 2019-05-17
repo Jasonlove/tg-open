@@ -250,46 +250,41 @@
             	<input id="actId" name="id" type="hidden"></input>
             	<div class="modal-body">
                      <div class="form-group">
-                        <label class="col-lg-2 control-label">活动名称</label>
+                        <label class="col-lg-2 control-label">活动名称*</label>
                         <div class="col-lg-3">
                            <input type="text" name="name" required="required" placeholder="活动名称" class="form-control"></input>
                         </div>
-                        <label class="col-lg-2 control-label">商户名称</label>
+                        <label class="col-lg-2 control-label">商户名称*</label>
                         <div class="col-lg-3">
                            <input type="text" name="merchant" required="required" placeholder="商户名称" class="form-control"></input>
                         </div>
                      </div>
                      <div class="form-group">
-                        <label class="col-lg-2 control-label">开始时间</label>
+                        <label class="col-lg-2 control-label">开始时间*</label>
                         <div class="col-lg-3">
                            <input type="text" name="startTime" required="required" placeholder="开始时间" class="form-control" onclick="WdatePicker({dateFmt: 'yyyy-MM-dd HH:mm:ss',isShowClear:false,readOnly:true})"></input>
                         </div>
-                        <label class="col-lg-2 control-label">结束时间</label>
+                        <label class="col-lg-2 control-label">结束时间*</label>
                         <div class="col-lg-3">
                            <input type="text" name="endTime" required="required" placeholder="结束时间" class="form-control" onclick="WdatePicker({dateFmt: 'yyyy-MM-dd HH:mm:ss',isShowClear:false,readOnly:true})"></input>
                         </div>
                      </div>
 
                      <div class="form-group">
-                        <label class="col-lg-2 control-label">活动金额</label>
+                        <label class="col-lg-2 control-label">活动金额*</label>
                         <div class="col-lg-3">
                            <input type="text" name="amount" required="required"  placeholder="整数或小数"  class="form-control"></input>
                         </div>
-                        <label class="col-lg-2 control-label">分享金额</label>
+                        <label class="col-lg-2 control-label">分享金额*</label>
                         <div class="col-lg-3">
                            <input type="text" name="shareAmount" required="required"  placeholder="整数或小数" class="form-control"></input>
                         </div>
                      </div>
 
-                     <div class="form-group">
-                        <label class="col-lg-2 control-label">限制人数</label>
-                        <div class="col-lg-8">
-                           <input type="number" name="limitCount" placeholder="最多参加人数" class="form-control"></input>
-                        </div>
-                     </div>
+                     
                      
                      <div class="form-group">
-                        <label class="col-lg-2 control-label">首页图片</label>
+                        <label class="col-lg-2 control-label">首页图片*</label>
                         <div class="col-lg-4">
                         	<input type="text" name="firstImg"  required="required" class="form-control"></input>
                         </div>
@@ -302,7 +297,7 @@
                      </div>
                      
                      <div class="form-group">
-                        <label class="col-lg-2 control-label">商品图片</label>
+                        <label class="col-lg-2 control-label">商品图片*</label>
                         <div class="col-lg-4">
                         	<input type="text" name="infoImg"  required="required" class="form-control"></input>
                         </div>
@@ -315,7 +310,7 @@
                      </div>
                      
                      <div class="form-group">
-                        <label class="col-lg-2 control-label">分享图片</label>
+                        <label class="col-lg-2 control-label">分享图片*</label>
                         <div class="col-lg-4">
                         	<input type="text" name="shareImg"  required="required" class="form-control"></input>
                         </div>
@@ -328,11 +323,77 @@
                      </div>
                      
                      <div class="form-group">
+                        <label class="col-lg-2 control-label">限制人数</label>
+                        <div class="col-lg-8">
+                           <input type="number" name="limitCount" placeholder="最多参加人数" class="form-control"></input>
+                        </div>
+                     </div>
+                     
+                     <div class="form-group">
                         <label class="col-lg-2 control-label">技术支持</label>
                         <div class="col-lg-8">
                         	<textarea name="techInfo" class="form-control" placeholder="技术支持：河北辰祥广告传媒 创建活动：19933395887" ></textarea>
                         </div>
                      </div>
+                     
+                     <HR align='center' width='90%' SIZE='1'></HR>
+                     
+                     <div class="form-group">
+                        <label class="col-lg-2 control-label">分享标题*</label>
+                        <div class="col-lg-3">
+                           <input type="text" name="shareTitle" required="required"  placeholder="微信分享标题"  class="form-control"></input>
+                        </div>
+                     </div>
+                     
+                     <div class="form-group">
+                     	<label class="col-lg-2 control-label">分享描述*</label>
+                        <div class="col-lg-8">
+                        	<input type="text" name="shareDesc" required="required"  placeholder="微信分享描述"  class="form-control"></input>
+                        </div>
+                     </div>
+                     
+                     <div class="form-group">
+                        <label class="col-lg-2 control-label">分享图标*</label>
+                        <div class="col-lg-4">
+                        	<input type="text" name="shareSmallImg"  required="required" class="form-control"></input>
+                        </div>
+                        <div class="col-lg-4">
+                        	<input type="file"  id="save_file_share_small" class="form-control"></input>
+                        </div>
+                        <div class="col-lg-1">
+                        	<button type="button" class="btn btn-success btn_share_small">上传</button>
+                        </div>
+                     </div>
+                     
+                     <HR align='center' width='90%'  SIZE='1'></HR>
+                     
+                     <div class="form-group">
+                        <label class="col-lg-2 control-label">背景音乐*</label>
+                        <div class="col-lg-4">
+                        	<input type="text" name="music"  required="required" class="form-control"></input>
+                        </div>
+                        <div class="col-lg-4">
+                        	<input type="file"  id="save_file_music" class="form-control"></input>
+                        </div>
+                        <div class="col-lg-1">
+                        	<button type="button" class="btn btn-success btn_music">上传</button>
+                        </div>
+                     </div>
+                     
+                     <div class="form-group">
+                        <label class="col-lg-2 control-label">客服二维码*</label>
+                        <div class="col-lg-4">
+                        	<input type="text" name="callQr"  required="required" class="form-control"></input>
+                        </div>
+                        <div class="col-lg-4">
+                        	<input type="file"  id="save_file_callQr" class="form-control"></input>
+                        </div>
+                        <div class="col-lg-1">
+                        	<button type="button" class="btn btn-success btn_callQr">上传</button>
+                        </div>
+                     </div>
+                     
+                     
                      
             	</div>
 	            <div class="modal-footer">
@@ -375,6 +436,11 @@
 		    	$("input[name='infoImg']").val(result.infoImg);
 		    	$("input[name='shareImg']").val(result.shareImg);
 		    	$("textarea[name='techInfo']").val(result.techInfo);
+		    	$("input[name='shareTitle']").val(result.shareTitle);
+		    	$("input[name='shareDesc']").val(result.shareDesc);
+		    	$("input[name='shareSmallImg']").val(result.shareSmallImg);
+		    	$("input[name='music']").val(result.music);
+		    	$("input[name='callQr']").val(result.callQr);
 		    }
 		});
 	});
@@ -398,6 +464,27 @@
    		var file = document.getElementById("save_file_share").files[0];
    		formData.append('file', file);
         $("input[name='shareImg']").val(upload(formData).url);
+ 	});
+   	
+   	$(".btn_share_small").click(function(){
+   		var formData = new FormData();
+   		var file = document.getElementById("save_file_share_small").files[0];
+   		formData.append('file', file);
+        $("input[name='shareSmallImg']").val(upload(formData).url);
+ 	});
+   	
+   	$(".btn_music").click(function(){
+   		var formData = new FormData();
+   		var file = document.getElementById("save_file_music").files[0];
+   		formData.append('file', file);
+        $("input[name='music']").val(upload(formData).url);
+ 	});
+   	
+   	$(".btn_callQr").click(function(){
+   		var formData = new FormData();
+   		var file = document.getElementById("save_file_callQr").files[0];
+   		formData.append('file', file);
+        $("input[name='callQr']").val(upload(formData).url);
  	});
    	
    	//上
