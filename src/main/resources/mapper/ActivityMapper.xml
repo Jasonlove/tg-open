@@ -20,6 +20,7 @@
             <arg column="tech_info" javaType="java.lang.String" jdbcType="VARCHAR" />
             <arg column="act_url" javaType="java.lang.String" jdbcType="VARCHAR" />
             <arg column="music" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <arg column="call_qr" javaType="java.lang.String" jdbcType="VARCHAR" />
             <arg column="share_title" javaType="java.lang.String" jdbcType="VARCHAR" />
             <arg column="share_desc" javaType="java.lang.String" jdbcType="VARCHAR" />
             <arg column="share_small_img" javaType="java.lang.String" jdbcType="VARCHAR" />
@@ -28,7 +29,7 @@
     <sql id="Base_Column_List">
         id, name, merchant, start_time, end_time, amount, share_amount, limit_count, join_count, 
         create_time, first_img, info_img, foot_img, share_img, tech_info, act_url, music, 
-        share_title, share_desc, share_small_img
+        call_qr, share_title, share_desc, share_small_img
     </sql>
     <select id="selectById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
         select 
@@ -49,15 +50,15 @@
             limit_count, join_count, create_time, 
             first_img, info_img, foot_img, 
             share_img, tech_info, act_url, 
-            music, share_title, share_desc, 
-            share_small_img)
+            music, call_qr, share_title, 
+            share_desc, share_small_img)
         values (#{name,jdbcType=VARCHAR}, #{merchant,jdbcType=VARCHAR}, #{startTime,jdbcType=TIMESTAMP}, 
             #{endTime,jdbcType=TIMESTAMP}, #{amount,jdbcType=DOUBLE}, #{shareAmount,jdbcType=DOUBLE}, 
             #{limitCount,jdbcType=INTEGER}, #{joinCount,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
             #{firstImg,jdbcType=VARCHAR}, #{infoImg,jdbcType=VARCHAR}, #{footImg,jdbcType=VARCHAR}, 
             #{shareImg,jdbcType=VARCHAR}, #{techInfo,jdbcType=VARCHAR}, #{actUrl,jdbcType=VARCHAR}, 
-            #{music,jdbcType=VARCHAR}, #{shareTitle,jdbcType=VARCHAR}, #{shareDesc,jdbcType=VARCHAR}, 
-            #{shareSmallImg,jdbcType=VARCHAR})
+            #{music,jdbcType=VARCHAR}, #{callQr,jdbcType=VARCHAR}, #{shareTitle,jdbcType=VARCHAR}, 
+            #{shareDesc,jdbcType=VARCHAR}, #{shareSmallImg,jdbcType=VARCHAR})
     </insert>
     <insert id="insertSelective" parameterType="com.jinkuangkj.open.model.Activity">
         <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
@@ -112,6 +113,9 @@
             </if>
             <if test="music != null">
                 music,
+            </if>
+            <if test="callQr != null">
+                call_qr,
             </if>
             <if test="shareTitle != null">
                 share_title,
@@ -171,6 +175,9 @@
             </if>
             <if test="music != null">
                 #{music,jdbcType=VARCHAR},
+            </if>
+            <if test="callQr != null">
+                #{callQr,jdbcType=VARCHAR},
             </if>
             <if test="shareTitle != null">
                 #{shareTitle,jdbcType=VARCHAR},
@@ -234,6 +241,9 @@
             <if test="music != null">
                 music = #{music,jdbcType=VARCHAR},
             </if>
+            <if test="callQr != null">
+                call_qr = #{callQr,jdbcType=VARCHAR},
+            </if>
             <if test="shareTitle != null">
                 share_title = #{shareTitle,jdbcType=VARCHAR},
             </if>
@@ -264,6 +274,7 @@
             tech_info = #{techInfo,jdbcType=VARCHAR},
             act_url = #{actUrl,jdbcType=VARCHAR},
             music = #{music,jdbcType=VARCHAR},
+            call_qr = #{callQr,jdbcType=VARCHAR},
             share_title = #{shareTitle,jdbcType=VARCHAR},
             share_desc = #{shareDesc,jdbcType=VARCHAR},
             share_small_img = #{shareSmallImg,jdbcType=VARCHAR}
@@ -275,5 +286,4 @@
         <include refid="Base_Column_List" />
         from t_activity order by id desc
     </select>
-	
 </mapper>

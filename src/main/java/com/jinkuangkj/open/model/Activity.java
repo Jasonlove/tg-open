@@ -2,7 +2,7 @@
  * @des @TODO 
  * @name Activity.java
  * @author Jason-pc
- * @date 2019-05-17 10:13:24
+ * @date 2019-05-17 15:29:37
  */
 package com.jinkuangkj.open.model;
 
@@ -14,7 +14,7 @@ import org.springframework.format.annotation.DateTimeFormat;
  * @des @TODO 
  * @name 
  * @author Jason-pc
- * @date 2019-05-17 10:13:24
+ * @date 2019-05-17 15:29:37
  */
 public class Activity {
     private Integer id;
@@ -85,6 +85,10 @@ public class Activity {
      */
     private String music;
     /**
+     * 客服二维码
+     */
+    private String callQr;
+    /**
      * 分享标题
      */
     private String shareTitle;
@@ -94,7 +98,7 @@ public class Activity {
     private String shareDesc;
     private String shareSmallImg;
 
-    public Activity(Integer id, String name, String merchant, Date startTime, Date endTime, Double amount, Double shareAmount, Integer limitCount, Integer joinCount, Date createTime, String firstImg, String infoImg, String footImg, String shareImg, String techInfo, String actUrl, String music, String shareTitle, String shareDesc, String shareSmallImg) {
+    public Activity(Integer id, String name, String merchant, Date startTime, Date endTime, Double amount, Double shareAmount, Integer limitCount, Integer joinCount, Date createTime, String firstImg, String infoImg, String footImg, String shareImg, String techInfo, String actUrl, String music, String callQr, String shareTitle, String shareDesc, String shareSmallImg) {
         this.id = id;
         this.name = name;
         this.merchant = merchant;
@@ -112,6 +116,7 @@ public class Activity {
         this.techInfo = techInfo;
         this.actUrl = actUrl;
         this.music = music;
+        this.callQr = callQr;
         this.shareTitle = shareTitle;
         this.shareDesc = shareDesc;
         this.shareSmallImg = shareSmallImg;
@@ -221,6 +226,12 @@ public class Activity {
     public void setMusic(String music) {
         this.music = music;
     }
+    public String getCallQr() {
+        return callQr;
+    }
+    public void setCallQr(String callQr) {
+        this.callQr = callQr;
+    }
     public String getShareTitle() {
         return shareTitle;
     }
@@ -262,6 +273,7 @@ public class Activity {
         sb.append(", techInfo=").append(techInfo);
         sb.append(", actUrl=").append(actUrl);
         sb.append(", music=").append(music);
+        sb.append(", callQr=").append(callQr);
         sb.append(", shareTitle=").append(shareTitle);
         sb.append(", shareDesc=").append(shareDesc);
         sb.append(", shareSmallImg=").append(shareSmallImg);
