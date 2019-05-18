@@ -18,5 +18,5 @@ public interface ActUserService {
 	
 	List<ActUser> getListRanking(Integer actId);
 	
-	void addIncome(Integer userId,Double income);
+	void addIncome(Integer shareUid,Double income,Integer orderUid);
 }

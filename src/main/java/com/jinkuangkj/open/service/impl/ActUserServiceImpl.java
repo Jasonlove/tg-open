@@ -76,9 +76,9 @@ public class ActUserServiceImpl implements ActUserService {
 	}
 
 	@Override
-	public void addIncome(Integer userId,Double income) {
+	public void addIncome(Integer shareUid,Double income,Integer orderUid) {
 		//受益人
-		ActUser user = actUserDao.selectById(userId);
+		ActUser user = actUserDao.selectById(shareUid);
 	    BigDecimal b1=new BigDecimal(Double.toString(user.getShareIncome()));
 	    BigDecimal b2 = new BigDecimal(Double.toString(income));
 	    BigDecimal add = b1.add(b2);
@@ -88,7 +88,7 @@ public class ActUserServiceImpl implements ActUserService {
 	    user.setShareCount(count);
 	    actUserDao.updateSelective(user);
 	    //添加发红包记录
-	    transferService.sendRed(user, income);
+	    transferService.sendRed(user, income,orderUid);
 	}
 
 	@Override

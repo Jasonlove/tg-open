@@ -24,7 +24,7 @@ public class TransferServiceImpl implements TransferService{
 	private OpenConfig openConfig;
 	
 	@Override
-	public void sendRed(ActUser user,Double income) {
+	public void sendRed(ActUser user,Double income,Integer orderUid) {
 		
 		//调用三方发红包接口
 		
@@ -32,6 +32,7 @@ public class TransferServiceImpl implements TransferService{
 		Transfer transfer = new Transfer();
 		transfer.setUserId(user.getId());
 		transfer.setActId(user.getActId());
+		transfer.setOrderUid(orderUid);
 		transfer.setCreateTime(new Date());
 		transfer.setAmount(income);
 		transfer.setStatus(OrderStatus.PENDING.getValue());

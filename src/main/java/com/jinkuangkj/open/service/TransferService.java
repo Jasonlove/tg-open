@@ -7,7 +7,7 @@ import com.jinkuangkj.open.model.result.TransferResult;
 
 public interface TransferService {
 	
-	void sendRed(ActUser user,Double income);
+	void sendRed(ActUser user,Double income,Integer orderUid);
 	
 	List<TransferResult> getList();
 

@@ -43,9 +43,9 @@ public class Transfer {
     /**
      * 分享人用户id
      */
-    private Integer shareUid;
+    private Integer orderUid;
 
-    public Transfer(Integer id, Integer userId, Integer actId, String transferNo, Double amount, String status, String resultCode, String resultMessage, Date createTime, String merchantId, Integer shareUid) {
+    public Transfer(Integer id, Integer userId, Integer actId, String transferNo, Double amount, String status, String resultCode, String resultMessage, Date createTime, String merchantId, Integer orderUid) {
         this.id = id;
         this.userId = userId;
         this.actId = actId;
@@ -56,7 +56,7 @@ public class Transfer {
         this.resultMessage = resultMessage;
         this.createTime = createTime;
         this.merchantId = merchantId;
-        this.shareUid = shareUid;
+        this.orderUid = orderUid;
     }
     public Transfer() {
         super();
@@ -121,13 +121,14 @@ public class Transfer {
     public void setMerchantId(String merchantId) {
         this.merchantId = merchantId;
     }
-    public Integer getShareUid() {
-        return shareUid;
-    }
-    public void setShareUid(Integer shareUid) {
-        this.shareUid = shareUid;
-    }
-    @Override
+    
+    public Integer getOrderUid() {
+		return orderUid;
+	}
+	public void setOrderUid(Integer orderUid) {
+		this.orderUid = orderUid;
+	}
+	@Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append(getClass().getSimpleName());
@@ -143,7 +144,7 @@ public class Transfer {
         sb.append(", resultMessage=").append(resultMessage);
         sb.append(", createTime=").append(createTime);
         sb.append(", merchantId=").append(merchantId);
-        sb.append(", shareUid=").append(shareUid);
+        sb.append(", orderUid=").append(orderUid);
         sb.append("]");
         return sb.toString();
     }

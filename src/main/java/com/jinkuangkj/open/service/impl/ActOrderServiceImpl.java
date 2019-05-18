@@ -78,6 +78,11 @@ public class ActOrderServiceImpl implements ActOrderService{
 			throw new BusinessException("未找到该活动");
 		}
 		
+		//支付密等处理
+		if(order.getStatus().equals(OrderStatus.SUCCESS.getValue())) {
+			return ;
+		}
+		
 		//解析报文
 		WxPayOrderNotifyResult result = wxPayService.parseOrderNotifyResult(xml);
 		order.setOutTradeNo(result.getTransactionId());
@@ -98,7 +103,7 @@ public class ActOrderServiceImpl implements ActOrderService{
         //添加收入
         ActUser user = actUserService.getUserById(order.getUserId());
         if(null != user.getShareUserId()) {
-        	actUserService.addIncome(user.getShareUserId(), activity.getShareAmount());
+        	actUserService.addIncome(user.getShareUserId(), activity.getShareAmount(),order.getUserId());
         }
 	}
 
