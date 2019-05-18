@@ -35,6 +35,7 @@ import com.jinkuangkj.open.model.ActUser;
 import com.jinkuangkj.open.model.Activity;
 import com.jinkuangkj.open.model.Contact;
 import com.jinkuangkj.open.model.result.OrderResult;
+import com.jinkuangkj.open.model.result.ShareResult;
 import com.jinkuangkj.open.service.ActOrderService;
 import com.jinkuangkj.open.service.ActUserService;
 import com.jinkuangkj.open.service.ActivityService;
@@ -136,14 +137,6 @@ public class OpenController extends AbstractController{
      */
     @GetMapping("/act")
     public String getAct(@RequestParam String actId,@RequestParam Integer userId, Model model) {
-    		//页面加权限分享功能
-    		try {
-    			String url =  openConfig.getMpBaseUrl()+"/open/act?actId="+actId+"&userId="+userId;
-    			WxJsapiSignature sign = wxMpService.createJsapiSignature(url);
-    			model.addAttribute("sign", sign);
-	    	} catch (WxErrorException e) {
-	    		log.error("签名异常:{}",e);
-	    	}
     	
 	    	Integer aid = Integer.valueOf(actId);
 	    	//个人信息
@@ -169,6 +162,23 @@ public class OpenController extends AbstractController{
 	    	model.addAttribute("orderList", orderList);
 	    	model.addAttribute("rankList", rankList);
 	    	model.addAttribute("shareUrl", shareUrl);
+	    	
+	    	
+	    	//页面加权限分享功能
+    		try {
+    			String url =  openConfig.getMpBaseUrl()+"/open/act?actId="+actId+"&userId="+userId;
+    			WxJsapiSignature sign = wxMpService.createJsapiSignature(url);
+    			ShareResult share = new ShareResult();
+    			share.setActUrl(activity.getActUrl());
+    			share.setShareTitle(activity.getShareTitle());
+    			share.setShareDesc(activity.getShareDesc());
+    			share.setShareSmallImg(openConfig.getMpBaseUrl()+activity.getShareSmallImg());
+    			model.addAttribute("sign", sign);
+    			model.addAttribute("share", share);
+    			
+	    	} catch (WxErrorException e) {
+	    		log.error("签名异常:{}",e);
+	    	}
     	
     	return "open/index";
     }
