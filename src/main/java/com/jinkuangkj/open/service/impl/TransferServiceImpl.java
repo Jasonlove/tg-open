@@ -54,25 +54,24 @@ public class TransferServiceImpl implements TransferService{
 	public MessageResult getMessage(Integer actId) {
 		
 		Transfer transfer = transferDao.findTransferLimit(actId);
+
+		MessageResult result = new MessageResult();
+		
+		if(transfer == null) {
+			return result;
+		}
+		
+		result.setAmount(transfer.getAmount());
 		
 		ActUser orderUser = actUserDao.selectById(transfer.getOrderUid());
-		
 		ActUser shareUser = actUserDao.selectById(transfer.getUserId());
-		
-		MessageResult result = new MessageResult();
 		
 		if(orderUser != null) {
 			result.setOrderUser(orderUser.getNickname());
 		}
-		
 		if(shareUser != null) {
 			result.setShareUser(shareUser.getNickname());
 		}
-		
-		if(transfer != null) {
-			result.setAmount(transfer.getAmount());
-		}
-		
 		return result;
 	}
 
