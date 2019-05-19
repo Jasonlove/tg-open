@@ -31,7 +31,7 @@ spring:
       cache: false
     http:      multipart:        enabled: true
         file-size-threshold: 0
-        max-file-size: 3MB
+        max-file-size: 4MB
         location: D:/data/tg-open/upload
       
 wechat:

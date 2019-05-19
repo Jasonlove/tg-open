@@ -38,14 +38,34 @@
 	.music img{
 		width:60px;	
 	}
+	.client{
+		position:fixed;
+		left:30px;
+		bottom:200px;
+	}
+	.client .client_pic{
+		width:100px;
+	}
+	.client .ewm_pic{
+		position:absolute;
+		top:-50px;
+		right:-250px;
+		width:250px;
+		display:none;
+	}
 	
 </style>
 
 <body>
+	
+    <div th:if="${act.callQr != '' &amp;&amp; act.callQr != null}" class="client">
+        <img alt="" src="/open/img/client.png" class="client_pic"></img>
+        <img alt="" th:src="${act.callQr}" class="ewm_pic"></img>
+    </div>
 	<div class="horse">
 		<marquee width="100%" direction="left" align="middle">用户<em>宋幸会</em>通过<strong>肖佳佳</strong>的分享抢购成功,<strong>肖佳佳</strong>获得佣金<i>3</i>元</marquee>
 	</div>
-	<div class="music">
+	<div th:if="${act.music != '' &amp;&amp; act.music != null}" class="music">
 		<img alt="" src="/open/img/open.png"></img>
 		<audio autoplay="autoplay" id="bgMusic">
 			<source th:src="${act.music}"></source>
@@ -202,6 +222,11 @@
 			music.pause();
 			
 		}
+	})
+	
+	//客服按钮点击弹出二维码
+	$(".client .client_pic").click(function(){
+		$(".client .ewm_pic").toggle()
 	})
 	
 	
