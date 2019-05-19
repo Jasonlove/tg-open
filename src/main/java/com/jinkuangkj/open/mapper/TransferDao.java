@@ -25,4 +25,6 @@ public interface TransferDao {
     int updateById(Transfer record);
     
     List<TransferResult> getList(Integer actId);
+    
+    Transfer findTransferLimit(Integer actId);
 }

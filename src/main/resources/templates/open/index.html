@@ -24,10 +24,9 @@
 		padding:10px 0;
 		font-family:"微软雅黑";
 	}
-	.horse em,.horse strong,.horse i{
-		font-style:normal;
-		font-weight:normal;
+	.horse div{
 		color:red;
+		display:inline-block;
 	}
 	.music{
 		position:absolute;
@@ -62,8 +61,8 @@
         <img alt="" src="/open/img/client.png" class="client_pic"></img>
         <img alt="" th:src="${act.callQr}" class="ewm_pic"></img>
     </div>
-	<div class="horse">
-		<marquee width="100%" direction="left" align="middle">用户<em>宋幸会</em>通过<strong>肖佳佳</strong>的分享抢购成功,<strong>肖佳佳</strong>获得佣金<i>3</i>元</marquee>
+	<div th:if="${msg.amount != null}"  class="horse">
+		<marquee width="100%" direction="left" align="middle">用户<div th:text="${msg.orderUser}"></div>通过<div th:text="${msg.shareUser}"></div>的分享抢购成功,<div th:text="${msg.shareUser}"></div>获得佣金<div th:text="${msg.amount}"></div>元</marquee>
 	</div>
 	<div th:if="${act.music != '' &amp;&amp; act.music != null}" class="music">
 		<img alt="" src="/open/img/open.png"></img>

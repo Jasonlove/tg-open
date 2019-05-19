@@ -8,9 +8,11 @@ import org.springframework.stereotype.Service;
 
 import com.jinkuangkj.open.config.open.OpenConfig;
 import com.jinkuangkj.open.constant.OrderStatus;
+import com.jinkuangkj.open.mapper.ActUserDao;
 import com.jinkuangkj.open.mapper.TransferDao;
 import com.jinkuangkj.open.model.ActUser;
 import com.jinkuangkj.open.model.Transfer;
+import com.jinkuangkj.open.model.result.MessageResult;
 import com.jinkuangkj.open.model.result.TransferResult;
 import com.jinkuangkj.open.service.TransferService;
 import com.jinkuangkj.open.util.PrimaryGenerater;
@@ -22,6 +24,8 @@ public class TransferServiceImpl implements TransferService{
 	TransferDao transferDao;
 	@Autowired
 	private OpenConfig openConfig;
+	@Autowired
+	ActUserDao actUserDao;
 	
 	@Override
 	public void sendRed(ActUser user,Double income,Integer orderUid) {
@@ -44,6 +48,32 @@ public class TransferServiceImpl implements TransferService{
 	@Override
 	public List<TransferResult> getList() {
 		return transferDao.getList(null);
+	}
+
+	@Override
+	public MessageResult getMessage(Integer actId) {
+		
+		Transfer transfer = transferDao.findTransferLimit(actId);
+		
+		ActUser orderUser = actUserDao.selectById(transfer.getOrderUid());
+		
+		ActUser shareUser = actUserDao.selectById(transfer.getUserId());
+		
+		MessageResult result = new MessageResult();
+		
+		if(orderUser != null) {
+			result.setOrderUser(orderUser.getNickname());
+		}
+		
+		if(shareUser != null) {
+			result.setShareUser(shareUser.getNickname());
+		}
+		
+		if(transfer != null) {
+			result.setAmount(transfer.getAmount());
+		}
+		
+		return result;
 	}
 
 }

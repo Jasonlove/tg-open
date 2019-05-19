@@ -1,6 +1,5 @@
 package com.jinkuangkj.open.controller;
 
-import java.io.File;
 import java.net.URLEncoder;
 import java.util.Date;
 import java.util.List;
@@ -26,7 +25,6 @@ import com.github.binarywang.wxpay.bean.request.WxPayUnifiedOrderRequest;
 import com.github.binarywang.wxpay.constant.WxPayConstants.TradeType;
 import com.github.binarywang.wxpay.exception.WxPayException;
 import com.github.binarywang.wxpay.service.WxPayService;
-import com.github.pagehelper.PageInfo;
 import com.jinkuangkj.open.config.exp.BusinessException;
 import com.jinkuangkj.open.config.open.OpenConfig;
 import com.jinkuangkj.open.mapper.ContactDao;
@@ -34,11 +32,13 @@ import com.jinkuangkj.open.model.ActOrder;
 import com.jinkuangkj.open.model.ActUser;
 import com.jinkuangkj.open.model.Activity;
 import com.jinkuangkj.open.model.Contact;
+import com.jinkuangkj.open.model.result.MessageResult;
 import com.jinkuangkj.open.model.result.OrderResult;
 import com.jinkuangkj.open.model.result.ShareResult;
 import com.jinkuangkj.open.service.ActOrderService;
 import com.jinkuangkj.open.service.ActUserService;
 import com.jinkuangkj.open.service.ActivityService;
+import com.jinkuangkj.open.service.TransferService;
 import com.jinkuangkj.open.util.AmountUtils;
 import com.jinkuangkj.open.util.URLUtil;
 
@@ -76,6 +76,8 @@ public class OpenController extends AbstractController{
 	private WxPayService wxPayService;
 	@Autowired
 	private ContactDao contactDao;
+	@Autowired
+	private TransferService transferService;
 	
 	/**
 	 * 授权页面
@@ -151,10 +153,14 @@ public class OpenController extends AbstractController{
 	    	List<OrderResult> orderList = actOrderService.getListOrder(aid,1, 10);
 	    	//获取分享排名
 	    	List<ActUser> rankList = actUserService.getListRanking(aid);
+	    	//获取支付消息
+	    	MessageResult message = transferService.getMessage(aid);
+	    	
 	    	
 	    	//分享链接请求地址
 	    	String shareUrl = openConfig.getMpBaseUrl() + "/open/share?actId="+actId+"&userId="+userId;
 	    	
+	    	model.addAttribute("msg", message);
 	    	model.addAttribute("user", user);
 	    	model.addAttribute("act", activity);
 	    	model.addAttribute("userList", userList);

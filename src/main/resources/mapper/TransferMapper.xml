@@ -213,4 +213,9 @@
 		</if>
     </select>
     
+    <select id="findTransferLimit"  parameterType="java.lang.Integer"  resultMap="BaseResultMap">
+        select * from t_transfer where  act_id = #{actId} order by id desc 
+		limit 1;
+    </select>
+    
 </mapper>
