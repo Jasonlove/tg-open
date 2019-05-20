@@ -80,10 +80,6 @@ public class AdminController {
 	
 	@GetMapping("/index")
 	public String index() {
-		Object account = session.getAttribute("admin");
-		if(account == null) {
-			return "redirect:/openAdmin/login";
-		}
 		return "admin/index";
 	}
 	
@@ -95,12 +91,32 @@ public class AdminController {
 		return "admin/activity/index";
 	}
 	
+	
+	
+	@PostMapping("/activity/save")
+	public String saveActivity(Activity activity) {
+		activityService.saveActivity(activity);
+		return "redirect:/admin/activity/index";
+	}
+	
+	
+	
+	@ResponseBody
+	@GetMapping("/activity/get")
+	public Activity getActivity(@RequestParam Integer actId) {
+		return activityService.get(actId);
+	}
+	
+	
+	
 	@GetMapping("/order/index")
 	public String orderList(Model model) {
 		List<OrderResult> list = actOrderService.getListOrderByAdmin();
 		model.addAttribute("orderList", list);
 		return "admin/order/index";
 	}
+	
+	
 	
 	@GetMapping("/transfer/index")
 	public String transferList(Model model) {
@@ -109,6 +125,7 @@ public class AdminController {
 		return "admin/transfer/index";
 	}
 	
+	
 	@GetMapping("/contact/index")
 	public String contactList(Model model) {
 		 List<Contact> list = contactService.getList();
@@ -116,17 +133,7 @@ public class AdminController {
 		return "admin/contact/index";
 	}
 	
-	@PostMapping("/activity/save")
-	public String saveActivity(Activity activity) {
-		activityService.saveActivity(activity);
-		return "redirect:/admin/activity/index";
-	}
 	
-	@ResponseBody
-	@GetMapping("/activity/get")
-	public Activity getActivity(@RequestParam Integer actId) {
-		return activityService.get(actId);
-	}
 	
 	
 }
