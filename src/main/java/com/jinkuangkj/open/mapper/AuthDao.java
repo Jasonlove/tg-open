@@ -6,6 +6,8 @@
  */
 package com.jinkuangkj.open.mapper;
 
+import java.util.List;
+
 import com.jinkuangkj.open.model.Auth;
 
 public interface AuthDao {
@@ -20,4 +22,6 @@ public interface AuthDao {
     int updateSelective(Auth record);
 
     int updateById(Auth record);
+    
+    List<Auth> listByRoleId(Integer roleId);
 }

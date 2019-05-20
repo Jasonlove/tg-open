@@ -4,13 +4,14 @@
     <resultMap id="BaseResultMap" type="com.jinkuangkj.open.model.Auth">
         <constructor>
             <idArg column="id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+            <arg column="type" javaType="java.lang.String" jdbcType="VARCHAR" />
             <arg column="name" javaType="java.lang.String" jdbcType="VARCHAR" />
             <arg column="desc" javaType="java.lang.String" jdbcType="VARCHAR" />
             <arg column="url" javaType="java.lang.String" jdbcType="VARCHAR" />
         </constructor>
     </resultMap>
     <sql id="Base_Column_List">
-        id, name, desc, url
+        id, type, name, desc, url
     </sql>
     <select id="selectById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
         select 
@@ -26,10 +27,10 @@
         <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
             SELECT LAST_INSERT_ID()
         </selectKey>
-        insert into t_auth (name, desc, url
-            )
-        values (#{name,jdbcType=VARCHAR}, #{desc,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}
-            )
+        insert into t_auth (type, name, desc, 
+            url)
+        values (#{type,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{desc,jdbcType=VARCHAR}, 
+            #{url,jdbcType=VARCHAR})
     </insert>
     <insert id="insertSelective" parameterType="com.jinkuangkj.open.model.Auth">
         <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
@@ -37,6 +38,9 @@
         </selectKey>
         insert into t_auth
         <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="type != null">
+                type,
+            </if>
             <if test="name != null">
                 name,
             </if>
@@ -48,6 +52,9 @@
             </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="type != null">
+                #{type,jdbcType=VARCHAR},
+            </if>
             <if test="name != null">
                 #{name,jdbcType=VARCHAR},
             </if>
@@ -62,6 +69,9 @@
     <update id="updateSelective" parameterType="com.jinkuangkj.open.model.Auth">
         update t_auth
         <set>
+            <if test="type != null">
+                type = #{type,jdbcType=VARCHAR},
+            </if>
             <if test="name != null">
                 name = #{name,jdbcType=VARCHAR},
             </if>
@@ -76,9 +86,18 @@
     </update>
     <update id="updateById" parameterType="com.jinkuangkj.open.model.Auth">
         update t_auth
-        set name = #{name,jdbcType=VARCHAR},
+        set type = #{type,jdbcType=VARCHAR},
+            name = #{name,jdbcType=VARCHAR},
             desc = #{desc,jdbcType=VARCHAR},
             url = #{url,jdbcType=VARCHAR}
         where id = #{id,jdbcType=INTEGER}
     </update>
+    
+    <select id="listByRoleId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    	select a.* 
+		from t_role_auth ra 
+		join t_auth a on ra.auth_id = a.id
+		where ra.role_id = #{roleId}
+		ORDER BY id ASC
+    </select>
 </mapper>

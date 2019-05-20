@@ -20,4 +20,6 @@ public interface AdminDao {
     int updateSelective(Admin record);
 
     int updateById(Admin record);
+    
+    Admin getUserByPassword(String username,String password);
 }

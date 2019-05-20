@@ -6,12 +6,12 @@ spring:
         name: open
         type: com.alibaba.druid.pool.DruidDataSource
         driver-class-name: com.mysql.jdbc.Driver
-#        url: jdbc:mysql://rm-bp1c91t516o8q8lc7.mysql.rds.aliyuncs.com/open_service?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&useSSL=false&failOverReadOnly=false
-#        username: pay_account
-#        password: ZVMZmHc92zsR2gMKutR25Wc2gQo1VokJ
-        url: jdbc:mysql://127.0.0.1/open?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&useSSL=false&failOverReadOnly=false
-        username: root
-        password: root
+        url: jdbc:mysql://rm-bp1c91t516o8q8lc7.mysql.rds.aliyuncs.com/open_service?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&useSSL=false&failOverReadOnly=false
+        username: pay_account
+        password: ZVMZmHc92zsR2gMKutR25Wc2gQo1VokJ
+#        url: jdbc:mysql://127.0.0.1/open?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&useSSL=false&failOverReadOnly=false
+#        username: root
+#        password: root
         filters: stat,wall,slf4j
         maxActive: 15
         initialSize: 1
@@ -32,20 +32,20 @@ spring:
     http:      multipart:        enabled: true
         file-size-threshold: 0
         max-file-size: 4MB
-        location: D:/data/tg-open/upload
+        location: /data/tg-open/upload
       
-wechat:
-  mpAppId: wxa2c54680eabde041
-  mpAppSecret: 1f3ddde1803db2e188092ab0a928b86a
-  mpMchId: 1505191651
-  mpMchKey: chenxiangchuanmei2016chenxiangcm
-  mpBaseUrl: http://xinghui.natapp1.cc
-
-#wechat:#  mpAppId: wx1b3ed6da07dbdc5b
-#  mpAppSecret: fae00b40f6bce1059d531010bba60fe3
+#wechat:
+#  mpAppId: wxa2c54680eabde041
+#  mpAppSecret: 1f3ddde1803db2e188092ab0a928b86a
 #  mpMchId: 1505191651
 #  mpMchKey: chenxiangchuanmei2016chenxiangcm
-#  mpBaseUrl: http://open.jinkuangkj.com
+#  mpBaseUrl: http://xinghui.natapp1.cc
+
+wechat:  mpAppId: wx1b3ed6da07dbdc5b
+  mpAppSecret: fae00b40f6bce1059d531010bba60fe3
+  mpMchId: 1505191651
+  mpMchKey: chenxiangchuanmei2016chenxiangcm
+  mpBaseUrl: http://open.jinkuangkj.com
 
 
   

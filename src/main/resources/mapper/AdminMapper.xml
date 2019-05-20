@@ -103,4 +103,15 @@
             role_id = #{roleId,jdbcType=INTEGER}
         where id = #{id,jdbcType=INTEGER}
     </update>
+    
+    <!-- 登录查找用户 -->
+    <select id="getUserByPassword" parameterType="com.jinkuangkj.open.model.Admin">
+    	select 
+        <include refid="Base_Column_List" />
+        from t_admin
+        where username = #{username} and password = #{password}
+    </select>
+    
+    
+    
 </mapper>
