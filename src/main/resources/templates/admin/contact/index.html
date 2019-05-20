@@ -76,15 +76,15 @@
                      <span data-localize="sidebar.heading.HEADER"></span>
                   </li>
                  
-                  <li class=" ">
-                     <a href="#menuid" title="活动" data-toggle="collapse">
+                  <li class=" " th:if="${session.menu.actList.size() gt 0}">
+                     <a href="#menuid" data-toggle="collapse">
                         <em class="icon-folder"></em>
                         <span data-localize="sidebar.nav.menu.MENU">活动</span>
                      </a>
                      <ul id="menuid" class="nav sidebar-subnav collapse">
                         <li class="sidebar-subnav-header">活动</li>
                         <li class=" ">
-                           <a href="/admin/activity/index.html" title="活动列表">
+                           <a href="/admin/activity/index.html">
                               <em></em>
                               <span data-localize="sidebar.nav.menu.SUBMENU">活动列表</span>
                            </a>
@@ -92,15 +92,15 @@
                      </ul>
                   </li>
                   
-                  <li class=" ">
-                     <a href="#order" title="订单" data-toggle="collapse">
+                  <li class=" " th:if="${session.menu.orderList.size() gt 0}">
+                     <a href="#order" data-toggle="collapse">
                         <em class="icon-folder"></em>
                         <span data-localize="sidebar.nav.menu.MENU">订单</span>
                      </a>
                      <ul id="order" class="nav sidebar-subnav collapse">
                         <li class="sidebar-subnav-header">订单</li>
                         <li class=" ">
-                           <a href="/admin/order/index.html" title="订单">
+                           <a href="/admin/order/index.html">
                               <em></em>
                               <span data-localize="sidebar.nav.menu.SUBMENU">订单列表</span>
                            </a>
@@ -108,15 +108,15 @@
                      </ul>
                   </li>
                   
-                  <li class=" ">
-                     <a href="#transfer" title="转账" data-toggle="collapse">
+                  <li class=" " th:if="${session.menu.tranList.size() gt 0}">
+                     <a href="#transfer" data-toggle="collapse">
                         <em class="icon-folder"></em>
                         <span data-localize="sidebar.nav.menu.MENU">转账</span>
                      </a>
                      <ul id="transfer" class="nav sidebar-subnav collapse">
                         <li class="sidebar-subnav-header">转账</li>
                         <li class=" ">
-                           <a href="/admin/transfer/index.html" title="转账">
+                           <a href="/admin/transfer/index.html">
                               <em></em>
                               <span data-localize="sidebar.nav.menu.SUBMENU">转账列表</span>
                            </a>
@@ -124,16 +124,15 @@
                      </ul>
                   </li>
                   
-                  
-                  <li class=" ">
-                     <a href="#contact" title="联系人" data-toggle="collapse">
+                  <li class=" " th:if="${session.menu.contList.size() gt 0}">
+                     <a href="#contact" data-toggle="collapse">
                         <em class="icon-folder"></em>
                         <span data-localize="sidebar.nav.menu.MENU">联系人</span>
                      </a>
                      <ul id="contact" class="nav sidebar-subnav collapse">
                         <li class="sidebar-subnav-header">联系人</li>
                         <li class=" active">
-                           <a href="/admin/contact/index.html" title="联系人">
+                           <a href="/admin/contact/index.html" >
                               <em></em>
                               <span data-localize="sidebar.nav.menu.SUBMENU">联系人列表</span>
                            </a>

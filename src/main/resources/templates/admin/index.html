@@ -73,7 +73,7 @@
                      <span data-localize="sidebar.heading.HEADER"></span>
                   </li>
                  
-                  <li class=" ">
+                  <li class=" " th:if="${session.menu.actList.size() gt 0}">
                      <a href="#menuid" data-toggle="collapse">
                         <em class="icon-folder"></em>
                         <span data-localize="sidebar.nav.menu.MENU">活动</span>
@@ -89,7 +89,7 @@
                      </ul>
                   </li>
                   
-                  <li class=" ">
+                  <li class=" " th:if="${session.menu.orderList.size() gt 0}">
                      <a href="#order" data-toggle="collapse">
                         <em class="icon-folder"></em>
                         <span data-localize="sidebar.nav.menu.MENU">订单</span>
@@ -105,7 +105,7 @@
                      </ul>
                   </li>
                   
-                  <li class=" ">
+                  <li class=" " th:if="${session.menu.tranList.size() gt 0}">
                      <a href="#transfer" data-toggle="collapse">
                         <em class="icon-folder"></em>
                         <span data-localize="sidebar.nav.menu.MENU">转账</span>
@@ -121,7 +121,7 @@
                      </ul>
                   </li>
                   
-                  <li class=" ">
+                  <li class=" " th:if="${session.menu.contList.size() gt 0}">
                      <a href="#contact" data-toggle="collapse">
                         <em class="icon-folder"></em>
                         <span data-localize="sidebar.nav.menu.MENU">联系人</span>

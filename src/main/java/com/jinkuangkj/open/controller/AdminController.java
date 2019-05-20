@@ -18,16 +18,19 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.jinkuangkj.open.config.exp.LoginException;
+import com.jinkuangkj.open.mapper.AdminDao;
 import com.jinkuangkj.open.model.Activity;
 import com.jinkuangkj.open.model.Admin;
 import com.jinkuangkj.open.model.Contact;
 import com.jinkuangkj.open.model.Transfer;
+import com.jinkuangkj.open.model.result.Menu;
 import com.jinkuangkj.open.model.result.OrderResult;
 import com.jinkuangkj.open.model.result.TransferResult;
 import com.jinkuangkj.open.service.ActOrderService;
 import com.jinkuangkj.open.service.ActivityService;
 import com.jinkuangkj.open.service.AdminService;
 import com.jinkuangkj.open.service.ContactService;
+import com.jinkuangkj.open.service.RoleService;
 import com.jinkuangkj.open.service.TransferService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -50,26 +53,30 @@ public class AdminController {
 	AdminService adminService;
 	@Autowired
 	HttpSession session;
+	@Autowired
+	AdminDao adminDao;
+	@Autowired
+	RoleService roleService;
 	
 	@GetMapping("/login")
 	public String login() {
 		return "admin/login";
 	}
-	
-	
+		
 	@PostMapping("/login")
 	public String login(@RequestParam("username")String userName,@RequestParam("password")String password) {
-		try {
-			Map<String, Object> map = adminService.login(userName, password);
-			session.setAttribute("admin", map);
-		} catch (LoginException e) {
+
+		Admin logAdmin = adminDao.getUserByPassword(userName,password);
+		if(logAdmin == null) {
 			//异常返回登录页面
 			return "redirect:/admin/login";
 		}
+		Menu menu = roleService.getMenu(logAdmin.getRoleId());
+		session.setAttribute("admin", logAdmin);
+		session.setAttribute("menu", menu);
+		
 		return "admin/index";
 	}
-	
-	
 	
 	@GetMapping("/index")
 	public String index() {
