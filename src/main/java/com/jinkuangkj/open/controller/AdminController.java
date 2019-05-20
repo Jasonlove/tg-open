@@ -1,16 +1,23 @@
 package com.jinkuangkj.open.controller;
 
 import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
+import com.jinkuangkj.open.config.exp.LoginException;
 import com.jinkuangkj.open.model.Activity;
 import com.jinkuangkj.open.model.Admin;
 import com.jinkuangkj.open.model.Contact;
@@ -19,6 +26,7 @@ import com.jinkuangkj.open.model.result.OrderResult;
 import com.jinkuangkj.open.model.result.TransferResult;
 import com.jinkuangkj.open.service.ActOrderService;
 import com.jinkuangkj.open.service.ActivityService;
+import com.jinkuangkj.open.service.AdminService;
 import com.jinkuangkj.open.service.ContactService;
 import com.jinkuangkj.open.service.TransferService;
 
@@ -38,19 +46,26 @@ public class AdminController {
 	TransferService transferService;
 	@Autowired
 	ContactService contactService;
+	@Autowired
+	AdminService adminService;
+	@Autowired
+	HttpSession session;
 	
 	@GetMapping("/login")
-	public String loginIndex() {
+	public String login() {
 		return "admin/login";
 	}
 	
 	
 	@PostMapping("/login")
 	public String login(@RequestParam("username")String userName,@RequestParam("password")String password) {
-		
-		
-		
-		
+		try {
+			Map<String, Object> map = adminService.login(userName, password);
+			session.setAttribute("admin", map);
+		} catch (LoginException e) {
+			//异常返回登录页面
+			return "redirect:/admin/login";
+		}
 		return "admin/index";
 	}
 	
@@ -58,6 +73,10 @@ public class AdminController {
 	
 	@GetMapping("/index")
 	public String index() {
+		Object account = session.getAttribute("admin");
+		if(account == null) {
+			return "redirect:/admin/login";
+		}
 		return "admin/index";
 	}
 	
