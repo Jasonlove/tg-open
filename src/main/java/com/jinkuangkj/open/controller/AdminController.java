@@ -37,7 +37,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Controller
-@RequestMapping("admin")
+@RequestMapping("openAdmin")
 public class AdminController {
 	
 	
@@ -69,7 +69,7 @@ public class AdminController {
 		Admin logAdmin = adminDao.getUserByPassword(userName,password);
 		if(logAdmin == null) {
 			//异常返回登录页面
-			return "redirect:/admin/login";
+			return "redirect:/openAdmin/login";
 		}
 		Menu menu = roleService.getMenu(logAdmin.getRoleId());
 		session.setAttribute("admin", logAdmin);
@@ -82,7 +82,7 @@ public class AdminController {
 	public String index() {
 		Object account = session.getAttribute("admin");
 		if(account == null) {
-			return "redirect:/admin/login";
+			return "redirect:/openAdmin/login";
 		}
 		return "admin/index";
 	}

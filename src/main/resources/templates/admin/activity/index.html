@@ -84,7 +84,7 @@
                      <ul id="menuid" class="nav sidebar-subnav collapse">
                         <li class="sidebar-subnav-header">活动</li>
                         <li class=" active">
-                           <a href="/admin/activity/index.html">
+                           <a href="/openAdmin/activity/index.html">
                               <em></em>
                               <span data-localize="sidebar.nav.menu.SUBMENU">活动列表</span>
                            </a>
@@ -100,7 +100,7 @@
                      <ul id="order" class="nav sidebar-subnav collapse">
                         <li class="sidebar-subnav-header">订单</li>
                         <li class=" ">
-                           <a href="/admin/order/index.html">
+                           <a href="/openAdmin/order/index.html">
                               <em></em>
                               <span data-localize="sidebar.nav.menu.SUBMENU">订单列表</span>
                            </a>
@@ -116,7 +116,7 @@
                      <ul id="transfer" class="nav sidebar-subnav collapse">
                         <li class="sidebar-subnav-header">转账</li>
                         <li class=" ">
-                           <a href="/admin/transfer/index.html">
+                           <a href="/openAdmin/transfer/index.html">
                               <em></em>
                               <span data-localize="sidebar.nav.menu.SUBMENU">转账列表</span>
                            </a>
@@ -132,7 +132,7 @@
                      <ul id="contact" class="nav sidebar-subnav collapse">
                         <li class="sidebar-subnav-header">联系人</li>
                         <li class=" ">
-                           <a href="/admin/contact/index.html" >
+                           <a href="/openAdmin/contact/index.html" >
                               <em></em>
                               <span data-localize="sidebar.nav.menu.SUBMENU">联系人列表</span>
                            </a>
@@ -246,7 +246,7 @@
                </button>
                <h4 id="myModalLabelLarge" class="modal-title">活动</h4>
             </div>
-            <form class="form-horizontal" action="/admin/activity/save" method="post" id="formAct">
+            <form class="form-horizontal" action="/openAdmin/activity/save" method="post" id="formAct">
             	<input id="actId" name="id" type="hidden"></input>
             	<div class="modal-body">
                      <div class="form-group">
@@ -418,7 +418,7 @@
    		$(".btn_reset").attr("disabled",true);
 	   var actId = $(this).parent("td").siblings().html();
 	   $.ajax({
-		    url: "/admin/activity/get",
+		    url: "/openAdmin/activity/get",
 		    type: "get",
 		    data: {"actId":actId},
 		    dataType: 'json',
