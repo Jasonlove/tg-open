@@ -6,6 +6,8 @@
  */
 package com.jinkuangkj.open.mapper;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.jinkuangkj.open.model.Admin;
 
 public interface AdminDao {
@@ -21,5 +23,5 @@ public interface AdminDao {
 
     int updateById(Admin record);
     
-    Admin getUserByPassword(String username,String password);
+    Admin getUserByPassword(@Param(value = "username") String username,@Param(value = "password")String password);
 }
