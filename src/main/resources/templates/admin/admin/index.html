@@ -254,7 +254,7 @@
                <h4 id="myModalLabelLarge" class="modal-title">管理员</h4>
             </div>
             <form class="form-horizontal" action="/openAdmin/admin/save" method="post" id="formAct">
-            	<input id="actId" name="id" type="hidden"></input>
+            	<input name="id" type="hidden"></input>
             	<div class="modal-body">
                      <div class="form-group">
                         <label class="col-lg-2 control-label">用户名*</label>
@@ -310,7 +310,12 @@
 		    	$("input[name='id']").val(result.id);
 		    	$("input[name='username']").val(result.username);
 		    	$("input[name='password']").val(result.password);
-		    	$("input[name='roleId']").val(result.roleId);
+		    	
+		    	$('select').children('option').each(function(){
+		    	    if($(this).val()== result.roleId){
+		    	        $(this).prop('selected',true);
+		    	    }
+		    	});
 		    	
 		    }
 		});

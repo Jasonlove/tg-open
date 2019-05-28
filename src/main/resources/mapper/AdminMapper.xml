@@ -109,7 +109,7 @@
     	select 
         <include refid="Base_Column_List" />
         from t_admin
-        where username = #{username} and password = #{password}
+        where username = #{username} and password = #{password} limit 1
     </select>
     
     

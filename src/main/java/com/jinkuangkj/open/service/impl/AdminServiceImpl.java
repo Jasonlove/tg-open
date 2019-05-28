@@ -22,8 +22,12 @@ public class AdminServiceImpl implements AdminService {
 
 	@Override
 	public void saveAdmin(Admin admin) {
-		admin.setCreateTime(new Date());
-		adminDao.insertSelective(admin);
+		if(null == admin.getId() ) {
+			admin.setCreateTime(new Date());
+			adminDao.insertSelective(admin);
+		}else {
+			adminDao.updateSelective(admin);
+		}
 	}
 
 	@Override
