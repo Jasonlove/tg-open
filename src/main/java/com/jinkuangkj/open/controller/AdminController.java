@@ -96,7 +96,7 @@ public class AdminController {
 	@PostMapping("/activity/save")
 	public String saveActivity(Activity activity) {
 		activityService.saveActivity(activity);
-		return "redirect:/admin/activity/index";
+		return "redirect:/openAdmin/activity/index";
 	}
 	
 	
@@ -134,6 +134,24 @@ public class AdminController {
 	}
 	
 	
+	@GetMapping("/admin/index")
+	public String adminList(Model model) {
+		List<Admin> list = adminService.getList();
+		model.addAttribute("adminList", list);
+		return "admin/admin/index";
+	}
+	
+	@PostMapping("/admin/save")
+	public String saveAdmin(Admin admin) {
+		adminService.saveAdmin(admin);
+		return "redirect:/openAdmin/admin/index";
+	}
+	
+	@ResponseBody
+	@GetMapping("/admin/get")
+	public Admin getAdmin(@RequestParam Integer adminId) {
+		return adminService.getAdmin(adminId);
+	}
 	
 	
 }

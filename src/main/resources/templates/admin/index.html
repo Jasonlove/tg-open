@@ -137,6 +137,22 @@
                      </ul>
                   </li>
                   
+                  <li class=" " th:if="${session.menu.adminList.size() gt 0}">
+                     <a href="#admin" data-toggle="collapse">
+                        <em class="icon-folder"></em>
+                        <span data-localize="sidebar.nav.menu.MENU">管理员</span>
+                     </a>
+                     <ul id="admin" class="nav sidebar-subnav collapse">
+                        <li class="sidebar-subnav-header">管理员</li>
+                        <li class=" ">
+                           <a href="/openAdmin/admin/index.html" >
+                              <em></em>
+                              <span data-localize="sidebar.nav.menu.SUBMENU">管理员列表</span>
+                           </a>
+                        </li>
+                     </ul>
+                  </li>
+                  
                </ul>
                <!-- END sidebar nav-->
             </nav>

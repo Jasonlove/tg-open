@@ -113,5 +113,12 @@
     </select>
     
     
+    <!--查找管理员列表-->
+    <select id="getList" resultMap="BaseResultMap">
+    	select 
+        <include refid="Base_Column_List" />
+        from t_admin
+    </select>
+    
     
 </mapper>
