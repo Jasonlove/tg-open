@@ -35,12 +35,12 @@
 		z-index:999;
 	}
 	.music img{
-		width:60px;	
+		width:100px;	
 	}
 	.client{
 		position:fixed;
 		left:30px;
-		bottom:200px;
+		bottom:320px;
 	}
 	.client .client_pic{
 		width:100px;
@@ -77,11 +77,6 @@
 				<img th:src="${act.firstImg}"></img>
 			</div>
 			<div class="record">
-				<div class="tm">
-					<input type="hidden" th:value="${#dates.format(act.endTime,'yyyy/MM/dd HH:mm:ss')}" id="time_x"></input>
-					<p class="tm_p">活动<em>结束</em>倒计时</p>
-					<p id="LeftTime" class="tm_end"></p>
-				</div>
 				<div class="attend_num">
 					<p>参加人数(<strong th:text="${act.joinCount}"></strong>)</p>
 					<ul>
@@ -147,6 +142,12 @@
 	</div>
 	<div style="clear: both"></div>
 	<div class="con_bottom">
+		<div class="tm">
+			<input type="hidden" th:value="${#dates.format(act.endTime,'yyyy/MM/dd HH:mm:ss')}" id="time_x"></input>
+			<p class="tm_p">活动<em>结束</em>倒计时</p>
+			<p id="LeftTime" class="tm_end"></p>
+		</div>
+	
 		<button class="btn_left" th:text="@{'限时抢购('+${act.amount}+'元)'}"></button>
 		<a th:href="${shareUrl}" class="btn_right" th:text="@{'分享赚'+${act.shareAmount}+'元'}"></a>
 	</div>

@@ -16,9 +16,11 @@ input{
 .pic img{
 	width:100%;
 }
-.record .tm{
+.con_bottom .tm{
 	text-align: center;
 	margin-top:20px;
+	background-color:rgba(0,0,0,0.3);
+	padding:10px 0;
 }
 .tm .tm_p{
 	font-size:42px;
@@ -207,6 +209,7 @@ input{
 	margin:40px auto;
 	width:90%;
 	font-size: 32px;
+	margin-bottom:150px;
 }
 .tg_p a{
 	display: block;

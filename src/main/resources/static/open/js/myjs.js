@@ -19,9 +19,9 @@ function FreshTime()
     if(lefttime <=0){
 	    document.getElementById("LeftTime").innerHTML="团购已结束";
 	    clearInterval(sh);
-	    $(".con_bottom").css("display","none");
 	    $(".con_bottom .btn_left").css("display","none");
 	    $(".con_bottom .btn_right").css("display","none");
+	    $(".tg_p div").css("margin-bottom","80px")
     }
 }
 FreshTime()
