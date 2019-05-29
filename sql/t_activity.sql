@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50162
 File Encoding         : 65001
 
-Date: 2019-05-20 18:19:28
+Date: 2019-05-29 17:19:08
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -41,14 +41,15 @@ CREATE TABLE `t_activity` (
   `share_title` varchar(255) DEFAULT NULL COMMENT '分享标题',
   `share_desc` varchar(255) DEFAULT NULL COMMENT '分享描述',
   `share_small_img` varchar(255) DEFAULT NULL,
+  `admin_id` int(11) DEFAULT NULL COMMENT '管理员id',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_activity
 -- ----------------------------
-INSERT INTO `t_activity` VALUES ('1', '测试活动', '瑞辛咖啡', '2019-05-08 13:58:27', '2019-05-11 13:58:29', '100.00', '100.00', '1', '3', '2019-05-08 13:59:05', '/component/1558191008690.jpg', '/component/1558191014826.jpg', null, '/component/1558191019287.jpg', '测试文字说明', 'http://xinghui.natapp1.cc/open/authorize?actId=1', '', '', '测试分享标题', '测试分享描述', '/component/1558190313997.png');
-INSERT INTO `t_activity` VALUES ('2', '测试活动2', '瑞辛咖啡', '2019-05-08 14:03:22', '2019-05-11 15:04:26', '1.00', '1.00', '1', '1', '2019-05-08 14:03:49', '/component/1557299013733.jpg', '/component/1557299014477.jpg', null, '/component/1557299015482.jpg', '', 'http://xinghui.natapp1.cc/open/authorize?actId=2', null, null, null, null, null);
+INSERT INTO `t_activity` VALUES ('1', '测试活动', '瑞辛咖啡', '2019-05-08 13:58:27', '2019-05-11 13:58:29', '100.00', '100.00', '1', '3', '2019-05-08 13:59:05', '/component/1558191008690.jpg', '/component/1558191014826.jpg', null, '/component/1558191019287.jpg', '测试文字说明', 'http://xinghui.natapp1.cc/open/authorize?actId=1', '', '', '测试分享标题', '测试分享描述', '/component/1558190313997.png', null);
+INSERT INTO `t_activity` VALUES ('2', '测试活动2', '瑞辛咖啡', '2019-05-08 14:03:22', '2019-05-11 15:04:26', '1.00', '1.00', '1', '1', '2019-05-08 14:03:49', '/component/1557299013733.jpg', '/component/1557299014477.jpg', null, '/component/1557299015482.jpg', '', 'http://xinghui.natapp1.cc/open/authorize?actId=2', null, null, null, null, null, null);
 
 -- ----------------------------
 -- Table structure for t_admin
@@ -62,12 +63,13 @@ CREATE TABLE `t_admin` (
   `login_time` datetime DEFAULT NULL COMMENT '登陆时间',
   `role_id` int(4) NOT NULL COMMENT '角色id',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_admin
 -- ----------------------------
 INSERT INTO `t_admin` VALUES ('1', 'jason', '123456', '2019-05-20 13:50:24', '2019-05-20 13:50:32', '1');
+INSERT INTO `t_admin` VALUES ('2', 'open', '123456', '2019-05-28 21:32:17', null, '1');
 
 -- ----------------------------
 -- Table structure for t_auth
@@ -85,10 +87,11 @@ CREATE TABLE `t_auth` (
 -- ----------------------------
 -- Records of t_auth
 -- ----------------------------
-INSERT INTO `t_auth` VALUES ('1000', '1', '活动列表', '活动权限', '/admin/activity/index');
-INSERT INTO `t_auth` VALUES ('2000', '2', '订单列表', '订单权限', '/admin/order/index');
-INSERT INTO `t_auth` VALUES ('3000', '3', '转账列表', '转账权限', '/admin/transfer/index');
-INSERT INTO `t_auth` VALUES ('4000', '4', '联系人列表', '联系人权限', '/admin/contact/index');
+INSERT INTO `t_auth` VALUES ('1000', '1', '活动列表', '活动权限', '/openAdmin/activity');
+INSERT INTO `t_auth` VALUES ('2000', '2', '订单列表', '订单权限', '/openAdmin/order');
+INSERT INTO `t_auth` VALUES ('3000', '3', '转账列表', '转账权限', '/openAdmin/transfer');
+INSERT INTO `t_auth` VALUES ('4000', '4', '联系人列表', '联系人权限', '/openAdmin/contact');
+INSERT INTO `t_auth` VALUES ('5000', '5', '管理员', '管理员权限', '/openAdmin/admin');
 
 -- ----------------------------
 -- Table structure for t_contact
@@ -164,7 +167,7 @@ CREATE TABLE `t_role_auth` (
   `role_id` int(11) DEFAULT NULL COMMENT '角色id',
   `auth_id` int(11) DEFAULT NULL COMMENT '权限id',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_role_auth
@@ -174,6 +177,7 @@ INSERT INTO `t_role_auth` VALUES ('2', '1', '2000');
 INSERT INTO `t_role_auth` VALUES ('3', '1', '3000');
 INSERT INTO `t_role_auth` VALUES ('4', '1', '4000');
 INSERT INTO `t_role_auth` VALUES ('5', '2', '1000');
+INSERT INTO `t_role_auth` VALUES ('6', '1', '5000');
 
 -- ----------------------------
 -- Table structure for t_transfer
