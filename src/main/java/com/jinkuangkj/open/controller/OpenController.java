@@ -268,7 +268,7 @@ public class OpenController extends AbstractController{
 	    	String shareUrl = openConfig.getMpBaseUrl() + "/open/share?actId="+actId+"&userId="+userId;
 			WxJsapiSignature sign = wxMpService.createJsapiSignature(shareUrl);
 			ShareResult share = new ShareResult();
-			share.setActUrl(activity.getActUrl());
+			share.setActUrl(shareUrl);
 			share.setShareTitle(activity.getShareTitle());
 			share.setShareDesc(activity.getShareDesc());
 			share.setShareSmallImg(openConfig.getMpBaseUrl()+activity.getShareSmallImg());
