@@ -225,7 +225,7 @@ body,html{
 .con_bottom{
 	position: fixed;
 	left: 0;
-	bottom:0;
+	bottom:-2px;
 	width: 100%;
 }
 .con_bottom button,.con_bottom a{
@@ -245,7 +245,7 @@ body,html{
 	width: 40%;
 	display: inline-block;
 	text-align: center;
-
+	margin-top:1.3px;
 }
 /*限时抢购点击*/
 .yincang_div{
