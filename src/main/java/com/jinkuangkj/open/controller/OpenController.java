@@ -253,6 +253,7 @@ public class OpenController extends AbstractController{
     
     @GetMapping("/share")
     public String getShare(Model model,@RequestParam Integer userId,@RequestParam Integer actId){
+    	
     	Activity activity = activityService.get(actId);
     	ActUser user = actUserService.getUserById(userId);
     	if(null==activity) {
@@ -260,6 +261,22 @@ public class OpenController extends AbstractController{
     	}
     	if(null==user) {
     		throw new BusinessException("用户不存在");
+    	}
+    	
+    	try {
+    		//分享链接请求地址
+	    	String shareUrl = openConfig.getMpBaseUrl() + "/open/share?actId="+actId+"&userId="+userId;
+			WxJsapiSignature sign = wxMpService.createJsapiSignature(shareUrl);
+			ShareResult share = new ShareResult();
+			share.setActUrl(activity.getActUrl());
+			share.setShareTitle(activity.getShareTitle());
+			share.setShareDesc(activity.getShareDesc());
+			share.setShareSmallImg(openConfig.getMpBaseUrl()+activity.getShareSmallImg());
+			model.addAttribute("sign", sign);
+			model.addAttribute("share", share);
+			
+    	} catch (WxErrorException e) {
+    		log.error("签名异常:{}",e);
     	}
     	
     	String shareUrl = openConfig.getMpBaseUrl() + "/open/authorize?actId="+actId +"&shareId="+userId;
