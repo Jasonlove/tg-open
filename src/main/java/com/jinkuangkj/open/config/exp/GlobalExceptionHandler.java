@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.HttpMediaTypeNotAcceptableException;
 import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -47,6 +48,14 @@ public class GlobalExceptionHandler {
     public ResultEntity businessExceptionHandler(HttpServletRequest req,HttpServletResponse response, BusinessException e) throws Exception {
 		//log.error("异常日志", e);
 		return buildErrorInfo(HttpStatus.INTERNAL_SERVER_ERROR.value(), e.getMessage(), req);
+    }
+	
+	
+	//类型
+	@ExceptionHandler(value = HttpMediaTypeNotAcceptableException.class)
+    @ResponseBody
+    public void HttpMediaTypeNotAcceptableExceptionHandler(HttpServletRequest req,HttpServletResponse response, BusinessException e) throws Exception {
+		//log.error("异常日志", e);
     }
 	
 
