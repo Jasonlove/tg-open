@@ -13,6 +13,7 @@ import com.jinkuangkj.open.model.ActUser;
 import com.jinkuangkj.open.model.Activity;
 import com.jinkuangkj.open.service.ActUserService;
 import com.jinkuangkj.open.service.TransferService;
+import com.jinkuangkj.open.util.StringUtil;
 
 import me.chanjar.weixin.mp.bean.result.WxMpUser;
 
@@ -29,10 +30,12 @@ public class ActUserServiceImpl implements ActUserService {
 	@Override
 	public ActUser register(WxMpUser info,Integer actId,String shareId,String token) {
 		
+		
+		
 		//进入活动页面
 		ActUser actUser = this.getUserByOpenIdAndActId(info.getOpenId(), actId);
 		if(null != actUser) {
-			actUser.setNickname(info.getNickname());
+			actUser.setNickname(StringUtil.filter(info.getNickname()));
 			actUser.setHeadimgurl(info.getHeadImgUrl());
 			actUser.setOpenid(info.getOpenId());
 			actUser.setToken(token);
@@ -40,7 +43,7 @@ public class ActUserServiceImpl implements ActUserService {
 			return actUser;
 		}
 		actUser = new ActUser();
-		actUser.setNickname(info.getNickname());
+		actUser.setNickname(StringUtil.filter(info.getNickname()));
 		actUser.setHeadimgurl(info.getHeadImgUrl());
 		actUser.setOpenid(info.getOpenId());
 		actUser.setActId(Integer.valueOf(actId));
