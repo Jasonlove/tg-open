@@ -1,8 +1,10 @@
 package com.jinkuangkj.open.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.jinkuangkj.open.config.exp.LoginException;
+import com.jinkuangkj.open.excel.ExcelUtil;
+import com.jinkuangkj.open.excel.model.ExportTransfer;
 import com.jinkuangkj.open.mapper.AdminDao;
 import com.jinkuangkj.open.model.Activity;
 import com.jinkuangkj.open.model.Admin;
@@ -32,6 +36,7 @@ import com.jinkuangkj.open.service.AdminService;
 import com.jinkuangkj.open.service.ContactService;
 import com.jinkuangkj.open.service.RoleService;
 import com.jinkuangkj.open.service.TransferService;
+import com.jinkuangkj.open.util.DateUtil;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -124,6 +129,25 @@ public class AdminController {
 		model.addAttribute("transferList", list);
 		return "admin/transfer/index";
 	}
+	
+	
+	@GetMapping("/transfer/excel")
+	public void transferExcel(HttpServletResponse response) {
+		List<TransferResult> list = transferService.getList();
+		List<ExportTransfer> exportList = new ArrayList<>();
+		for (TransferResult transfer : list) {
+			ExportTransfer point = new ExportTransfer();
+			point.setActName(transfer.getActName());
+			point.setAmount(transfer.getAmount().toString());
+			point.setTransferNo(transfer.getTransferNo());
+			point.setCreateTime(DateUtil.formatTime(transfer.getCreateTime()));
+			exportList.add(point);
+		}
+		ExcelUtil.writeExcel(response, exportList, "分享", "分享", new ExportTransfer());
+		
+	}
+	
+	
 	
 	
 	@GetMapping("/contact/index")
