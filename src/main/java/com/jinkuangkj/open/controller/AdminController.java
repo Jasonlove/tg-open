@@ -138,12 +138,13 @@ public class AdminController {
 		for (TransferResult transfer : list) {
 			ExportTransfer point = new ExportTransfer();
 			point.setActName(transfer.getActName());
+			point.setNickname(transfer.getNickname());
 			point.setAmount(transfer.getAmount().toString());
 			point.setTransferNo(transfer.getTransferNo());
 			point.setCreateTime(DateUtil.formatTime(transfer.getCreateTime()));
 			exportList.add(point);
 		}
-		ExcelUtil.writeExcel(response, exportList, "分享", "分享", new ExportTransfer());
+		ExcelUtil.writeExcel(response, exportList, "转账", "分享", new ExportTransfer());
 		
 	}
 	
