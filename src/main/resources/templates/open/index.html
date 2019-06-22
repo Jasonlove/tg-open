@@ -53,14 +53,48 @@
 		display:none;
 	}
 	
+	.share_div{
+	   position:fixed;
+	   z-index:999;
+	   top:0;bottom:0;
+	   width:100%;
+	   height:94.5%;
+	   background-color:rgba(0,0,0,0.5);
+	   display:none;
+	}
+	.share_div .share_con{
+	   text-align:right;
+	   margin-top:100px;
+	   margin-right:50px;
+	   
+	}
+	.share_div .arrow{
+	   width:150px;
+	}
+	.share_div .arrow_b{
+	   margin-top:20px;
+	}
 </style>
 
 <body>
+	<!-- 分享赚的隐藏div -->
+	<div class="share_div">
+	   <div class="share_con">
+	       <div>
+	           <img src="/open/img/lead_imgT.png" class="arrow"></img>
+	       </div>
+	       <img src="/open/img/lead_img.png" class="arrow_b"></img>
+	   </div>
+	</div>
+	<!-- end -->
 	
+	<!-- 页面二维码div -->
     <div th:if="${act.callQr != '' &amp;&amp; act.callQr != null}" class="client">
         <img alt="" src="/open/img/client.png" class="client_pic"></img>
         <img alt="" th:src="${act.callQr}" class="ewm_pic"></img>
     </div>
+    <!-- end -->
+    
 	<div th:if="${msg.amount != null}"  class="horse">
 		<marquee width="100%" direction="left" align="middle">用户<div th:text="${msg.orderUser}"></div>通过<div th:text="${msg.shareUser}"></div>的分享抢购成功,<div th:text="${msg.shareUser}"></div>获得佣金<div th:text="${msg.amount}"></div>元</marquee>
 	</div>
@@ -149,7 +183,7 @@
 		</div>
 	
 		<button class="btn_left" th:text="@{'限时抢购('+${act.amount}+'元)'}"></button>
-		<a th:href="${shareUrl}" class="btn_right" th:text="@{'分享赚'+${act.shareAmount}+'元'}"></a>
+		<button class="btn_right" th:text="@{'分享赚'+${act.shareAmount}+'元'}"></button>
 	</div>
 	<div class="yincang_div">
 		<div class="back_div"></div>
@@ -224,6 +258,14 @@
 		}
 	})
 	
+	//分享赚的div hide/show
+	
+	$(".btn_right").click(function(){
+		$(".share_div").show()
+	})
+	$(".share_div").click(function(){
+		$(this).hide()
+	})	
 	//客服按钮点击弹出二维码
 	$(".client .client_pic").click(function(){
 		$(".client .ewm_pic").toggle()
