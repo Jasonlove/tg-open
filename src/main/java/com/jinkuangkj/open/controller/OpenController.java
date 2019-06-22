@@ -157,8 +157,6 @@ public class OpenController extends AbstractController{
 	    	MessageResult message = transferService.getMessage(aid);
 	    	
 	    	
-	    	//分享链接请求地址
-	    	String shareUrl = openConfig.getMpBaseUrl() + "/open/share?actId="+actId+"&userId="+userId;
 	    	
 	    	model.addAttribute("msg", message);
 	    	model.addAttribute("user", user);
@@ -167,15 +165,20 @@ public class OpenController extends AbstractController{
 	    	model.addAttribute("count", count);
 	    	model.addAttribute("orderList", orderList);
 	    	model.addAttribute("rankList", rankList);
-	    	model.addAttribute("shareUrl", shareUrl);
 	    	
+	    	//分享链接请求地址
+	    	//String shareUrl = openConfig.getMpBaseUrl() + "/open/share?actId="+actId+"&userId="+userId;
+	    	//model.addAttribute("shareUrl", shareUrl);
 	    	
 	    	//页面加权限分享功能
     		try {
+    		    //分享地址进来的
+    		    String shareUrl = openConfig.getMpBaseUrl() + "/open/authorize?actId="+actId +"&shareId="+userId;
+    		    
     			String url =  openConfig.getMpBaseUrl()+"/open/act?actId="+actId+"&userId="+userId;
     			WxJsapiSignature sign = wxMpService.createJsapiSignature(url);
     			ShareResult share = new ShareResult();
-    			share.setActUrl(activity.getActUrl());
+    			share.setActUrl(shareUrl);
     			share.setShareTitle(activity.getShareTitle());
     			share.setShareDesc(activity.getShareDesc());
     			share.setShareSmallImg(openConfig.getMpBaseUrl()+activity.getShareSmallImg());
